@@ -1,0 +1,124 @@
+/* Reset styles. */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
+figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background: #e2e0f7;
+}
+
+.header-bar {
+    width: 96vw;
+    height: auto;
+    padding-bottom: 14px;
+    margin-left: 2vw;
+    background: radial-gradient(
+            circle,
+            rgb(32, 29, 54) 0%,
+            rgb(31, 31, 59) 50%,
+            rgba(23, 35, 37, 1) 100%
+    );
+    border-radius: 0 0 10px 10px;
+}
+
+.header-bar-title {
+    color: white;
+    font-size: 3rem;
+    padding-left: 34px;
+    padding-top: 19px;
+    padding-bottom: 1px;
+    text-shadow: white 0 0 3px;
+}
+
+.header-bar-button-row {
+    display: inline-block;
+    margin-top: 16px;
+    width: 95vw;
+    background: linear-gradient(
+            180deg,
+            rgba(53, 53, 71, 1) 0%,
+            rgba(120, 118, 161, 1) 6%,
+            rgba(86, 86, 129, 1) 48%,
+            rgba(70, 71, 116, 1) 52%,
+            rgba(67, 61, 85, 1) 94%,
+            rgba(47, 38, 54, 1) 100%
+    );
+    padding: 10px 0 10px 1vw;
+}
+
+.header-bar-button {
+    color: white;
+    text-shadow: white 0 0 3px;
+    background: linear-gradient(
+            180deg,
+            rgba(53, 53, 71, 1) 0%,
+            rgba(120, 118, 161, 1) 6%,
+            rgba(86, 86, 129, 1) 48%,
+            rgba(70, 71, 116, 1) 52%,
+            rgba(67, 61, 85, 1) 94%,
+            rgba(47, 38, 54, 1) 100%
+    );
+    padding: 10px 20px;
+    text-decoration: none;
+    border-left: solid 1px #232436;
+    border-right: solid 1px #50506c;
+}
+
+.header-bar-button:hover {
+    background: linear-gradient(
+            180deg,
+            rgba(53, 53, 71, 1) 0%,
+            rgb(134, 132, 169) 8%,
+            rgba(134, 134, 176, 1) 48%,
+            rgb(109, 110, 148) 52%,
+            rgba(75, 69, 92, 1) 92%,
+            rgba(47, 38, 54, 1) 100%
+    );
+}
+
+.hbb-left {
+    border-left: solid 1px #232436;
+    box-shadow: -1px 0 0 0 #50506c;
+}
+
+.hbb-right {
+    border-right: inset 1px #50506c;
+    box-shadow: 1px 0 0 0 #232436;
+}
+
+
+.header-bar-top-menu {
+    float: right;
+    display: inline-block;
+    margin-top: -3.7rem;
+    padding-right: 1.8rem;
+}
+
+.header-top-button {
+    padding-left: 22px;
+    color: white;
+    text-decoration: none;
+    text-shadow: #dadada 0 0 3px;
+}
+
+.header-top-button:hover {
+    text-decoration: underline;
+}
+
+.content {
+    background: #f9faff;
+    width: 94vw;
+    margin-left: 2vw;
+    margin-top: 14px;
+    min-height: inherit;
+    padding: 1vw;
+    border-radius: 10px;
+}
