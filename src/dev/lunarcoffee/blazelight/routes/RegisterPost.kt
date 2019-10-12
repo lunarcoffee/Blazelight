@@ -14,6 +14,8 @@ fun Routing.registerPostRoute() = post("/register") {
     val username = params["username"]!!
     val password = params["password"]!!
 
+    // TODO: Add bounds checking and email verification.
+
     UserRegistrar.tryRegister(email, username, password)
     call.respondRedirect("/register")
 }

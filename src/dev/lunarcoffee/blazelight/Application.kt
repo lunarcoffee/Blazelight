@@ -67,5 +67,6 @@ fun Application.module() {
         homeRoute()
         registerRoute()
         registerPostRoute()
+        loginRoute()
     }
 }

@@ -1,18 +1,33 @@
 package dev.lunarcoffee.blazelight.routes.templates
 
+import dev.lunarcoffee.blazelight.routes.sessions.UserSession
+import io.ktor.application.ApplicationCall
 import io.ktor.html.*
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-class HeaderBarTemplate(private val titleText: String) : Template<HTML> {
+class HeaderBarTemplate(
+    private val titleText: String,
+    private val call: ApplicationCall
+) : Template<HTML> {
+
     val content = Placeholder<HtmlBlockTag>()
-    val personalized = Placeholder<HtmlBlockTag>()
 
     override fun HTML.apply() {
         insert(HeadTemplate(titleText)) {
             body {
                 div(classes = "header-bar") {
                     h1(classes = "header-bar-title") { +"Blazelight" }
-                    div(classes = "header-bar-top-menu") { insert(personalized) }
+                    div(classes = "header-bar-top-menu") {
+                        if (call.sessions.get<UserSession>() == null) {
+                            a(href = "/register", classes = "header-top-button") { +"Register" }
+                            a(href = "/login", classes = "header-top-button") { +"Login" }
+                        } else {
+                            a(href = "/me", classes = "header-top-button") { +"My Profile" }
+                            a(href = "/logout", classes = "header-top-button") { +"Log Out" }
+                        }
+                    }
 
                     div(classes = "header-bar-button-row") {
                         a(href = "/", classes = "header-bar-button hbb-left") { +"Home" }
