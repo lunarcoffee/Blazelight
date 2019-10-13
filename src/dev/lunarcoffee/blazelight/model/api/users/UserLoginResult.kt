@@ -1,6 +1,6 @@
 package dev.lunarcoffee.blazelight.model.api.users
 
-enum class UserLoginResult {
-    SUCCESS,
-    FAILURE
-}
+sealed class UserLoginResult
+
+object UserLoginFailure : UserLoginResult()
+class UserLoginSuccess(val id: Long) : UserLoginResult()

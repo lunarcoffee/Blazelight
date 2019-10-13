@@ -1,16 +1,14 @@
 package dev.lunarcoffee.blazelight
 
-import dev.lunarcoffee.blazelight.model.api.users.UserLoginResult
-import dev.lunarcoffee.blazelight.model.api.users.UserRegistrar
 import dev.lunarcoffee.blazelight.routes.*
 import dev.lunarcoffee.blazelight.routes.sessions.UserSession
-import io.ktor.application.Application
-import io.ktor.application.install
+import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.http.CacheControl
 import io.ktor.http.ContentType
 import io.ktor.http.content.*
+import io.ktor.response.respondRedirect
 import io.ktor.routing.routing
 import io.ktor.sessions.*
 import io.ktor.util.KtorExperimentalAPI
@@ -20,21 +18,25 @@ import java.io.File
 @KtorExperimentalAPI
 @Suppress("unused")
 fun Application.module() {
+    configAuth()
+    configCache()
+    configSessions()
+    configRouting()
+
+    install(CallLogging) { level = Level.INFO }
+    install(CORS)
+}
+
+fun Application.configAuth() {
     install(Authentication) {
         form("loginAuth") {
-            userParamName = "username"
-            passwordParamName = "password"
-
-            validate {
-                if (UserRegistrar.tryLogin(it.name, it.password) == UserLoginResult.SUCCESS)
-                    UserIdPrincipal(it.name)
-                else
-                    null
-            }
             skipWhen { it.sessions.get<UserSession>() != null }
+            challenge { call.respondRedirect("/login") }
         }
     }
+}
 
+fun Application.configCache() {
     install(CachingHeaders) {
         // Cache images for a day.
         options { outgoingContent ->
@@ -44,17 +46,16 @@ fun Application.module() {
                 null
         }
     }
+}
 
-    install(CallLogging) { level = Level.INFO }
-    install(CORS)
-
+@KtorExperimentalAPI
+fun Application.configSessions() {
     install(Sessions) {
-        cookie<UserSession>(
-            "BlazelightUserSession",
-            directorySessionStorage(File(".sessions"), true)
-        )
+        cookie<UserSession>("BlazelightSession", directorySessionStorage(File(".sessions"), true))
     }
+}
 
+fun Application.configRouting() {
     routing {
         static {
             staticRootFolder = File("resources/static")
@@ -68,5 +69,11 @@ fun Application.module() {
         registerRoute()
         registerPostRoute()
         loginRoute()
+        loginPostRoute()
+
+        authenticate("loginAuth") {
+            profileRoute()
+            logoutRoute()
+        }
     }
 }

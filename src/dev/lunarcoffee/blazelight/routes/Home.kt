@@ -5,12 +5,12 @@ import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Routing
 import io.ktor.routing.get
-import kotlinx.html.p
+import kotlinx.html.*
 
 fun Routing.homeRoute() = get("/") {
     call.respondHtmlTemplate(HeaderBarTemplate("Home", call)) {
         content {
-            p { +"blazelight" }
+            p { +"Welcome to Blazelight!" }
         }
     }
 }

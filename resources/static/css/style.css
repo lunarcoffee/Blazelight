@@ -122,3 +122,50 @@ body {
     padding: 1vw;
     border-radius: 10px;
 }
+
+.fi-text {
+    border: solid 1px #464774;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin: 3px 0;
+    outline: none;
+    box-shadow: #50506c 0 0 3px;
+}
+
+.fi-top {
+    margin-top: 12px;
+}
+
+.fi-text:focus {
+    box-shadow: #50506c 0 0 4px;
+}
+
+.button-1 {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: white;
+    text-shadow: white 0 0 3px;
+    box-shadow: #464774 0 0 2px;
+    background: linear-gradient(
+            180deg,
+            rgba(120, 118, 161, 1) 0%,
+            rgba(86, 86, 129, 1) 48%,
+            rgba(70, 71, 116, 1) 52%,
+            rgba(67, 61, 85, 1) 100%
+    );
+    margin-top: 10px;
+}
+
+.button-1:hover {
+    background: linear-gradient(
+            180deg,
+            rgb(134, 132, 169) 0%,
+            rgba(134, 134, 176, 1) 48%,
+            rgb(109, 110, 148) 52%,
+            rgba(75, 69, 92, 1) 100%
+    );
+    outline: none;
+}
