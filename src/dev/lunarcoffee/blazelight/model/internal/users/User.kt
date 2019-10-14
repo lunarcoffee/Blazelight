@@ -3,8 +3,7 @@ package dev.lunarcoffee.blazelight.model.internal.users
 import dev.lunarcoffee.blazelight.model.internal.std.Dateable
 import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 
-interface User : Dateable,
-    Identifiable {
+interface User : Dateable, Identifiable {
     val username: String
     val description: String?
 
@@ -16,4 +15,6 @@ interface User : Dateable,
 
     val commentIds: List<Long>
     val threadIds: List<Long>
+
+    val settings: UserSettings
 }

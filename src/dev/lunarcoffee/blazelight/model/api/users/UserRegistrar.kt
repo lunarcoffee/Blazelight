@@ -4,15 +4,24 @@ import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.model.internal.util.PasswordHasher
+import dev.lunarcoffee.blazelight.std.Language
 import org.litote.kmongo.eq
 import java.security.SecureRandom
+import java.time.ZoneId
 
 object UserRegistrar {
     private val srng = SecureRandom()
     private val emailRegex = """[a-zA-Z0-9+.]+@[a-zA-Z0-9.]+""".toRegex() // TODO: make this good!
 
     // TODO: strip bad chars from name (extract to function (ext?)?).
-    suspend fun tryRegister(email: String, name: String, password: String): UserRegisterResult {
+    suspend fun tryRegister(
+        email: String,
+        name: String,
+        password: String,
+        timeZone: ZoneId,
+        language: Language
+    ): UserRegisterResult {
+
         if (!(email matches emailRegex))
             return UserRegisterInvalidEmail
         if (name.length !in 1..40)
@@ -28,7 +37,7 @@ object UserRegistrar {
         srng.nextBytes(salt)
         val passwordHash = PasswordHasher(password, salt).hash()
 
-        val user = DefaultUser(name, email, passwordHash, salt)
+        val user = DefaultUser(name, email, passwordHash, salt, timeZone, language)
         Database.userCol.insertOne(user)
 
         return UserRegisterSuccess

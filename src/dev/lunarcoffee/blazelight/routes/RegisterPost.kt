@@ -1,6 +1,8 @@
 package dev.lunarcoffee.blazelight.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.*
+import dev.lunarcoffee.blazelight.std.LanguageManager
+import dev.lunarcoffee.blazelight.std.TimeZoneManager
 import io.ktor.application.call
 import io.ktor.request.receiveParameters
 import io.ktor.response.respondRedirect
@@ -13,15 +15,23 @@ fun Routing.registerPostRoute() = post("/register") {
     val email = params["email"]!!
     val username = params["username"]!!
     val password = params["password"]!!
+    val passwordConfirm = params["password-c"]!!
+    val timeZone = TimeZoneManager.toTimeZone(params["timeZone"]!!)
+    val language = LanguageManager.toLanguage(params["language"]!!)
 
-    // This will index into a list of special failure messages in [Routing.registerRoute].
-    val specialMessageIndex = when (UserRegistrar.tryRegister(email, username, password)) {
+    if (password != passwordConfirm) {
+        call.respondRedirect("/register?a=5")
+        return@post
+    }
+
+    // This will index into a list of registration status messages in [Routing.registerRoute].
+    val index = when (UserRegistrar.tryRegister(email, username, password, timeZone, language)) {
         is UserRegisterInvalidEmail -> 0
         is UserRegisterInvalidName -> 1
         is UserRegisterInvalidPassword -> 2
         is UserRegisterDuplicateEmail -> 3
         is UserRegisterDuplicateName -> 4
-        else -> 5
+        else -> 6
     }
-    call.respondRedirect("/register?a=$specialMessageIndex")
+    call.respondRedirect("/register?a=$index")
 }

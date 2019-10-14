@@ -25,6 +25,14 @@ fun Route.profileRoute() = get("/me") {
                 +(user.description ?: "(unset)")
                 a(href = "google.com") { +"modify" }
             }
+            p {
+                +(user.settings.zoneId.id ?: "(unset)")
+                a(href = "google.com") { +"modify" }
+            }
+            p {
+                +(user.settings.language.name)
+                a(href = "google.com") { +"modify" }
+            }
         }
     }
 }

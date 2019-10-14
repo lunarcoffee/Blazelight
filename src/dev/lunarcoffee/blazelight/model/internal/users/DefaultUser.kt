@@ -1,12 +1,16 @@
 package dev.lunarcoffee.blazelight.model.internal.users
 
 import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
+import dev.lunarcoffee.blazelight.std.Language
+import java.time.ZoneId
 
 class DefaultUser(
     override val username: String,
     override val email: String,
     override val passwordHash: String,
-    override val passwordSalt: ByteArray
+    override val passwordSalt: ByteArray,
+    zoneId: ZoneId = ZoneId.systemDefault(),
+    language: Language = Language.ENGLISH
 ) : User {
 
     override val description: String? = null
@@ -17,4 +21,6 @@ class DefaultUser(
 
     override val creationTime = System.currentTimeMillis()
     override val id = UniqueIDGenerator.nextId()
+
+    override val settings = UserSettings(zoneId, language, id)
 }

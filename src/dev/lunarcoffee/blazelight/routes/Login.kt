@@ -12,11 +12,8 @@ fun Routing.loginRoute() = get("/login") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Login", call)) {
         content {
-            // This message will be displayed upon failure to login.
-            if (failed == "0")
-                p { +"Invalid username or password!" }
-
-            p { +"Login to your account:" }
+            h3 { +"Login to your account:" }
+            hr()
             form(action = "/login", method = FormMethod.post) {
                 input(type = InputType.text, name = "username", classes = "fi-text fi-top") {
                     placeholder = "Username"
@@ -25,8 +22,12 @@ fun Routing.loginRoute() = get("/login") {
                 input(type = InputType.password, name = "password", classes = "fi-text") {
                     placeholder = "Password"
                 }
-                br()
+                hr()
                 input(type = InputType.submit, classes = "button-1") { value = "Login" }
+
+                // This message will be displayed upon failure to login.
+                if (failed == "0")
+                    span(classes = "red") { +"Invalid username or password!" }
             }
         }
     }

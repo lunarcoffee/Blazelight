@@ -15,6 +15,16 @@ body {
     background: #e2e0f7;
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background: #bbb;
+}
+
+h2, h3 {
+    font-weight: normal;
+}
+
 .header-bar {
     width: 96vw;
     height: auto;
@@ -130,14 +140,28 @@ body {
     font-size: 0.9rem;
     margin: 3px 0;
     outline: none;
+    width: 10vw;
     box-shadow: #50506c 0 0 3px;
 }
 
-.fi-top {
-    margin-top: 12px;
+.fi-text:hover {
+    box-shadow: #50506c 0 0 4px;
 }
 
-.fi-text:focus {
+.fi-select {
+    border: solid 1px #464774;
+    border-radius: 4px;
+    padding: 4px 4px 4px 1px;
+    width: 7vw;
+    height: 27px;
+    font-size: 0.9rem;
+    margin: 3px 10px 3px 0;
+    outline: none;
+    box-shadow: #50506c 0 0 3px;
+    background: white;
+}
+
+.fi-select:hover {
     box-shadow: #50506c 0 0 4px;
 }
 
@@ -145,6 +169,8 @@ body {
     border: none;
     border-radius: 4px;
     padding: 8px 16px;
+    margin-top: 2px;
+    margin-right: 14px;
     font-size: 0.9rem;
     color: white;
     text-shadow: white 0 0 3px;
@@ -156,7 +182,7 @@ body {
             rgba(70, 71, 116, 1) 52%,
             rgba(67, 61, 85, 1) 100%
     );
-    margin-top: 10px;
+    cursor: pointer;
 }
 
 .button-1:hover {
@@ -167,5 +193,20 @@ body {
             rgb(109, 110, 148) 52%,
             rgba(75, 69, 92, 1) 100%
     );
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: #29a829;
+}
+
+*:focus {
+    outline: none;
+}
+
+* {
     outline: none;
 }

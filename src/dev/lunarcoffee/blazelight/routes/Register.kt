@@ -1,6 +1,8 @@
 package dev.lunarcoffee.blazelight.routes
 
 import dev.lunarcoffee.blazelight.routes.templates.HeaderBarTemplate
+import dev.lunarcoffee.blazelight.std.Language
+import dev.lunarcoffee.blazelight.std.TimeZoneManager
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Routing
@@ -13,21 +15,19 @@ private val specialMessages = listOf(
     "That password is invalid! It must be 8-200 in length.",
     "That email is taken!",
     "That username is taken!",
+    "The two passwords don't match!",
     "Registration successful! You may now log in."
 )
 
 fun Routing.registerRoute() = get("/register") {
-    val specialMessageIndex = call.parameters["a"]?.toIntOrNull()
+    val messageIndex = call.parameters["a"]?.toIntOrNull()
 
     call.respondHtmlTemplate(HeaderBarTemplate("Register", call)) {
         content {
-            // This message will be displayed upon a status after register.
-            if (specialMessageIndex in specialMessages.indices)
-                p { +specialMessages[specialMessageIndex!!] }
-
-            p { +"Register for an account:" }
+            h3 { +"Register for an account:" }
+            hr()
             form(action = "/register", method = FormMethod.post) {
-                input(type = InputType.text, name = "email", classes = "fi-text fi-top") {
+                input(type = InputType.text, name = "email", classes = "fi-text") {
                     placeholder = "Email"
                 }
                 br()
@@ -39,7 +39,41 @@ fun Routing.registerRoute() = get("/register") {
                     placeholder = "Password"
                 }
                 br()
+                input(type = InputType.password, name = "password-c", classes = "fi-text") {
+                    placeholder = "Retype password"
+                }
+                hr()
+                select(classes = "fi-select") {
+                    name = "timeZone"
+                    for ((index, zoneId) in TimeZoneManager.timeZones.withIndex()) {
+                        option {
+                            // Select UTC time by default (offset 0).
+                            if (index == 14)
+                                selected = true
+                            value = index.toString()
+                            +zoneId.id.substringAfter("/").replace("GMT", "UTC")
+                        }
+                    }
+                }
+                +"(time zone)"
+                br()
+                select(classes = "fi-select") {
+                    name = "language"
+                    for ((index, lang) in Language.values().withIndex()) {
+                        option {
+                            value = index.toString()
+                            +lang.languageName
+                        }
+                    }
+                }
+                +"(language)"
+                hr()
                 input(type = InputType.submit, classes = "button-1") { value = "Register" }
+
+                // This message will be displayed upon a status after register.
+                val color = if (messageIndex == specialMessages.lastIndex) "green" else "red"
+                if (messageIndex in specialMessages.indices)
+                    span(classes = color) { +specialMessages[messageIndex!!] }
             }
         }
     }
