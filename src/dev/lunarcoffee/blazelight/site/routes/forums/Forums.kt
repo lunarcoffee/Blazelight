@@ -29,8 +29,6 @@ fun Routing.forumsRoute() = get("/forums") {
             for (category in categories)
                 p { +"${category.name} on ${category.creationTime}" }
 
-            println(user)
-            println(user?.isAdmin)
             if (user?.isAdmin == true) {
                 h3 { +"Create a new forum category:" }
                 hr()
@@ -38,14 +36,17 @@ fun Routing.forumsRoute() = get("/forums") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {
                         placeholder = "Forum name"
                     }
-                    input(type = InputType.submit, classes = "button-1") { value = "Create" }
+                    hr()
+                    input(type = InputType.submit, classes = "button-1") {
+                        value = "Create"
+                    }
+
+                    // This message will be displayed after an attempt to create a new category.
+                    val color = if (messageIndex == specialMessages.lastIndex) "green" else "red"
+                    if (messageIndex in specialMessages.indices)
+                        span(classes = color) { +specialMessages[messageIndex!!] }
                 }
             }
-
-            // This message will be displayed after an attempt to create a new category.
-            val color = if (messageIndex == specialMessages.lastIndex) "green" else "red"
-            if (messageIndex in specialMessages.indices)
-                span(classes = color) { +specialMessages[messageIndex!!] }
         }
     }
 }
