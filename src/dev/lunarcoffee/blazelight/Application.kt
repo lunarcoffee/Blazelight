@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight
 
 import dev.lunarcoffee.blazelight.site.routes.*
+import dev.lunarcoffee.blazelight.site.routes.forums.categoryPostRoute
 import dev.lunarcoffee.blazelight.site.routes.forums.forumsRoute
 import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import io.ktor.application.*
@@ -76,6 +77,7 @@ fun Application.configRouting() {
         authenticate("loginAuth") {
             profileRoute()
             logoutRoute()
+            categoryPostRoute()
         }
     }
 }

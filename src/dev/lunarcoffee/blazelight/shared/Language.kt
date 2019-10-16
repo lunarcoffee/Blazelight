@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.std
+package dev.lunarcoffee.blazelight.shared
 
 enum class Language(val languageName: String) {
     ENGLISH("English"),

@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.internal.threads
+package dev.lunarcoffee.blazelight.model.internal.forums
 
 import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
 

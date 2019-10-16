@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.std
+package dev.lunarcoffee.blazelight.shared
 
 import java.time.LocalDateTime
 import java.time.ZoneId

@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.model.api.forums
 
 import dev.lunarcoffee.blazelight.model.internal.Database
-import dev.lunarcoffee.blazelight.model.internal.threads.DefaultCategory
+import dev.lunarcoffee.blazelight.model.internal.forums.DefaultCategory
 import dev.lunarcoffee.blazelight.model.internal.users.User
 
 object CategoryManager {

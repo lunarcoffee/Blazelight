@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.internal.threads
+package dev.lunarcoffee.blazelight.model.internal.forums
 
 import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
 
@@ -8,7 +8,7 @@ class UserThread(
     override val categoryId: Long
 ) : Thread {
 
-    override val commentIds = emptyList<Long>()
+    override val commentIds = mutableListOf<Long>()
 
     override val creationTime = System.currentTimeMillis()
     override val id = UniqueIDGenerator.nextId()

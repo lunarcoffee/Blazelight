@@ -1,6 +1,6 @@
 package dev.lunarcoffee.blazelight.model.internal
 
-import dev.lunarcoffee.blazelight.model.internal.threads.*
+import dev.lunarcoffee.blazelight.model.internal.forums.*
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.model.internal.util.IdSetWrapper
 import org.litote.kmongo.coroutine.coroutine

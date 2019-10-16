@@ -1,8 +1,8 @@
 package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
-import dev.lunarcoffee.blazelight.std.Language
-import dev.lunarcoffee.blazelight.std.TimeZoneManager
+import dev.lunarcoffee.blazelight.shared.Language
+import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Routing
@@ -11,12 +11,12 @@ import kotlinx.html.*
 
 private val specialMessages = listOf(
     "That email is invalid!",
-    "That username is invalid! It must be at most 40 in length.",
-    "That password is invalid! It must be 8-200 in length.",
+    "That username is invalid! It must be at most 40 characters long (inclusive).",
+    "That password is invalid! It must be 8 to 200 characters long (inclusive).",
     "That email is taken!",
     "That username is taken!",
     "The two passwords don't match!",
-    "Registration successful! You may now log in."
+    "Success! You may now log in."
 )
 
 fun Routing.registerRoute() = get("/register") {
@@ -70,7 +70,7 @@ fun Routing.registerRoute() = get("/register") {
                 hr()
                 input(type = InputType.submit, classes = "button-1") { value = "Register" }
 
-                // This message will be displayed upon a status after register.
+                // This message will be displayed after attempting to register.
                 val color = if (messageIndex == specialMessages.lastIndex) "green" else "red"
                 if (messageIndex in specialMessages.indices)
                     span(classes = color) { +specialMessages[messageIndex!!] }

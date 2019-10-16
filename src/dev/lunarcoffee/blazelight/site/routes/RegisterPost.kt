@@ -1,8 +1,8 @@
 package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.*
-import dev.lunarcoffee.blazelight.std.LanguageManager
-import dev.lunarcoffee.blazelight.std.TimeZoneManager
+import dev.lunarcoffee.blazelight.shared.LanguageManager
+import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import io.ktor.application.call
 import io.ktor.request.receiveParameters
 import io.ktor.response.respondRedirect
