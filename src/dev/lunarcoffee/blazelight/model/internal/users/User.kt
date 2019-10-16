@@ -17,4 +17,5 @@ interface User : Dateable, Identifiable {
     val threadIds: List<Long>
 
     val settings: UserSettings
+    val isAdmin: Boolean
 }

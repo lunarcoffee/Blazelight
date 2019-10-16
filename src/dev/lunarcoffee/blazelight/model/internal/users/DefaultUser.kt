@@ -23,4 +23,5 @@ class DefaultUser(
     override val id = UniqueIDGenerator.nextId()
 
     override val settings = UserSettings(zoneId, language, id)
+    override var isAdmin = false
 }

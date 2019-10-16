@@ -70,6 +70,7 @@ fun Application.configRouting() {
         registerPostRoute()
         loginRoute()
         loginPostRoute()
+        forumsRoute()
 
         authenticate("loginAuth") {
             profileRoute()
