@@ -1,6 +1,6 @@
-package dev.lunarcoffee.blazelight.routes
+package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.routes.templates.HeaderBarTemplate
+import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Routing

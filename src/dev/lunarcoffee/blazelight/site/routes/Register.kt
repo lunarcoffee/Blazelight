@@ -1,6 +1,6 @@
-package dev.lunarcoffee.blazelight.routes
+package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.routes.templates.HeaderBarTemplate
+import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import dev.lunarcoffee.blazelight.std.Language
 import dev.lunarcoffee.blazelight.std.TimeZoneManager
 import io.ktor.application.call

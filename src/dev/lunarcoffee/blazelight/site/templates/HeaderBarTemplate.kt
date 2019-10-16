@@ -1,6 +1,6 @@
-package dev.lunarcoffee.blazelight.routes.templates
+package dev.lunarcoffee.blazelight.site.templates
 
-import dev.lunarcoffee.blazelight.routes.sessions.UserSession
+import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import io.ktor.application.ApplicationCall
 import io.ktor.html.*
 import io.ktor.sessions.get

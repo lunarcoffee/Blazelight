@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.routes.templates
+package dev.lunarcoffee.blazelight.site.templates
 
 import io.ktor.html.*
 import kotlinx.html.*

@@ -1,7 +1,8 @@
 package dev.lunarcoffee.blazelight
 
-import dev.lunarcoffee.blazelight.routes.*
-import dev.lunarcoffee.blazelight.routes.sessions.UserSession
+import dev.lunarcoffee.blazelight.site.routes.*
+import dev.lunarcoffee.blazelight.site.routes.forums.forumsRoute
+import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*

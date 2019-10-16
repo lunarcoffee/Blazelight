@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.routes
+package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.*
 import dev.lunarcoffee.blazelight.std.LanguageManager
