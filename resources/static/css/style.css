@@ -220,6 +220,23 @@ h2, h3 {
     margin-bottom: 18px;
 }
 
+.forum-list-item {
+    display: inline;
+}
+
+.b-img-a {
+    padding-left: 8px;
+}
+
+.b-plus {
+    height: 14px;
+    filter: brightness(95%);
+}
+
+.b-plus:hover {
+    filter: brightness(110%);
+}
+
 *:focus {
     outline: none;
 }

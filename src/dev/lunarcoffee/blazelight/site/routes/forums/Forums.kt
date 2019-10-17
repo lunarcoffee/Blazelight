@@ -30,17 +30,24 @@ fun Routing.forumsRoute() = get("/forums") {
         content {
             for (category in categories) {
                 div(classes = "category") {
-                    h3 { +category.name }
+                    h3 {
+                        +category.name
+                        a(href = "/forums/add", classes = "b-img-a") {
+                            img(alt = "ok adi", src = "/img/green-plus.png", classes = "b-plus")
+                        }
+                    }
                     hr()
+
                     if (category.forumIds.isEmpty()) {
-                        p { +"There are no forums in this category."}
+                        p { +"There are no forums in this category." }
                     } else {
                         for (id in category.forumIds) {
                             val forum = runBlocking { id.getForum() }
-                            // TODO:
+                            div(classes = "forum-list-item") {
+
+                            }
                         }
                     }
-
                 }
             }
 
