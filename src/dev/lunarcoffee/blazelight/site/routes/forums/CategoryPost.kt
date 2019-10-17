@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
-import dev.lunarcoffee.blazelight.model.api.forums.CategoryAddResult
-import dev.lunarcoffee.blazelight.model.api.forums.CategoryManager
+import dev.lunarcoffee.blazelight.model.api.categories.CategoryAddResult
+import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import io.ktor.application.call

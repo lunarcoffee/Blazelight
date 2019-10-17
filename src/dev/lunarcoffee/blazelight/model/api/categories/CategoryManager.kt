@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.api.forums
+package dev.lunarcoffee.blazelight.model.api.categories
 
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.DefaultCategory

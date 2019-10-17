@@ -11,6 +11,7 @@ object Database {
 
     val userCol = db.getCollection<DefaultUser>("BL_User0")
     val categoryCol = db.getCollection<DefaultCategory>("BL_Category0")
+    val forumCol = db.getCollection<DefaultForum>("BL_Forum0")
     val threadCol = db.getCollection<UserThread>("BL_Thread0")
     val commentCol = db.getCollection<UserComment>("BL_Comment0")
 

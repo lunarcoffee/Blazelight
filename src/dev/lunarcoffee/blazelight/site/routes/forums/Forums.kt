@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
-import dev.lunarcoffee.blazelight.model.api.forums.CategoryManager
+import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
+import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -10,6 +11,7 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
+import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 
 private val specialMessages = listOf(
@@ -26,18 +28,30 @@ fun Routing.forumsRoute() = get("/forums") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Forums", call)) {
         content {
-            for (category in categories)
-                p { +"${category.name} on ${category.creationTime}" }
+            for (category in categories) {
+                div(classes = "category") {
+                    h3 { +category.name }
+                    hr()
+                    if (category.forumIds.isEmpty()) {
+                        p { +"There are no forums in this category."}
+                    } else {
+                        for (id in category.forumIds) {
+                            val forum = runBlocking { id.getForum() }
+                            // TODO:
+                        }
+                    }
+
+                }
+            }
 
             if (user?.isAdmin == true) {
-                h3 { +"Create a new forum category:" }
                 hr()
-                form(action = "/forums/category", method = FormMethod.post) {
+                h3 { +"Create a new forum category:" }
+                form(action = "/forums/category", method = FormMethod.post, classes = "f-inline") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {
                         placeholder = "Forum name"
                     }
-                    hr()
-                    input(type = InputType.submit, classes = "button-1") {
+                    input(type = InputType.submit, classes = "button-1 b-inline") {
                         value = "Create"
                     }
 

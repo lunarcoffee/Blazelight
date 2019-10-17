@@ -195,6 +195,19 @@ h2, h3 {
     );
 }
 
+.f-inline {
+    margin-top: 4px;
+    padding-top: 1px;
+    display: inline-block;
+}
+
+.b-inline {
+    height: 28px;
+    padding-top: 6px;
+    margin-top: 1px;
+    margin-left: 8px;
+}
+
 .red {
     color: red;
 }

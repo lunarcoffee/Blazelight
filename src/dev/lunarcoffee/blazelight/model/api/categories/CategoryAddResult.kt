@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.api.forums
+package dev.lunarcoffee.blazelight.model.api.categories
 
 enum class CategoryAddResult {
     INSUFFICIENT_PERMISSIONS,
