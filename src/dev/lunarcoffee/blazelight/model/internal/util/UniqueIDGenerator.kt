@@ -11,17 +11,17 @@ object UniqueIDGenerator : CoroutineScope by CoroutineScope(Dispatchers.IO) {
         val id = Random(System.nanoTime()).nextLong(1, Long.MAX_VALUE)
 
         // This can theoretically cause a stack overflow, but in practice that should never happen.
-        return if (id in generated.set) {
-            nextId()
-        } else {
+        return if (id !in generated.set) {
             generated.set += id
             Database.idCol.run {
-                launch {
+                runBlocking {
                     drop()
                     insertOne(generated)
                 }
             }
             id
+        } else {
+            nextId()
         }
     }
 }

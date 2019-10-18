@@ -79,6 +79,7 @@ fun Application.configRouting() {
 
             categoryPostRoute()
             forumsAddRoute()
+            forumsAddPostRoute()
         }
     }
 }

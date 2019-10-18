@@ -21,42 +21,46 @@ private val specialMessages = listOf(
 )
 
 fun Routing.forumsRoute() = get("/forums") {
-    val categories = CategoryManager.getAll()
-    val user = call.sessions.get<UserSession>()?.getUser()
-
+    val categories = CategoryManager.categories
     val messageIndex = call.parameters["a"]?.toIntOrNull()
+
+    val user = call.sessions.get<UserSession>()?.getUser()
+    val isAdmin = user?.isAdmin == true
 
     call.respondHtmlTemplate(HeaderBarTemplate("Forums", call)) {
         content {
-            for (category in categories) {
-                div(classes = "category") {
+            if (categories.isEmpty())
+                p { +"There are no categories." }
+
+            for ((index, category) in categories.withIndex()) {
+                div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
                     h3 {
                         +category.name
-                        a(href = "/forums/add", classes = "b-img-a") {
+                        a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
                             img(alt = "Add Forum", src = "/img/green-plus.png", classes = "b-plus")
                         }
                     }
                     hr()
 
-                    if (category.forumIds.isEmpty()) {
+                    if (category.forumIds.isEmpty())
                         p { +"There are no forums in this category." }
-                    } else {
-                        for (id in category.forumIds) {
-                            val forum = runBlocking { id.getForum() }
-                            div(classes = "forum-list-item") {
 
-                            }
+                    for (id in category.forumIds) {
+                        val forum = runBlocking { id.getForum() }
+                        div(classes = "forum-list-item") {
+                            p { +forum.name }
+                            p { +forum.topic }
                         }
                     }
                 }
             }
 
-            if (user?.isAdmin == true) {
+            if (isAdmin) {
                 hr()
                 h3 { +"Create a new forum category:" }
                 form(action = "/forums/category", method = FormMethod.post, classes = "f-inline") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {
-                        placeholder = "Forum name"
+                        placeholder = "Name"
                     }
                     input(type = InputType.submit, classes = "button-1 b-inline") {
                         value = "Create"

@@ -5,7 +5,7 @@ import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 
 interface Forum : Dateable, Identifiable {
     val name: String
-    val description: String
+    val topic: String
 
     val threadIds: MutableList<Long>
     val categoryId: Long

@@ -4,7 +4,7 @@ import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
 
 class DefaultForum(
     override val name: String,
-    override val description: String,
+    override val topic: String,
     override val categoryId: Long
 ) : Forum {
 
