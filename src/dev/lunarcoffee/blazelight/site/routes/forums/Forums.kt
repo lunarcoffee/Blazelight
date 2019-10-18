@@ -33,7 +33,7 @@ fun Routing.forumsRoute() = get("/forums") {
                     h3 {
                         +category.name
                         a(href = "/forums/add", classes = "b-img-a") {
-                            img(alt = "ok adi", src = "/img/green-plus.png", classes = "b-plus")
+                            img(alt = "Add Forum", src = "/img/green-plus.png", classes = "b-plus")
                         }
                     }
                     hr()

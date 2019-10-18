@@ -7,8 +7,13 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*
 
+private val specialMessages = listOf(
+    "Invalid username or password!",
+    "Please login to continue."
+)
+
 fun Routing.loginRoute() = get("/login") {
-    val failed = call.parameters["a"]
+    val messageIndex = call.parameters["a"]?.toIntOrNull()
 
     call.respondHtmlTemplate(HeaderBarTemplate("Login", call)) {
         content {
@@ -25,9 +30,11 @@ fun Routing.loginRoute() = get("/login") {
                 hr()
                 input(type = InputType.submit, classes = "button-1") { value = "Login" }
 
-                // This message will be displayed upon failure to login.
-                if (failed == "0")
-                    span(classes = "red") { +"Invalid username or password!" }
+                // This message will be displayed upon a special login event. The possible events
+                // include a permission redirection (user must log in to perform action) and in the
+                // case of invalid credentials.
+                if (messageIndex in specialMessages.indices)
+                    span(classes = "red") { +specialMessages[messageIndex!!] }
             }
         }
     }

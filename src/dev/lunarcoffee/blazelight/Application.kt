@@ -32,7 +32,7 @@ fun Application.configAuth() {
     install(Authentication) {
         form("loginAuth") {
             skipWhen { it.sessions.get<UserSession>() != null }
-            challenge { call.respondRedirect("/login") }
+            challenge { call.respondRedirect("/login?a=1") }
         }
     }
 }
