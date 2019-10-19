@@ -35,9 +35,15 @@ fun Routing.forumsRoute() = get("/forums") {
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
                     h3 {
-                        +category.name
-                        a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
-                            img(alt = "Add Forum", src = "/img/green-plus.png", classes = "b-plus")
+                        b { +category.name }
+                        if (isAdmin) {
+                            a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
+                                img(
+                                    alt = "Add Forum",
+                                    src = "/img/green-plus.png",
+                                    classes = "b-plus"
+                                )
+                            }
                         }
                     }
                     hr()
@@ -49,14 +55,14 @@ fun Routing.forumsRoute() = get("/forums") {
                         val forum = runBlocking { id.getForum() }
                         div(classes = "forum-list-item") {
                             p { +forum.name }
-                            p { +forum.topic }
+                            p(classes = "forum-topic") { +forum.topic }
+                            hr(classes = "hr-dot")
                         }
                     }
                 }
             }
 
             if (isAdmin) {
-                hr()
                 h3 { +"Create a new forum category:" }
                 form(action = "/forums/category", method = FormMethod.post, classes = "f-inline") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {

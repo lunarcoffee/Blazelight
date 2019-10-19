@@ -21,6 +21,12 @@ hr {
     background: #bbb;
 }
 
+.hr-dot {
+    border: none;
+    border-top: 1px dotted #bbb;
+    background-color: white;
+}
+
 h2, h3 {
     font-weight: normal;
 }
@@ -196,7 +202,7 @@ h2, h3 {
 }
 
 .f-inline {
-    margin-top: 4px;
+    margin-top: 6px;
     padding-top: 1px;
     display: inline-block;
 }
@@ -217,19 +223,20 @@ h2, h3 {
 }
 
 .category {
-    margin-bottom: 18px;
-}
-
-.category-last {
-
+    margin-bottom: 16px;
 }
 
 .forum-list-item {
-    display: inline;
+    padding: 2px 0;
+}
+
+.forum-topic {
+    font-size: 0.8rem;
+    padding-top: 2px;
 }
 
 .b-img-a {
-    padding-left: 8px;
+    padding-left: 9px;
 }
 
 .b-plus {
