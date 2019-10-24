@@ -10,7 +10,7 @@ class HeadTemplate(private val titleText: String) : Template<HTML> {
         head {
             meta(charset = "utf-8")
             title(content = "Blazelight - $titleText")
-            link(href = "/css/style.css", rel = "stylesheet", type = "text/css")
+            link(href = "/css/style_glass.css", rel = "stylesheet", type = "text/css")
         }
         body { insert(body) }
     }

@@ -14,7 +14,7 @@ import io.ktor.sessions.sessions
 
 fun Route.categoryPostRoute() = post("/forums/category") {
     val name = call.receiveParameters()["name"]!!
-    val user = call.sessions.get<UserSession>()!!.getUser()
+    val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     val index = when (CategoryManager.add(name, user)) {
         CategoryAddResult.INSUFFICIENT_PERMISSIONS -> 0

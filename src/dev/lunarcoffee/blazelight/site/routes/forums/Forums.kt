@@ -52,9 +52,12 @@ fun Routing.forumsRoute() = get("/forums") {
                         p { +"There are no forums in this category." }
 
                     for (id in category.forumIds) {
-                        val forum = runBlocking { id.getForum() }
+                        val forum = runBlocking { id.getForum()!! }
                         div(classes = "forum-list-item") {
-                            p { +forum.name }
+                            a(href = "/forums/view/$id", classes = "a1") {
+                                +forum.name
+                                +" (${forum.threadIds.size})"
+                            }
                             p(classes = "forum-topic") { +forum.topic }
                             hr(classes = "hr-dot")
                         }

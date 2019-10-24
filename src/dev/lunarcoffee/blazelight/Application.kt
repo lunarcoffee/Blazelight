@@ -2,6 +2,8 @@ package dev.lunarcoffee.blazelight
 
 import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
+import dev.lunarcoffee.blazelight.site.routes.statuses.internalServerErrorStatus
+import dev.lunarcoffee.blazelight.site.routes.statuses.notFoundStatus
 import dev.lunarcoffee.blazelight.site.sessions.UserSession
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -22,6 +24,7 @@ fun Application.module() {
     configAuth()
     configCache()
     configSessions()
+    configStatusPages()
     configRouting()
 
     install(CallLogging) { level = Level.INFO }
@@ -38,10 +41,20 @@ fun Application.configAuth() {
 }
 
 fun Application.configCache() {
+    val fileTypes = setOf(
+        ContentType.Image.PNG,
+        ContentType.Image.JPEG,
+        ContentType.Image.GIF,
+        ContentType.Image.SVG,
+        ContentType.Video.MP4,
+        ContentType.Video.MPEG,
+        ContentType.Video.OGG
+    )
+
     install(CachingHeaders) {
-        // Cache images for a day.
+        // Cache certain media types for a day.
         options { outgoingContent ->
-            if (outgoingContent.contentType?.withoutParameters() == ContentType.Image.Any)
+            if (outgoingContent.contentType?.withoutParameters() in fileTypes)
                 CachingOptions(CacheControl.MaxAge(86_400), null)
             else
                 null
@@ -53,6 +66,13 @@ fun Application.configCache() {
 fun Application.configSessions() {
     install(Sessions) {
         cookie<UserSession>("BlazelightSession", directorySessionStorage(File(".sessions"), true))
+    }
+}
+
+fun Application.configStatusPages() {
+    install(StatusPages) {
+        notFoundStatus()
+        internalServerErrorStatus()
     }
 }
 
@@ -71,7 +91,9 @@ fun Application.configRouting() {
         registerPostRoute()
         loginRoute()
         loginPostRoute()
+
         forumsRoute()
+        forumsViewRoute()
 
         authenticate("loginAuth") {
             profileRoute()

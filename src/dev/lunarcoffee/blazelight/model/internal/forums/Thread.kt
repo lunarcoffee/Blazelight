@@ -8,5 +8,5 @@ interface Thread : Dateable, Identifiable {
 
     val authorId: Long
     val commentIds: MutableList<Long>
-    val categoryId: Long
+    val forumId: Long
 }

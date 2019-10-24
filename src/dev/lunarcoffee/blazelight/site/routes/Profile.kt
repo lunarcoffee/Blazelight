@@ -12,7 +12,7 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Route.profileRoute() = get("/me") {
-    val user = call.sessions.get<UserSession>()!!.getUser()
+    val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
         content {

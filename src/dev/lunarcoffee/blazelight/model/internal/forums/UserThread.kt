@@ -5,7 +5,7 @@ import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
 class UserThread(
     override val title: String,
     override val authorId: Long,
-    override val categoryId: Long
+    override val forumId: Long
 ) : Thread {
 
     override val commentIds = mutableListOf<Long>()

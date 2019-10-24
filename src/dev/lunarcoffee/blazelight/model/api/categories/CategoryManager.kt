@@ -23,7 +23,7 @@ object CategoryManager {
     }
 
     suspend fun addForum(forum: Forum) {
-        val category = forum.categoryId.getCategory()
+        val category = forum.categoryId.getCategory() ?: return
         val newForums = category.forumIds + forum.id
 
         Database.categoryCol.updateOne(

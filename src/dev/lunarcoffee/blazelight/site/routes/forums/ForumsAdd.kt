@@ -4,10 +4,10 @@ import dev.lunarcoffee.blazelight.model.api.categories.getCategory
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
-import io.ktor.response.respondRedirect
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
-import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 
 private val specialMessages = listOf(
@@ -20,20 +20,21 @@ fun Route.forumsAddRoute() = get("/forums/add") {
     val params = call.parameters
 
     val messageIndex = params["a"]?.toIntOrNull()
-    val categoryId = params["b"]?.toLongOrNull() ?: return@get call.respondRedirect("/")
+    val category = params["b"]?.toLongOrNull()?.getCategory()
+        ?: return@get call.respond(HttpStatusCode.NotFound)
 
     call.respondHtmlTemplate(HeaderBarTemplate("Add Forum", call)) {
         content {
             h3 {
                 +"Create a new forum in "
-                b { +runBlocking { categoryId.getCategory().name } }
+                b { +category.name }
                 +":"
             }
             hr()
             form(action = "/forums/add", method = FormMethod.post) {
                 // Hidden category ID.
                 input(type = InputType.hidden, name = "category") {
-                    value = categoryId.toString()
+                    value = category.id.toString()
                 }
 
                 input(type = InputType.text, name = "name", classes = "fi-text fi-top") {

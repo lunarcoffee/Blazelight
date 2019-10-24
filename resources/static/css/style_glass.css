@@ -214,6 +214,15 @@ h2, h3 {
     margin-left: 8px;
 }
 
+.a1 {
+    text-decoration: none;
+    color: black;
+}
+
+.a1:hover {
+    text-decoration: underline;
+}
+
 .red {
     color: red;
 }

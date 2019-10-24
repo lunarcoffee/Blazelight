@@ -1,15 +1,19 @@
 package dev.lunarcoffee.blazelight.model.api.users
 
 import dev.lunarcoffee.blazelight.model.internal.Database
+import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.model.internal.users.User
+import dev.lunarcoffee.blazelight.model.internal.util.Cache
 import dev.lunarcoffee.blazelight.model.internal.util.PasswordHasher
 import dev.lunarcoffee.blazelight.shared.Language
 import org.litote.kmongo.eq
 import java.security.SecureRandom
 import java.time.ZoneId
 
-object UserRegistrar {
+object UserRegistrar : DBCacheable<User> {
+    val users = Cache<User>()
+
     private val srng = SecureRandom()
     private val emailRegex = """[a-zA-Z0-9+.]+@[a-zA-Z0-9.]+""".toRegex() // TODO: make this good!
 
@@ -39,6 +43,7 @@ object UserRegistrar {
 
         val user = DefaultUser(name, email, passwordHash, salt, timeZone, language)
         Database.userCol.insertOne(user)
+        users += user
 
         return UserRegisterSuccess
     }
@@ -53,5 +58,7 @@ object UserRegistrar {
             UserLoginFailure
     }
 
-    suspend fun getUserById(id: Long) = Database.userCol.findOne(User::id eq id)
+    override suspend fun cacheFromDB(id: Long): User? {
+        return Database.userCol.findOne(User::id eq id)?.also { users += it }
+    }
 }

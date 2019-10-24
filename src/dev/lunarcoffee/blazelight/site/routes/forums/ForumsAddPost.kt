@@ -18,7 +18,7 @@ fun Route.forumsAddPostRoute() = post("/forums/add") {
     val categoryId = params["category"]!!.toLong()
     val name = params["name"]!!
     val topic = params["topic"]!!
-    val user = call.sessions.get<UserSession>()!!.getUser()
+    val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     val index = when (ForumManager.add(name, topic, categoryId, user)) {
         ForumAddResult.INSUFFICIENT_PERMISSIONS -> 0
