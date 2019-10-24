@@ -257,6 +257,22 @@ h2, h3 {
     filter: brightness(110%);
 }
 
+.bc-a {
+    font-size: 0.8rem;
+}
+
+.bc-home {
+    width: 18px;
+    margin-bottom: -3px;
+    filter: hue-rotate(-130deg) saturate(40%);
+}
+
+.bc-arrow {
+    width: 9px;
+    padding: 0 8px;
+    filter: invert(50%);
+}
+
 *:focus {
     outline: none;
 }

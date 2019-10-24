@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.site.sessions
+package dev.lunarcoffee.blazelight.site.std.sessions
 
 import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 

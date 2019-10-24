@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
-import dev.lunarcoffee.blazelight.site.sessions.UserSession
+import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
