@@ -30,6 +30,7 @@ class HeaderBarTemplate(
                     }
 
                     div(classes = "header-bar-button-row") {
+                        div(classes = "header-bar-lp")
                         a(href = "/", classes = "header-bar-button hbb-left") { +"Home" }
                         a(href = "/forums", classes = "header-bar-button") { +"Forums" }
                         a(href = "/tools", classes = "header-bar-button hbb-right") { +"Tools" }

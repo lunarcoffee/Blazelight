@@ -32,10 +32,11 @@ h2, h3 {
 }
 
 .header-bar {
-    width: 96vw;
+    width: available;
     height: auto;
     padding-bottom: 14px;
-    margin-left: 2vw;
+    margin-left: 38px;
+    margin-right: 38px;
     background: radial-gradient(
             circle,
             rgb(32, 29, 54) 0%,
@@ -57,7 +58,7 @@ h2, h3 {
 .header-bar-button-row {
     display: inline-block;
     margin-top: 16px;
-    width: 95vw;
+    width: 100%;
     background: linear-gradient(
             180deg,
             rgba(53, 53, 71, 1) 0%,
@@ -67,7 +68,21 @@ h2, h3 {
             rgba(67, 61, 85, 1) 94%,
             rgba(47, 38, 54, 1) 100%
     );
-    padding: 10px 0 10px 1vw;
+    padding: 10px 0;
+}
+
+.header-bar-lp {
+    background: linear-gradient(
+            180deg,
+            rgba(53, 53, 71, 1) 0%,
+            rgba(120, 118, 161, 1) 6%,
+            rgba(86, 86, 129, 1) 48%,
+            rgba(70, 71, 116, 1) 52%,
+            rgba(67, 61, 85, 1) 94%,
+            rgba(47, 38, 54, 1) 100%
+    );
+    padding-right: 19px;
+    width: 19px;
 }
 
 .header-bar-button {
@@ -103,6 +118,7 @@ h2, h3 {
 .hbb-left {
     border-left: solid 1px #232436;
     box-shadow: -1px 0 0 0 #50506c;
+    margin-left: 19px;
 }
 
 .hbb-right {
@@ -131,11 +147,12 @@ h2, h3 {
 
 .content {
     background: #f9faff;
-    width: 94vw;
-    margin-left: 2vw;
+    width: available;
+    margin-left: 38px;
     margin-top: 14px;
+    margin-right: 38px;
     min-height: inherit;
-    padding: 1vw;
+    padding: 20px;
     border-radius: 10px;
 }
 
@@ -189,6 +206,7 @@ h2, h3 {
             rgba(67, 61, 85, 1) 100%
     );
     cursor: pointer;
+    text-decoration: none;
 }
 
 .button-1:hover {
@@ -199,6 +217,10 @@ h2, h3 {
             rgb(109, 110, 148) 52%,
             rgba(75, 69, 92, 1) 100%
     );
+}
+
+.ba-wrap {
+    margin: 20px 0 8px 0;
 }
 
 .f-inline {
@@ -225,6 +247,10 @@ h2, h3 {
 
 .red {
     color: red;
+}
+
+.red-u:hover {
+    text-decoration: red underline;
 }
 
 .green {

@@ -3,6 +3,7 @@ package dev.lunarcoffee.blazelight.site.routes.forums
 import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -20,7 +21,7 @@ private val specialMessages = listOf(
     "Success! Forum created."
 )
 
-fun Routing.forumsRoute() = get("/forums") {
+fun Routing.forumsRoute() = get("/forums/{category?}") {
     val categories = CategoryManager.categories
     val messageIndex = call.parameters["a"]?.toIntOrNull()
 
@@ -29,20 +30,39 @@ fun Routing.forumsRoute() = get("/forums") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Forums", call)) {
         content {
+            val crumbName = call.parameters["category"]?.substringAfterLast("#")
+            breadcrumbs {
+                crumb("/forums", "Forums")
+
+                // Add a category breadcrumb if the user has selected a category.
+                if (categories.any { it.name == crumbName })
+                    crumb("/forums/$crumbName#$crumbName", crumbName!!)
+            }
+            br()
+
             if (categories.isEmpty())
                 p { +"There are no categories." }
 
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
-                    h3 {
-                        b { +category.name }
-                        if (isAdmin) {
-                            a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
-                                img(
-                                    alt = "Add Forum",
-                                    src = "/img/green-plus.png",
-                                    classes = "b-plus"
-                                )
+                    a(href = "/forums/${category.name}#${category.name}", classes = "a1") {
+                        h3 {
+                            id = category.name
+                            b {
+                                // Highlight the user's selected category (if one is selected).
+                                if (category.name == crumbName)
+                                    span(classes = "red red-u") { +category.name }
+                                else
+                                    +category.name
+                            }
+                            if (isAdmin) {
+                                a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
+                                    img(
+                                        alt = "Add Forum",
+                                        src = "/img/green-plus.png",
+                                        classes = "b-plus"
+                                    )
+                                }
                             }
                         }
                     }

@@ -46,6 +46,7 @@ fun Application.configCache() {
         ContentType.Image.JPEG,
         ContentType.Image.GIF,
         ContentType.Image.SVG,
+        ContentType.Image.XIcon,
         ContentType.Video.MP4,
         ContentType.Video.MPEG,
         ContentType.Video.OGG

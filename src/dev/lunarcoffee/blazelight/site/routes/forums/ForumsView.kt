@@ -22,11 +22,15 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
     call.respondHtmlTemplate(HeaderBarTemplate("Forums - ${forum.name}", call)) {
         content {
             breadcrumbs {
-                link("/forums", forum.categoryId.getCategory()!!.name)
-                link("/forums/view/${forum.id}", forum.name)
+                val category = forum.categoryId.getCategory()!!
+                crumb("/forums", "Forums")
+                crumb("/forums/${category.name}#${category.name}", category.name)
+                crumb("/forums/view/${forum.id}", forum.name)
             }
             br()
 
+            h3 { b { +forum.name } }
+            hr()
             if (forum.threadIds.isEmpty())
                 p { +"There are no threads in this forum." }
 
@@ -46,8 +50,9 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 }
             }
 
-            h3 { +"Create a new thread:" }
-
+            div(classes = "ba-wrap") {
+                a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +"New Thread" }
+            }
         }
     }
 }
