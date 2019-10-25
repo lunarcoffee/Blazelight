@@ -6,6 +6,8 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
+import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
@@ -13,6 +15,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
@@ -31,22 +35,26 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
 
             h3 { b { +forum.name } }
             hr()
-            if (forum.threadIds.isEmpty())
+            if (forum.threadIds.isEmpty()) {
                 p { +"There are no threads in this forum." }
+            } else {
+                // [user] is used for local time display.
+                val user = call.sessions.get<UserSession>()?.getUser()
 
-            for (threadId in forum.threadIds) {
-                val thread = threadId.getThread()!!
-                div(classes = "forum-list-item") {
-                    a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
-                        +thread.title
-                        +" (${thread.commentIds.size})"
+                for (threadId in forum.threadIds) {
+                    val thread = threadId.getThread()!!
+                    div(classes = "forum-list-item") {
+                        a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
+                            +thread.title
+                            +" (${thread.commentIds.size})"
+                        }
+                        p(classes = "forum-topic") { +thread.commentIds[0].getComment()!!.contentRaw }
+                        a(classes = "forum-topic a1") {
+                            +thread.commentIds.last().getComment()!!.authorId.getUser()!!.username
+                            +" at ${thread.creationTime.toTimeDisplay(user)}"
+                        }
+                        hr(classes = "hr-dot")
                     }
-                    p(classes = "forum-topic") { +thread.commentIds[0].getComment()!!.contentRaw }
-                    a(classes = "forum-topic a1") {
-                        +thread.commentIds.last().getComment()!!.authorId.getUser()!!.username
-                        +" at {time}"
-                    }
-                    hr(classes = "hr-dot")
                 }
             }
 

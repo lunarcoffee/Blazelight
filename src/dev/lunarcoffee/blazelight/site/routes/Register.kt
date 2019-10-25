@@ -51,11 +51,8 @@ fun Routing.registerRoute() = get("/register") {
                     name = "timeZone"
                     for ((index, zoneId) in TimeZoneManager.timeZones.withIndex()) {
                         option {
-                            // Select UTC time by default (offset 0).
-                            if (index == 14)
-                                selected = true
                             value = index.toString()
-                            +zoneId.id.substringAfter("/").replace("GMT", "UTC")
+                            +zoneId.id
                         }
                     }
                 }
