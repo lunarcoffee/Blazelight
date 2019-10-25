@@ -2,7 +2,7 @@ package dev.lunarcoffee.blazelight.model.internal
 
 import dev.lunarcoffee.blazelight.model.internal.forums.*
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
-import dev.lunarcoffee.blazelight.model.internal.util.IdSetWrapper
+import dev.lunarcoffee.blazelight.model.internal.std.util.IdSetWrapper
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 

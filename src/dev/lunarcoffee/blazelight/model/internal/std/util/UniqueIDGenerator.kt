@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.internal.util
+package dev.lunarcoffee.blazelight.model.internal.std.util
 
 import dev.lunarcoffee.blazelight.model.internal.Database
 import kotlinx.coroutines.*

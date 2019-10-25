@@ -3,7 +3,7 @@ package dev.lunarcoffee.blazelight.model.api.comments
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.Comment
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
-import dev.lunarcoffee.blazelight.model.internal.util.Cache
+import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
 import org.litote.kmongo.eq
 
 object CommentManager : DBCacheable<Comment> {

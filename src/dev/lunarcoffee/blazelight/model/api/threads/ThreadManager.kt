@@ -3,7 +3,7 @@ package dev.lunarcoffee.blazelight.model.api.threads
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.*
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
-import dev.lunarcoffee.blazelight.model.internal.util.Cache
+import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
 import org.litote.kmongo.eq
 
 object ThreadManager : DBCacheable<Thread> {

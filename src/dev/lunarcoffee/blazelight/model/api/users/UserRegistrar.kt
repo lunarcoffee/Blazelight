@@ -4,8 +4,8 @@ import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.model.internal.users.User
-import dev.lunarcoffee.blazelight.model.internal.util.Cache
-import dev.lunarcoffee.blazelight.model.internal.util.PasswordHasher
+import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
+import dev.lunarcoffee.blazelight.model.internal.std.util.PasswordHasher
 import dev.lunarcoffee.blazelight.shared.Language
 import org.litote.kmongo.eq
 import java.security.SecureRandom

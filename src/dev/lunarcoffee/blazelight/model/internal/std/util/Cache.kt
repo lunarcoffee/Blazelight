@@ -1,8 +1,8 @@
-package dev.lunarcoffee.blazelight.model.internal.util
+package dev.lunarcoffee.blazelight.model.internal.std.util
 
 import java.util.*
 
-// Cache backed by a weak referenced map.
+// Set-like cache backed by a weak referenced map.
 class Cache<T : Comparable<T>>(private val limit: Int = 1024) : MutableSet<T> {
     private val storage = WeakHashMap<Int, T>()
     private var index = 0

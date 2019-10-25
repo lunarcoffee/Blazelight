@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.internal.util
+package dev.lunarcoffee.blazelight.model.internal.std.util
 
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec

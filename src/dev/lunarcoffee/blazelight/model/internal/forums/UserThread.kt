@@ -1,6 +1,6 @@
 package dev.lunarcoffee.blazelight.model.internal.forums
 
-import dev.lunarcoffee.blazelight.model.internal.util.UniqueIDGenerator
+import dev.lunarcoffee.blazelight.model.internal.std.util.UniqueIDGenerator
 
 class UserThread(
     override val title: String,
