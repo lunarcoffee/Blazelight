@@ -87,15 +87,6 @@ fun Application.configRouting() {
                 static(path) { files(path) }
         }
 
-        homeRoute()
-        registerRoute()
-        registerPostRoute()
-        loginRoute()
-        loginPostRoute()
-
-        forumsRoute()
-        forumsViewRoute()
-
         authenticate("loginAuth") {
             profileRoute()
             logoutRoute()
@@ -104,5 +95,14 @@ fun Application.configRouting() {
             forumsAddRoute()
             forumsAddPostRoute()
         }
+
+        homeRoute()
+        registerRoute()
+        registerPostRoute()
+        loginRoute()
+        loginPostRoute()
+
+        forumsRoute()
+        forumsViewRoute()
     }
 }

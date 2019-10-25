@@ -290,7 +290,11 @@ h2, h3 {
 .bc-home {
     width: 18px;
     margin-bottom: -3px;
-    filter: hue-rotate(-130deg) saturate(40%);
+    filter: hue-rotate(-130deg) saturate(40%) brightness(95%);
+}
+
+.bc-home:hover {
+    filter: hue-rotate(-130deg) saturate(40%) brightness(110%);
 }
 
 .bc-arrow {

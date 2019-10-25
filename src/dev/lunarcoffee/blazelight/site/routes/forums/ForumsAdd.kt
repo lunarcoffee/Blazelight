@@ -1,10 +1,12 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
+import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
+import io.ktor.request.uri
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
@@ -25,6 +27,14 @@ fun Route.forumsAddRoute() = get("/forums/add") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Add Forum", call)) {
         content {
+            breadcrumbs {
+                val name = category.name
+                crumb("/forums", "Forums")
+                crumb("/forums/$name#$name", name)
+                crumb(call.request.uri, "Create Forum")
+            }
+            br()
+
             h3 {
                 +"Create a new forum in "
                 b { +category.name }

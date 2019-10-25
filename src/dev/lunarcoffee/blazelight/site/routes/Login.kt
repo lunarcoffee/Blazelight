@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes
 
+import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
@@ -17,6 +18,9 @@ fun Routing.loginRoute() = get("/login") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Login", call)) {
         content {
+            breadcrumbs { crumb("/login", "Login") }
+            br()
+
             h3 { +"Login to your account:" }
             hr()
             form(action = "/login", method = FormMethod.post) {

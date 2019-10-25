@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -16,6 +17,9 @@ fun Route.profileRoute() = get("/me") {
 
     call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
         content {
+            breadcrumbs { crumb("/me", "My Profile") }
+            br()
+
             p { +user.username }
             p {
                 +(user.realName ?: "(unset)")
