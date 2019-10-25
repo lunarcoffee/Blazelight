@@ -40,8 +40,10 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
             }
             br()
 
-            if (categories.isEmpty())
+            if (categories.isEmpty()) {
                 p { +"There are no categories." }
+                hr()
+            }
 
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {

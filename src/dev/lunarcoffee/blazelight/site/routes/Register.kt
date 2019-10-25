@@ -13,7 +13,7 @@ import kotlinx.html.*
 private val specialMessages = listOf(
     "That email is invalid!",
     "That username is invalid! It must be at most 40 characters long (inclusive).",
-    "That password is invalid! It must be 8 to 200 characters long (inclusive).",
+    "That password is invalid! It must be 8 to 1000 characters long (inclusive).",
     "That email is taken!",
     "That username is taken!",
     "The two passwords don't match!",
@@ -25,7 +25,7 @@ fun Routing.registerRoute() = get("/register") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Register", call)) {
         content {
-            breadcrumbs { crumb("/register", "Register") }
+            breadcrumbs { thisCrumb(call, "Register") }
             br()
 
             h3 { +"Register for an account:" }

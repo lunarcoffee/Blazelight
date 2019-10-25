@@ -18,7 +18,7 @@ fun Routing.loginRoute() = get("/login") {
 
     call.respondHtmlTemplate(HeaderBarTemplate("Login", call)) {
         content {
-            breadcrumbs { crumb("/login", "Login") }
+            breadcrumbs { thisCrumb(call, "Login") }
             br()
 
             h3 { +"Login to your account:" }

@@ -17,7 +17,7 @@ fun Route.profileRoute() = get("/me") {
 
     call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
         content {
-            breadcrumbs { crumb("/me", "My Profile") }
+            breadcrumbs { thisCrumb(call, "My Profile") }
             br()
 
             p { +user.username }

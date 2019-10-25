@@ -25,7 +25,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 val category = forum.categoryId.getCategory()!!
                 crumb("/forums", "Forums")
                 crumb("/forums/${category.name}#${category.name}", category.name)
-                crumb("/forums/view/${forum.id}", forum.name)
+                thisCrumb(call, forum.name)
             }
             br()
 

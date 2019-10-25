@@ -17,7 +17,7 @@ object CategoryManager {
             return CategoryAddResult.INVALID_NAME
 
         Database.categoryCol.insertOne(DefaultCategory(name))
-        reloadDbChanges()
+        reloadFromDb()
 
         return CategoryAddResult.SUCCESS
     }
@@ -30,10 +30,10 @@ object CategoryManager {
             Category::id eq category.id,
             setValue(Category::forumIds, newForums)
         )
-        reloadDbChanges()
+        reloadFromDb()
     }
 
-    private suspend fun reloadDbChanges() {
+    suspend fun reloadFromDb() {
         categories = Database.categoryCol.find().toList()
     }
 }

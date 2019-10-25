@@ -303,6 +303,12 @@ h2, h3 {
     filter: invert(50%);
 }
 
+.fti {
+
+}
+
+/* */
+
 *:focus {
     outline: none;
 }

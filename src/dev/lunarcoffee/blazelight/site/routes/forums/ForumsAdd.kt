@@ -15,7 +15,7 @@ import kotlinx.html.*
 private val specialMessages = listOf(
     "You don't have enough permissions to do that!",
     "That name is invalid! It must be 1 to 100 characters long (inclusive)!",
-    "That topic is invalid! It must be 1 to 300 characters long (inclusive)!"
+    "That topic is invalid! It must be 1 to 1000 characters long (inclusive)!"
 )
 
 fun Route.forumsAddRoute() = get("/forums/add") {
@@ -31,7 +31,7 @@ fun Route.forumsAddRoute() = get("/forums/add") {
                 val name = category.name
                 crumb("/forums", "Forums")
                 crumb("/forums/$name#$name", name)
-                crumb(call.request.uri, "Create Forum")
+                thisCrumb(call, "Create Forum")
             }
             br()
 
@@ -41,7 +41,7 @@ fun Route.forumsAddRoute() = get("/forums/add") {
                 +":"
             }
             hr()
-            form(action = "/forums/add", method = FormMethod.post) {
+            form(action = call.request.uri, method = FormMethod.post) {
                 // Hidden category ID.
                 input(type = InputType.hidden, name = "category") {
                     value = category.id.toString()

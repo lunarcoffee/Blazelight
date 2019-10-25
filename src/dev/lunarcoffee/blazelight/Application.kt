@@ -2,6 +2,8 @@ package dev.lunarcoffee.blazelight
 
 import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
+import dev.lunarcoffee.blazelight.site.routes.forums.threads.forumsViewAdd
+import dev.lunarcoffee.blazelight.site.routes.forums.threads.forumsViewAddPost
 import dev.lunarcoffee.blazelight.site.routes.statuses.internalServerErrorStatus
 import dev.lunarcoffee.blazelight.site.routes.statuses.notFoundStatus
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -94,6 +96,8 @@ fun Application.configRouting() {
             categoryPostRoute()
             forumsAddRoute()
             forumsAddPostRoute()
+            forumsViewAdd()
+            forumsViewAddPost()
         }
 
         homeRoute()

@@ -30,7 +30,7 @@ object UserRegistrar : DBCacheable<User> {
             return UserRegisterInvalidEmail
         if (name.length !in 1..40)
             return UserRegisterInvalidName
-        if (password.length !in 8..200)
+        if (password.length !in 8..1_000)
             return UserRegisterInvalidPassword
         if (Database.userCol.findOne(User::email eq email) != null)
             return UserRegisterDuplicateEmail
