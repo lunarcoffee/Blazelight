@@ -45,15 +45,13 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
 
                 for (threadId in forum.threadIds) {
                     val thread = threadId.getThread()!!
-                    val firstComment = thread.commentIds[0].getComment()!!
-
                     div(classes = "forum-list-item") {
                         a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
                             +thread.title
                             +" (${thread.commentIds.size})"
                         }
                         p(classes = "forum-topic") {
-                            val content = firstComment.contentRaw
+                            val content = thread.firstPost.contentRaw
                             +content.take(200)
                             if (content.length > 200)
                                 +"..."
@@ -62,17 +60,16 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                         i(classes = "thread-l forum-topic") {
                             // Thread author's initial post and timestamp
                             +"Thread started by "
-                            val creatorName = firstComment.authorId.getUser()!!.username
+                            val creatorName = thread.firstPost.authorId.getUser()!!.username
                             a(href = "/users/$creatorName", classes = "a2") { +creatorName }
                             +" at ${thread.creationTime.toTimeDisplay(user)}"
                             br()
 
                             // Last post author and timestamp.
                             +"Last post by "
-                            val lastComment = thread.commentIds.last().getComment()!!
-                            val authorName = lastComment.authorId.getUser()!!.username
+                            val authorName = thread.lastPost.authorId.getUser()!!.username
                             a(href = "/users/$authorName", classes = "a2") { +authorName }
-                            +" at ${lastComment.creationTime.toTimeDisplay(user)}"
+                            +" at ${thread.creationTime.toTimeDisplay(user)}"
                         }
                         hr(classes = "hr-dot")
                     }

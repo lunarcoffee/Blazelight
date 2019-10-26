@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.model.internal.forums
 
+import dev.lunarcoffee.blazelight.model.api.comments.getComment
 import dev.lunarcoffee.blazelight.model.internal.std.Dateable
 import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 
@@ -9,4 +10,7 @@ interface Thread : Dateable, Identifiable {
     val authorId: Long
     val commentIds: MutableList<Long>
     val forumId: Long
+
+    val firstPost: Comment
+    val lastPost: Comment
 }
