@@ -220,7 +220,7 @@ h2, h3 {
 }
 
 .ba-wrap {
-    margin: 20px 0 8px 0;
+    margin: 12px 0 8px 0;
 }
 
 .f-inline {
@@ -236,12 +236,25 @@ h2, h3 {
     margin-left: 8px;
 }
 
+.p {
+    height: 4px;
+}
+
 .a1 {
     text-decoration: none;
     color: black;
 }
 
 .a1:hover {
+    text-decoration: underline;
+}
+
+.a2 {
+    text-decoration: none;
+    color: #47425a;
+}
+
+.a2:hover {
     text-decoration: underline;
 }
 
@@ -305,6 +318,10 @@ h2, h3 {
 
 .fti {
 
+}
+
+.thread-l {
+    color: #888;
 }
 
 /* */

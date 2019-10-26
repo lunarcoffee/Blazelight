@@ -6,6 +6,7 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -37,32 +38,41 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             hr()
             if (forum.threadIds.isEmpty()) {
                 p { +"There are no threads in this forum." }
+                padding(8)
             } else {
                 // [user] is used for local time display.
                 val user = call.sessions.get<UserSession>()?.getUser()
 
                 for (threadId in forum.threadIds) {
                     val thread = threadId.getThread()!!
+                    val firstComment = thread.commentIds[0].getComment()!!
+
                     div(classes = "forum-list-item") {
                         a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
                             +thread.title
                             +" (${thread.commentIds.size})"
                         }
                         p(classes = "forum-topic") {
-                            +thread.commentIds[0].getComment()!!.contentRaw
+                            val content = firstComment.contentRaw
+                            +content.take(200)
+                            if (content.length > 200)
+                                +"..."
                         }
-                        a(classes = "forum-topic a1") {
-                            i {
-                                +"Last post by "
-                                +thread
-                                    .commentIds
-                                    .last()
-                                    .getComment()!!
-                                    .authorId
-                                    .getUser()!!
-                                    .username
-                                +" at ${thread.creationTime.toTimeDisplay(user)}"
-                            }
+                        padding(5)
+                        i(classes = "thread-l forum-topic") {
+                            // Thread author's initial post and timestamp
+                            +"Thread started by "
+                            val creatorName = firstComment.authorId.getUser()!!.username
+                            a(href = "/users/$creatorName", classes = "a2") { +creatorName }
+                            +" at ${thread.creationTime.toTimeDisplay(user)}"
+                            br()
+
+                            // Last post author and timestamp.
+                            +"Last post by "
+                            val lastComment = thread.commentIds.last().getComment()!!
+                            val authorName = lastComment.authorId.getUser()!!.username
+                            a(href = "/users/$authorName", classes = "a2") { +authorName }
+                            +" at ${lastComment.creationTime.toTimeDisplay(user)}"
                         }
                         hr(classes = "hr-dot")
                     }
