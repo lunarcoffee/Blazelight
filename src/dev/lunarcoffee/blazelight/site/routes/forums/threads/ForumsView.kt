@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.site.routes.forums
+package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
@@ -71,9 +71,9 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 }
             }
 
-            div(classes = "ba-wrap") {
-                a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +"New Thread" }
-            }
+            padding(12)
+            a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +"New Thread" }
+            padding(8)
         }
     }
 }

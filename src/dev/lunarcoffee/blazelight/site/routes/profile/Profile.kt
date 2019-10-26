@@ -1,7 +1,8 @@
-package dev.lunarcoffee.blazelight.site.routes
+package dev.lunarcoffee.blazelight.site.routes.profile
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -21,22 +22,15 @@ fun Route.profileRoute() = get("/me") {
             br()
 
             p { +user.username }
-            p {
-                +(user.realName ?: "(unset)")
-                a(href = "google.com") { +"modify" }
-            }
-            p {
-                +(user.description ?: "(unset)")
-                a(href = "google.com") { +"modify" }
-            }
-            p {
-                +(user.settings.zoneId.id ?: "(unset)")
-                a(href = "google.com") { +"modify" }
-            }
-            p {
-                +(user.settings.language.name)
-                a(href = "google.com") { +"modify" }
-            }
+            p { +(user.realName ?: "(unset)") }
+            p { +(user.description ?: "(unset)") }
+            p { +(user.settings.zoneId.id ?: "(unset)") }
+            p { +(user.settings.language.name) }
+            p { +(user.settings.theme) }
+
+            padding(16)
+            a(href = "/me/settings", classes = "button-1") { +"Settings" }
+            padding(8)
         }
     }
 }

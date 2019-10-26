@@ -1,4 +1,4 @@
-/* Glass Classic */
+/* Glass Grey */
 
 /* Reset styles. */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
@@ -14,7 +14,7 @@ video {
 
 body {
     font-family: sans-serif;
-    background: #e2e0f7;
+    background: #ebebeb;
 }
 
 hr {
@@ -41,9 +41,9 @@ h2, h3 {
     margin-right: 38px;
     background: radial-gradient(
             circle,
-            rgb(32, 29, 54) 0%,
-            rgb(31, 31, 59) 50%,
-            rgba(23, 35, 37, 1) 100%
+            rgb(53, 51, 54) 0%,
+            rgb(57, 57, 59) 50%,
+            rgb(37, 34, 37) 100%
     );
     border-radius: 0 0 10px 10px;
 }
@@ -63,12 +63,12 @@ h2, h3 {
     width: 100%;
     background: linear-gradient(
             180deg,
-            rgba(53, 53, 71, 1) 0%,
-            rgba(120, 118, 161, 1) 6%,
-            rgba(86, 86, 129, 1) 48%,
-            rgba(70, 71, 116, 1) 52%,
-            rgba(67, 61, 85, 1) 94%,
-            rgba(47, 38, 54, 1) 100%
+            rgb(71, 67, 71) 0%,
+            rgb(161, 158, 159) 6%,
+            rgb(128, 126, 129) 48%,
+            rgb(114, 111, 116) 52%,
+            rgb(85, 82, 84) 94%,
+            rgb(54, 51, 54) 100%
     );
     padding: 10px 0;
 }
@@ -76,12 +76,12 @@ h2, h3 {
 .header-bar-lp {
     background: linear-gradient(
             180deg,
-            rgba(53, 53, 71, 1) 0%,
-            rgba(120, 118, 161, 1) 6%,
-            rgba(86, 86, 129, 1) 48%,
-            rgba(70, 71, 116, 1) 52%,
-            rgba(67, 61, 85, 1) 94%,
-            rgba(47, 38, 54, 1) 100%
+            rgb(71, 67, 71) 0%,
+            rgb(161, 158, 159) 6%,
+            rgb(128, 126, 129) 48%,
+            rgb(114, 111, 116) 52%,
+            rgb(85, 82, 84) 94%,
+            rgb(54, 51, 54) 100%
     );
     padding-right: 19px;
     width: 19px;
@@ -92,40 +92,40 @@ h2, h3 {
     text-shadow: white 0 0 3px;
     background: linear-gradient(
             180deg,
-            rgba(53, 53, 71, 1) 0%,
-            rgba(120, 118, 161, 1) 6%,
-            rgba(86, 86, 129, 1) 48%,
-            rgba(70, 71, 116, 1) 52%,
-            rgba(67, 61, 85, 1) 94%,
-            rgba(47, 38, 54, 1) 100%
+            rgb(71, 67, 71) 0%,
+            rgb(161, 158, 159) 6%,
+            rgb(128, 126, 129) 48%,
+            rgb(114, 111, 116) 52%,
+            rgb(85, 82, 84) 94%,
+            rgb(54, 51, 54) 100%
     );
     padding: 10px 20px;
     text-decoration: none;
-    border-left: solid 1px #232436;
-    border-right: solid 1px #50506c;
+    border-left: solid 1px #363435;
+    border-right: solid 1px #6c6a6c;
 }
 
 .header-bar-button:hover {
     background: linear-gradient(
             180deg,
-            rgba(53, 53, 71, 1) 0%,
-            rgb(134, 132, 169) 8%,
-            rgba(134, 134, 176, 1) 48%,
-            rgb(109, 110, 148) 52%,
-            rgba(75, 69, 92, 1) 92%,
-            rgba(47, 38, 54, 1) 100%
+            rgb(71, 68, 71) 0%,
+            rgb(169, 166, 167) 8%,
+            rgb(176, 168, 176) 48%,
+            rgb(148, 142, 143) 52%,
+            rgb(92, 88, 91) 92%,
+            rgb(54, 51, 53) 100%
     );
 }
 
 .hbb-left {
-    border-left: solid 1px #232436;
-    box-shadow: -1px 0 0 0 #50506c;
+    border-left: solid 1px #363435;
+    box-shadow: -1px 0 0 0 #6c6a6b;
     margin-left: 19px;
 }
 
 .hbb-right {
-    border-right: inset 1px #50506c;
-    box-shadow: 1px 0 0 0 #232436;
+    border-right: solid 1px #363435;
+    box-shadow: 1px 0 0 0 #363334;
 }
 
 
@@ -159,22 +159,22 @@ h2, h3 {
 }
 
 .fi-text {
-    border: solid 1px #464774;
+    border: solid 1px #746f73;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.9rem;
     margin: 3px 0;
     outline: none;
     width: 10vw;
-    box-shadow: #50506c 0 0 3px;
+    box-shadow: #6c6969 0 0 3px;
 }
 
 .fi-text:hover {
-    box-shadow: #50506c 0 0 4px;
+    box-shadow: #6c686b 0 0 4px;
 }
 
 .fi-select {
-    border: solid 1px #464774;
+    border: solid 1px #726f74;
     border-radius: 4px;
     padding: 4px 4px 4px 1px;
     width: 7vw;
@@ -182,12 +182,12 @@ h2, h3 {
     font-size: 0.9rem;
     margin: 3px 10px 3px 0;
     outline: none;
-    box-shadow: #50506c 0 0 3px;
+    box-shadow: #6c676b 0 0 3px;
     background: white;
 }
 
 .fi-select:hover {
-    box-shadow: #50506c 0 0 4px;
+    box-shadow: #6c686b 0 0 4px;
 }
 
 .button-1 {
@@ -199,13 +199,13 @@ h2, h3 {
     font-size: 0.9rem;
     color: white;
     text-shadow: white 0 0 3px;
-    box-shadow: #464774 0 0 2px;
+    box-shadow: #737074 0 0 2px;
     background: linear-gradient(
             180deg,
-            rgba(120, 118, 161, 1) 0%,
-            rgba(86, 86, 129, 1) 48%,
-            rgba(70, 71, 116, 1) 52%,
-            rgba(67, 61, 85, 1) 100%
+            rgb(159, 154, 161) 0%,
+            rgb(129, 124, 128) 48%,
+            rgb(116, 110, 115) 52%,
+            rgb(85, 80, 83) 100%
     );
     cursor: pointer;
     text-decoration: none;
@@ -214,10 +214,10 @@ h2, h3 {
 .button-1:hover {
     background: linear-gradient(
             180deg,
-            rgb(134, 132, 169) 0%,
-            rgba(134, 134, 176, 1) 48%,
-            rgb(109, 110, 148) 52%,
-            rgba(75, 69, 92, 1) 100%
+            rgb(168, 166, 169) 0%,
+            rgb(176, 176, 176) 48%,
+            rgb(148, 146, 145) 52%,
+            rgb(92, 90, 92) 100%
     );
 }
 
@@ -253,7 +253,7 @@ h2, h3 {
 
 .a2 {
     text-decoration: none;
-    color: #47425a;
+    color: #5a5858;
 }
 
 .a2:hover {
@@ -305,11 +305,11 @@ h2, h3 {
 .bc-home {
     width: 18px;
     margin-bottom: -3px;
-    filter: hue-rotate(-130deg) saturate(40%) brightness(95%);
+    filter: saturate(20%) brightness(95%);
 }
 
 .bc-home:hover {
-    filter: hue-rotate(-130deg) saturate(40%) brightness(110%);
+    filter: saturate(20%) brightness(110%);
 }
 
 .bc-arrow {
@@ -321,17 +321,17 @@ h2, h3 {
 .fti {
     width: 40vw;
     font-family: sans-serif;
-    border: solid 1px #464774;
+    border: solid 1px #736f74;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.9rem;
     margin: 3px 0;
     outline: none;
-    box-shadow: #50506c 0 0 3px;
+    box-shadow: #6c666b 0 0 3px;
 }
 
 .fti:hover {
-    box-shadow: #50506c 0 0 4px;
+    box-shadow: #6c666b 0 0 4px;
 }
 
 .thread-l {

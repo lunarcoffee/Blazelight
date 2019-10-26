@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.templates
 
+import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.ApplicationCall
 import io.ktor.html.*
@@ -15,7 +16,7 @@ class HeaderBarTemplate(
     val content = Placeholder<HtmlBlockTag>()
 
     override fun HTML.apply() {
-        insert(HeadTemplate(titleText)) {
+        insert(HeadTemplate(titleText, call.sessions.get<UserSession>()?.getUser())) {
             body {
                 div(classes = "header-bar") {
                     h1(classes = "header-bar-title") { +"Blazelight" }
