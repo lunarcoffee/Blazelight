@@ -1,14 +1,12 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
-import dev.lunarcoffee.blazelight.model.api.comments.getComment
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
-import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
-import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
@@ -47,27 +45,24 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                     val thread = threadId.getThread()!!
                     div(classes = "forum-list-item") {
                         a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
-                            +thread.title
+                            +thread.title.textOrEllipsis(100)
                             +" (${thread.commentIds.size})"
                         }
                         p(classes = "forum-topic") {
-                            val content = thread.firstPost.contentRaw
-                            +content.take(200)
-                            if (content.length > 200)
-                                +"..."
+                            +thread.firstPost!!.contentRaw.textOrEllipsis(200)
                         }
                         padding(5)
                         i(classes = "thread-l forum-topic") {
                             // Thread author's initial post and timestamp
                             +"Thread started by "
-                            val creatorName = thread.firstPost.authorId.getUser()!!.username
+                            val creatorName = thread.firstPost!!.authorId.getUser()!!.username
                             a(href = "/users/$creatorName", classes = "a2") { +creatorName }
                             +" at ${thread.creationTime.toTimeDisplay(user)}"
                             br()
 
                             // Last post author and timestamp.
                             +"Last post by "
-                            val authorName = thread.lastPost.authorId.getUser()!!.username
+                            val authorName = thread.lastPost!!.authorId.getUser()!!.username
                             a(href = "/users/$authorName", classes = "a2") { +authorName }
                             +" at ${thread.creationTime.toTimeDisplay(user)}"
                         }

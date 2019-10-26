@@ -14,6 +14,6 @@ class UserThread(
     override val creationTime = System.currentTimeMillis()
     override val id = UniqueIDGenerator.nextId()
 
-    override val firstPost get() = commentIds[0].getComment()!!
-    override val lastPost get() = commentIds.last().getComment()!!
+    override val firstPost get() = commentIds.firstOrNull()?.getComment()
+    override val lastPost get() = commentIds.lastOrNull()?.getComment()
 }

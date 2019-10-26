@@ -317,7 +317,19 @@ h2, h3 {
 }
 
 .fti {
+    width: 40vw;
+    font-family: sans-serif;
+    border: solid 1px #464774;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin: 3px 0;
+    outline: none;
+    box-shadow: #50506c 0 0 3px;
+}
 
+.fti:hover {
+    box-shadow: #50506c 0 0 4px;
 }
 
 .thread-l {
