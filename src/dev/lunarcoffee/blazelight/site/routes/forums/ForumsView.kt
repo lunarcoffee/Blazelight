@@ -48,10 +48,21 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                             +thread.title
                             +" (${thread.commentIds.size})"
                         }
-                        p(classes = "forum-topic") { +thread.commentIds[0].getComment()!!.contentRaw }
+                        p(classes = "forum-topic") {
+                            +thread.commentIds[0].getComment()!!.contentRaw
+                        }
                         a(classes = "forum-topic a1") {
-                            +thread.commentIds.last().getComment()!!.authorId.getUser()!!.username
-                            +" at ${thread.creationTime.toTimeDisplay(user)}"
+                            i {
+                                +"Last post by "
+                                +thread
+                                    .commentIds
+                                    .last()
+                                    .getComment()!!
+                                    .authorId
+                                    .getUser()!!
+                                    .username
+                                +" at ${thread.creationTime.toTimeDisplay(user)}"
+                            }
                         }
                         hr(classes = "hr-dot")
                     }
