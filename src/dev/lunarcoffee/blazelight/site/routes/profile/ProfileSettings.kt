@@ -33,7 +33,7 @@ fun Route.profileSettingsRoute() = get("/me/settings") {
 
             padding(16)
             a(href = "/me/settings", classes = "button-1") { +"Save" }
-            a(href = "/me/settings", classes = "button-1") { +"Discard" }
+            a(href = "/me", classes = "button-1") { +"Discard" }
             padding(8)
         }
     }

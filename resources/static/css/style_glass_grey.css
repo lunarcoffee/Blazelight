@@ -15,6 +15,8 @@ video {
 body {
     font-family: sans-serif;
     background: #ebebeb;
+    width: calc(100vw - 34px);
+    padding-left: 17px;
 }
 
 hr {
@@ -37,8 +39,7 @@ h2, h3 {
     width: available;
     height: auto;
     padding-bottom: 14px;
-    margin-left: 38px;
-    margin-right: 38px;
+    margin: 0 calc((100vw - 120vh) / 2);
     background: radial-gradient(
             circle,
             rgb(53, 51, 54) 0%,
@@ -150,9 +151,7 @@ h2, h3 {
 .content {
     background: #f9faff;
     width: available;
-    margin-left: 38px;
-    margin-top: 14px;
-    margin-right: 38px;
+    margin: 14px calc((100vw - 120vh) / 2);
     min-height: inherit;
     padding: 20px;
     border-radius: 10px;
