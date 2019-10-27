@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.model.internal.users
 
 import dev.lunarcoffee.blazelight.model.internal.std.util.UniqueIDGenerator
-import dev.lunarcoffee.blazelight.shared.Language
+import dev.lunarcoffee.blazelight.shared.language.Language
 import java.time.ZoneId
 
 class DefaultUser(

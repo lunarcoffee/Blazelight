@@ -1,6 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.shared.Language
+import dev.lunarcoffee.blazelight.shared.language.Language
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate

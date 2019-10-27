@@ -6,7 +6,7 @@ import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
 import dev.lunarcoffee.blazelight.model.internal.std.util.PasswordHasher
-import dev.lunarcoffee.blazelight.shared.Language
+import dev.lunarcoffee.blazelight.shared.language.Language
 import org.litote.kmongo.eq
 import java.security.SecureRandom
 import java.time.ZoneId

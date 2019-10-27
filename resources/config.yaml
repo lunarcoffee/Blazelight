@@ -1,1 +1,4 @@
-default_style: Glass Classic
+resourceRoot: resources
+defaultStyle: Glass Classic
+headerBarText: Blazelight
+titleText: Blazelight
