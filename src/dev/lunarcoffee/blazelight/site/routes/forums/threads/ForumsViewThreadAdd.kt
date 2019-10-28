@@ -46,10 +46,6 @@ fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
             }
             hr()
             form(action = call.request.path(), method = FormMethod.post) {
-                // Hidden forum and thread IDs.
-                input(type = InputType.hidden, name = "forum") { value = forum.id.toString() }
-                input(type = InputType.hidden, name = "thread") { value = thread.id.toString() }
-
                 formattedTextInput()
                 hr()
                 input(type = InputType.submit, classes = "button-1") { value = "Post" }

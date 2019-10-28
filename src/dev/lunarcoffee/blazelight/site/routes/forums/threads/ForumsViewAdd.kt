@@ -42,9 +42,6 @@ fun Route.forumsViewAdd() = get("/forums/view/{id}/add") {
             }
             hr()
             form(action = call.request.path(), method = FormMethod.post) {
-                // Hidden forum ID.
-                input(type = InputType.hidden, name = "forum") { value = forum.id.toString() }
-
                 input(type = InputType.text, name = "title", classes = "fi-text fi-top") {
                     placeholder = "Title"
                 }

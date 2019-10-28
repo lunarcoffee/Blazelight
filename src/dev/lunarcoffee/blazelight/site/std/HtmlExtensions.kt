@@ -6,6 +6,13 @@ import kotlinx.html.*
 
 fun HtmlBlockTag.padding(height: Int) = div { style = "height: ${height}px;" }
 
+fun HtmlInlineTag.renderWithNewlines(text: String) {
+    for (line in text.split("\n")) {
+        +line
+        br()
+    }
+}
+
 fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
     div(classes = "page-numbers") {
         // Show all page buttons if there are less than ten. If not, a navigator with first,

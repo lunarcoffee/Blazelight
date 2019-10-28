@@ -64,7 +64,8 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                         padding(6)
                     }
 
-                    p(classes = "comment-content") { +comment.contentRaw } // TODO: BBCode
+                    // TODO: BBCode
+                    p(classes = "comment-content") { renderWithNewlines(comment.contentRaw) }
                     padding(5)
                     i(classes = "thread-l forum-topic") {
                         // Thread author's initial post and timestamp

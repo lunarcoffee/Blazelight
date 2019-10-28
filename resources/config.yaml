@@ -3,5 +3,5 @@ defaultStyle: "Glass Classic"
 headerBarText: "Blazelight"
 titleText: "Blazelight"
 
-threadPageSize: 1
+threadPageSize: 15
 commentPageSize: 15

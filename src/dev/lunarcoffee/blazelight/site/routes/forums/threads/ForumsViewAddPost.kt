@@ -17,13 +17,13 @@ fun Route.forumsViewAddPost() = post("/forums/view/{id}/add") {
 
     val title = params["title"]!!
     val content = params["content"]!!
-    val forumId = params["forum"]!!.toLong()
+    val forumId = call.parameters["id"]!!.toLong()
     val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     val index = when (ThreadManager.add(title, content, forumId, user)) {
         ThreadAddResult.INVALID_NAME -> 0
         ThreadAddResult.INVALID_CONTENT -> 1
-        else -> return@post call.respondRedirect("/forum/view/$forumId")
+        else -> return@post call.respondRedirect("/forums/view/$forumId")
     }
     call.respondRedirect("/forums/view/$forumId/add?a=$index")
 }

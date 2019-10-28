@@ -14,11 +14,11 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
 fun Route.forumsViewThreadAddPost() = post("/forums/view/{forumId}/{threadId}/add") {
-    val params = call.receiveParameters()
+    val params = call.parameters
 
-    val content = params["content"]!!
-    val forumId = params["forum"]!!.toLong()
-    val threadId = params["thread"]!!.toLong()
+    val content = call.receiveParameters()["content"]!!
+    val forumId = params["forumId"]!!.toLong()
+    val threadId = params["threadId"]!!.toLong()
     val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     val comment = UserComment(content, user.id)
