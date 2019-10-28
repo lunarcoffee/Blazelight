@@ -8,7 +8,7 @@ fun HtmlBlockTag.breadcrumbs(breadcrumbsBuilder: BreadcrumbsBuilder.() -> Unit) 
         a(href = "/") { img(src = "/img/home.ico", alt = "Home", classes = "bc-home") }
         for ((route, display) in breadcrumbs.breadcrumbs) {
             img(src = "/img/arrow-right.svg", alt = "Separator", classes = "bc-arrow")
-            a(href = route, classes = "a1 bc-a") { +display }
+            a(href = route, classes = "a1 bc-a title") { +display }
         }
     }
 }

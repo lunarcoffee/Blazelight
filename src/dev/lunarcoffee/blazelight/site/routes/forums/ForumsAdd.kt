@@ -35,7 +35,7 @@ fun Route.forumsAddRoute() = get("/forums/add") {
             }
             br()
 
-            h3 {
+            h3(classes = "title") {
                 +"Create a new forum in "
                 b { +category.name }
                 +":"

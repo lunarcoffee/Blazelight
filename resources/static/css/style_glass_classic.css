@@ -220,6 +220,15 @@ h2, h3 {
     );
 }
 
+.title {
+    overflow-wrap: break-word;
+}
+
+.comment-content {
+    font-size: 0.85rem;
+    overflow-wrap: break-word;
+}
+
 .ba-wrap {
     margin: 12px 0 8px 0;
 }

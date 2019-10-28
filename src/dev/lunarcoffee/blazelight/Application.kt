@@ -110,5 +110,6 @@ fun Application.configRouting() {
 
         forumsRoute()
         forumsViewRoute()
+        forumsViewThread()
     }
 }

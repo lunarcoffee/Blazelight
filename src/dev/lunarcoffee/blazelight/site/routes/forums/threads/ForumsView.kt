@@ -25,11 +25,14 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
     val page = call.parameters["p"]?.toIntOrNull() ?: 0
-    val pageCount = ceil(forum.threadIds.size.toDouble() / BL_CONFIG.pageSize).toInt()
-    if (page !in 0 until pageCount)
+    val pageCount = ceil(forum.threadIds.size.toDouble() / BL_CONFIG.threadPageSize).toInt()
+    if (page !in 0 until pageCount && forum.threadIds.isNotEmpty())
         return@get call.respond(HttpStatusCode.NotFound)
 
-    val threadPage = forum.threadIds.drop(page * BL_CONFIG.pageSize).take(BL_CONFIG.pageSize)
+    val threadPage = forum
+        .threadIds
+        .drop(page * BL_CONFIG.threadPageSize)
+        .take(BL_CONFIG.threadPageSize)
 
     call.respondHtmlTemplate(HeaderBarTemplate("Forums - ${forum.name}", call)) {
         content {
@@ -41,10 +44,10 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             }
             br()
 
-            h3 { b { +forum.name } }
+            h3(classes = "title") { b { +forum.name } }
             pageNumbers(page, pageCount, call)
-
             hr()
+
             if (forum.threadIds.isEmpty()) {
                 p { +"There are no threads in this forum." }
                 padding(8)
@@ -54,6 +57,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
 
                 for (threadId in threadPage) {
                     val thread = threadId.getThread()!!
+
                     div(classes = "forum-list-item") {
                         a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
                             +thread.title.textOrEllipsis(70)

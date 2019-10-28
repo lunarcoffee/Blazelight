@@ -48,7 +48,7 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
                     a(href = "/forums/${category.name}#${category.name}", classes = "a1") {
-                        h3 {
+                        h3(classes = "title") {
                             id = category.name
                             b {
                                 // Highlight the user's selected category (if one is selected).

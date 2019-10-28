@@ -2,4 +2,6 @@ resourceRoot: "resources"
 defaultStyle: "Glass Classic"
 headerBarText: "Blazelight"
 titleText: "Blazelight"
-pageSize: 10
+
+threadPageSize: 1
+commentPageSize: 15
