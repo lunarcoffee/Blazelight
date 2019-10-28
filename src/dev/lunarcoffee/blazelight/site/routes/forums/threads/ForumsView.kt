@@ -12,21 +12,21 @@ import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.path
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
+import kotlin.math.ceil
 
 fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
     val forum = call.parameters["id"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
     val page = call.parameters["p"]?.toIntOrNull() ?: 0
-    val pageCount = forum.threadIds.size / BL_CONFIG.pageSize
-    if (page > pageCount)
+    val pageCount = ceil(forum.threadIds.size.toDouble() / BL_CONFIG.pageSize).toInt()
+    if (page !in 0 until pageCount)
         return@get call.respond(HttpStatusCode.NotFound)
 
     val threadPage = forum.threadIds.drop(page * BL_CONFIG.pageSize).take(BL_CONFIG.pageSize)
@@ -42,43 +42,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             br()
 
             h3 { b { +forum.name } }
-            div(classes = "page-numbers") {
-                if (pageCount < 10) {
-                    for (index in 0 until pageCount) {
-                        a(href = "${call.request.path()}?p=$index", classes = "a2 a-page") {
-                            +if (index == page) "(${(index + 1)})" else (index + 1).toString()
-                        }
-                    }
-                } else {
-                    if (page > 0) {
-                        // First and previous page buttons.
-                        a(href = call.request.path(), classes = "a2 a-page") { +"First" }
-                        a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") {
-                            +"Prev"
-                        }
-                    }
-                    // Current page button/indicator.
-                    a(href = "${call.request.path()}?p=$page", classes = "a2 a-page") {
-                        +"(${page + 1})"
-                    }
-                    if (page < pageCount - 1) {
-                        // Next and last page buttons.
-                        a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") {
-                            +"Next"
-                        }
-                        val last = pageCount - 1
-                        a(href = "${call.request.path()}?p=$last", classes = "a2 a-page") {
-                            +"Last"
-                        }
-                    }
-                    form(action = call.request.path(), classes = "f-page") {
-                        input(type = InputType.text, name = "p", classes = "fi-text fi-top")
-                        input(type = InputType.submit, classes = "button-1 b-inline") {
-                            style = "display: none;"
-                        }
-                    }
-                }
-            }
+            pageNumbers(page, pageCount, call)
 
             hr()
             if (forum.threadIds.isEmpty()) {

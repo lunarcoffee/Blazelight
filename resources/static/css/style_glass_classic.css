@@ -330,6 +330,10 @@ h2, h3 {
     filter: hue-rotate(-130deg) saturate(40%) brightness(110%);
 }
 
+.cursor-hand {
+    cursor: pointer;
+}
+
 .bc-arrow {
     width: 9px;
     padding: 0 8px;
