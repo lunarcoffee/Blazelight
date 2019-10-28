@@ -100,6 +100,8 @@ fun Application.configRouting() {
             forumsAddPostRoute()
             forumsViewAdd()
             forumsViewAddPost()
+            forumsViewThreadAdd()
+            forumsViewThreadAddPost()
         }
 
         homeRoute()

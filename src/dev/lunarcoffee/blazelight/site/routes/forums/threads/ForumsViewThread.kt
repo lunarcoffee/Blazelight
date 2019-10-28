@@ -45,11 +45,11 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                 crumb("/forums", "Forums")
                 crumb("/forums/${category.name}#${category.name}", category.name)
                 crumb("/forums/view/${forum.id}", forum.name)
-                thisCrumb(call, thread.id.toString())
+                thisCrumb(call, thread.title.textOrEllipsis(60))
             }
             br()
 
-            h3(classes = "title") { b { +thread.title } }
+            h3 { b { +"Thread" } }
             pageNumbers(page, pageCount, call)
             hr()
 
@@ -58,20 +58,31 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                 val comment = commentId.getComment()!!
 
                 div(classes = "forum-list-item") {
+                    // Show title on first comment.
+                    if (thread.firstPost?.id == comment.id) {
+                        b { +thread.title }
+                        padding(6)
+                    }
 
                     p(classes = "comment-content") { +comment.contentRaw } // TODO: BBCode
                     padding(5)
                     i(classes = "thread-l forum-topic") {
                         // Thread author's initial post and timestamp
                         +"Posted by "
-                        val creatorName = thread.firstPost!!.authorId.getUser()!!.username
+                        val creatorName = comment.authorId.getUser()!!.username
                         a(href = "/users/$creatorName", classes = "a2") { +creatorName }
-                        +" on ${thread.creationTime.toTimeDisplay(user)}"
+                        +" on ${comment.creationTime.toTimeDisplay(user)}"
                         br()
                     }
                     hr(classes = "hr-dot")
                 }
             }
+
+            padding(12)
+            a(href = "/forums/view/${forum.id}/${thread.id}/add", classes = "button-1") {
+                +"New Post"
+            }
+            padding(8)
         }
     }
 }
