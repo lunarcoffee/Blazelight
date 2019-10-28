@@ -1,12 +1,14 @@
 package dev.lunarcoffee.blazelight.shared.config
 
 import java.io.File
+import kotlin.properties.Delegates
 
 class BlazelightConfig {
     lateinit var resourceRoot: String
     lateinit var defaultStyle: String
     lateinit var headerBarText: String
     lateinit var titleText: String
+    var pageSize: Int by Delegates.notNull()
 
     val styles: Map<String, String> by lazy {
         File("$resourceRoot/static/css").listFiles()!!.associate {

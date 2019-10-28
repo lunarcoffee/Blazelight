@@ -12,6 +12,7 @@ fun loadBlazelightConfig(path: String?) {
             defaultStyle = "Glass Classic"
             headerBarText = "Blazelight"
             titleText = headerBarText
+            pageSize = 15
         }
     } else {
         Yaml().loadAs(File(path).reader(), BlazelightConfig::class.java)

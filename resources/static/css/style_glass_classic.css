@@ -230,6 +230,12 @@ h2, h3 {
     display: inline-block;
 }
 
+.f-page {
+    margin-top: 6px;
+    padding-top: 1px;
+    display: inline-block;
+}
+
 .b-inline {
     height: 28px;
     padding-top: 6px;
@@ -259,6 +265,10 @@ h2, h3 {
     text-decoration: underline;
 }
 
+.a-page {
+    padding-right: 6px;
+}
+
 .red {
     color: red;
 }
@@ -269,6 +279,11 @@ h2, h3 {
 
 .green {
     color: #29a829;
+}
+
+.page-numbers {
+    margin-top: -20px;
+    float: right;
 }
 
 .category {
@@ -282,6 +297,10 @@ h2, h3 {
 .forum-topic {
     font-size: 0.8rem;
     padding-top: 2px;
+}
+
+.inline {
+    display: inline;
 }
 
 .b-img-a {

@@ -1,4 +1,5 @@
-resourceRoot: resources
-defaultStyle: Glass Classic
-headerBarText: Blazelight
-titleText: Blazelight
+resourceRoot: "resources"
+defaultStyle: "Glass Classic"
+headerBarText: "Blazelight"
+titleText: "Blazelight"
+pageSize: 1
