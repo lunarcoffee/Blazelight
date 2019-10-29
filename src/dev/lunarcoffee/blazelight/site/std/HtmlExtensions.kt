@@ -19,7 +19,9 @@ fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
         // previous, next, last, and custom page selector buttons will be shown.
         if (pageCount < 10) {
             for (index in 0 until pageCount) {
-                a(href = "${call.request.path()}?p=$index", classes = "a2 a-page") {
+                // [padding] ensures there is no extra padding on the last element.
+                val padding = if (index < pageCount - 1) "a-page" else ""
+                a(href = "${call.request.path()}?p=$index", classes = "a2 $padding") {
                     +if (index == page) "(${(index + 1)})" else (index + 1).toString()
                 }
             }
@@ -45,7 +47,7 @@ fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
                     +"Next"
                 }
                 val last = pageCount - 1
-                a(href = "${call.request.path()}?p=$last", classes = "a2 a-page") {
+                a(href = "${call.request.path()}?p=$last", classes = "a2") {
                     +"Last"
                 }
             }

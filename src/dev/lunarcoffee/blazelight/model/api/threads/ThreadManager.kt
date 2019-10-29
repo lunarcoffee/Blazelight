@@ -16,7 +16,7 @@ object ThreadManager : DBCacheable<Thread> {
     suspend fun add(title: String, content: String, forumId: Long, user: User): ThreadAddResult {
         if (title.length !in 1..300)
             return ThreadAddResult.INVALID_NAME
-        if (content.length !in 30..10_000)
+        if (content.length !in 1..10_000)
             return ThreadAddResult.INVALID_CONTENT
 
         val comment = UserComment(content, user.id)

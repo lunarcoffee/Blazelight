@@ -12,7 +12,7 @@ object CommentManager : DBCacheable<Comment> {
     val comments = Cache<Comment>()
 
     suspend fun add(comment: Comment, threadId: Long): CommentAddResult {
-        if (comment.contentRaw.length !in 30..10_000)
+        if (comment.contentRaw.length !in 1..10_000)
             return CommentAddResult.INVALID_CONTENT
 
         comments += comment

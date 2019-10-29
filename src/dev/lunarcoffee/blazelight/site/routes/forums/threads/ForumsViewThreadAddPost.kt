@@ -23,7 +23,7 @@ fun Route.forumsViewThreadAddPost() = post("/forums/view/{forumId}/{threadId}/ad
 
     val comment = UserComment(content, user.id)
     if (CommentManager.add(comment, threadId) == CommentAddResult.INVALID_CONTENT)
-        call.respondRedirect("/forums/view/$forumId/add?a=0")
+        call.respondRedirect("/forums/view/$forumId/$threadId/add?a=0")
     else
         call.respondRedirect("/forums/view/$forumId/$threadId")
 }

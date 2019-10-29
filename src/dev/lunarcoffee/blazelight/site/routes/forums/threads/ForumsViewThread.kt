@@ -56,6 +56,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             val user = call.sessions.get<UserSession>()?.getUser()
             for (commentId in commentPage) {
                 val comment = commentId.getComment()!!
+                val author = comment.authorId.getUser()!!
 
                 div(classes = "forum-list-item") {
                     // Show title on first comment.
@@ -70,7 +71,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                     i(classes = "thread-l forum-topic") {
                         // Thread author's initial post and timestamp
                         +"Posted by "
-                        val creatorName = comment.authorId.getUser()!!.username
+                        val creatorName = author.username
                         a(href = "/users/$creatorName", classes = "a2") { +creatorName }
                         +" on ${comment.creationTime.toTimeDisplay(user)}"
                         br()

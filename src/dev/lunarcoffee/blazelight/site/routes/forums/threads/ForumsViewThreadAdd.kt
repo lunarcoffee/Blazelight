@@ -16,7 +16,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-private val msg = "That content is invalid! It must be 30 to 10000 characters long (inclusive)!"
+private val msg = "That content is invalid! It must be 1 to 10000 characters long (inclusive)!"
 
 fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
     val params = call.parameters

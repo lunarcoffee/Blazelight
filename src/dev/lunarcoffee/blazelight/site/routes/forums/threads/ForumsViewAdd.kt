@@ -16,7 +16,7 @@ import kotlinx.html.*
 
 private val specialMessages = listOf(
     "That title is invalid! It must be 1 to 300 characters long (inclusive)!",
-    "That content is invalid! It must be 30 to 10000 characters long (inclusive)!"
+    "That content is invalid! It must be 1 to 10000 characters long (inclusive)!"
 )
 
 fun Route.forumsViewAdd() = get("/forums/view/{id}/add") {
