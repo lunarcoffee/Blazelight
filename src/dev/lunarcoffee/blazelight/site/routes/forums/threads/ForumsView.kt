@@ -82,7 +82,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                             +"Last post by "
                             val authorName = thread.lastPost!!.authorId.getUser()!!.username
                             a(href = "/users/$authorName", classes = "a2") { +authorName }
-                            +" on ${thread.creationTime.toTimeDisplay(user)}"
+                            +" on ${thread.lastPost!!.creationTime.toTimeDisplay(user)}"
                         }
                         hr(classes = "hr-dot")
                     }
