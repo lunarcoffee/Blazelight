@@ -5,6 +5,13 @@ import io.ktor.request.path
 import kotlinx.html.*
 
 fun HtmlBlockTag.padding(height: Int) = div { style = "height: ${height}px;" }
+fun HtmlBlockTag.fillHeight() = div(classes = "fill-height")
+
+fun HtmlBlockTag.plusButton(url: String, alt: String) {
+    a(href = url, classes = "b-img-a") {
+        img(alt = alt, src = "/img/green-plus.png", classes = "b-plus")
+    }
+}
 
 fun HtmlInlineTag.renderWithNewlines(text: String) {
     for (line in text.split("\n")) {

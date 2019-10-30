@@ -308,6 +308,40 @@ h2, h3 {
     padding-top: 2px;
 }
 
+.comment-list-item {
+    display: flex;
+}
+
+.commenter-info {
+    float: left;
+    margin-top: -4px;
+    margin-bottom: 19px;
+    border-right: solid 1px #c9c9c9;
+    margin-right: 12px;
+    background: #e5e5e5;
+    width: 150px;
+
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+    padding-top: 4px;
+}
+
+.cdv {
+    margin-left: calc(-150px - 13px);
+    margin-top: 10px;
+    width: calc(100vw - calc((100vw - 120vh)) - 74px);
+}
+
+/* Comment-top margin reducer */
+.ctmr {
+    margin-top: -6px;
+}
+
 .inline {
     display: inline;
 }

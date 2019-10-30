@@ -49,34 +49,48 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             }
             br()
 
-            h3 { b { +"Thread" } }
+            h3 {
+                b { +"Thread" }
+                plusButton("/forums/view/${forum.id}/${thread.id}/add", "New Post")
+            }
             pageNumbers(page, pageCount, call)
             hr()
+            padding(4)
 
             val user = call.sessions.get<UserSession>()?.getUser()
             for (commentId in commentPage) {
                 val comment = commentId.getComment()!!
                 val author = comment.authorId.getUser()!!
 
-                div(classes = "forum-list-item") {
-                    // Show title on first comment.
-                    if (thread.firstPost?.id == comment.id) {
-                        b { +thread.title }
-                        padding(6)
+                div(classes = "forum-list-item comment-list-item") {
+                    div(classes = "commenter-info") { p { +"Test" } }
+                    div(classes = "comment") {
+                        // TODO: BBCode
+                        div(classes = "ctmr") {
+                            // Show title on first comment.
+                            if (thread.firstPost?.id == comment.id) {
+                                b { +thread.title }
+                                padding(6)
+                            }
+                            p(classes = "comment-content") {
+                                renderWithNewlines(comment.contentRaw)
+                            }
+                            padding(5)
+                        }
+                        div {
+                            i(classes = "thread-l forum-topic") {
+                                // Thread author's initial post and timestamp
+                                +"Posted by "
+                                val creatorName = author.username
+                                a(href = "/users/$creatorName", classes = "a2") {
+                                    +creatorName
+                                }
+                                +" on ${comment.creationTime.toTimeDisplay(user)}"
+                                br()
+                            }
+                            hr(classes = "hr-dot cdv")
+                        }
                     }
-
-                    // TODO: BBCode
-                    p(classes = "comment-content") { renderWithNewlines(comment.contentRaw) }
-                    padding(5)
-                    i(classes = "thread-l forum-topic") {
-                        // Thread author's initial post and timestamp
-                        +"Posted by "
-                        val creatorName = author.username
-                        a(href = "/users/$creatorName", classes = "a2") { +creatorName }
-                        +" on ${comment.creationTime.toTimeDisplay(user)}"
-                        br()
-                    }
-                    hr(classes = "hr-dot")
                 }
             }
 

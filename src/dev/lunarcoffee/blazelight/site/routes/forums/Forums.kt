@@ -4,6 +4,7 @@ import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.plusButton
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -57,15 +58,8 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
                                 else
                                     +category.name
                             }
-                            if (isAdmin) {
-                                a(href = "/forums/add?b=${category.id}", classes = "b-img-a") {
-                                    img(
-                                        alt = "Add Forum",
-                                        src = "/img/green-plus.png",
-                                        classes = "b-plus"
-                                    )
-                                }
-                            }
+                            if (isAdmin)
+                                plusButton("/forums/add?b=${category.id}", "Add Forum")
                         }
                     }
                     hr()

@@ -44,7 +44,10 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             }
             br()
 
-            h3(classes = "title") { b { +forum.name } }
+            h3(classes = "title") {
+                b { +forum.name }
+                plusButton("/forums/view/${forum.id}/add", "New Thread")
+            }
             pageNumbers(page, pageCount, call)
             hr()
 
@@ -59,15 +62,15 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                     val thread = threadId.getThread()!!
 
                     div(classes = "forum-list-item") {
-                        a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1") {
+                        a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1 title") {
                             +thread.title.textOrEllipsis(70)
                             +" (${thread.commentIds.size})"
                         }
-                        p(classes = "forum-topic") {
+                        p(classes = "forum-topic title") {
                             +thread.firstPost!!.contentRaw.textOrEllipsis(120)
                         }
                         padding(5)
-                        i(classes = "thread-l forum-topic") {
+                        i(classes = "thread-l forum-topic title") {
                             // Thread author's initial post and timestamp
                             +"Thread started by "
                             val creatorName = thread.firstPost!!.authorId.getUser()!!.username
