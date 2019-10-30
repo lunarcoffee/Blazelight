@@ -22,11 +22,14 @@ class HeaderBarTemplate(
                 div(classes = "header-bar") {
                     h1(classes = "header-bar-title") { +BL_CONFIG.headerBarText }
                     div(classes = "header-bar-top-menu") {
-                        if (call.sessions.get<UserSession>() == null) {
+                        val user = call.sessions.get<UserSession>()?.getUser()
+                        if (user == null) {
                             a(href = "/register", classes = "header-top-button") { +"Register" }
                             a(href = "/login", classes = "header-top-button") { +"Login" }
                         } else {
-                            a(href = "/me", classes = "header-top-button") { +"My Profile" }
+                            a(href = "/users/${user.id}", classes = "header-top-button") {
+                                +"My Profile"
+                            }
                             a(href = "/logout", classes = "header-top-button") { +"Log Out" }
                         }
                     }

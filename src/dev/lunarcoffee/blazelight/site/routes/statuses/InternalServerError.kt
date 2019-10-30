@@ -11,7 +11,7 @@ fun StatusPages.Configuration.internalServerErrorStatus() {
     status(HttpStatusCode.InternalServerError) {
         call.respondHtmlTemplate(HeaderBarTemplate("Internal Server Error", call)) {
             content {
-                h3 { +"Internal server error:" }
+                h3 { b { +"Internal server error:" } }
                 hr()
                 p {
                     +"The remote server is currently experiencing a malfunction. "

@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.shared.language.Language
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
+import dev.lunarcoffee.blazelight.shared.language.Language
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -28,7 +28,7 @@ fun Routing.registerRoute() = get("/register") {
             breadcrumbs { thisCrumb(call, "Register") }
             br()
 
-            h3 { +"Register for an account:" }
+            h3 { b { +"Register for an account:" } }
             hr()
             form(action = "/register", method = FormMethod.post) {
                 input(type = InputType.text, name = "email", classes = "fi-text") {

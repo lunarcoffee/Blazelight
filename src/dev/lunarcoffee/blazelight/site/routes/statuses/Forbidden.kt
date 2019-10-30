@@ -7,12 +7,12 @@ import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
 import kotlinx.html.*
 
-fun StatusPages.Configuration.notFoundStatus() = status(HttpStatusCode.NotFound) {
-    call.respondHtmlTemplate(HeaderBarTemplate("Not Found", call)) {
+fun StatusPages.Configuration.forbiddenStatus() = status(HttpStatusCode.Forbidden) {
+    call.respondHtmlTemplate(HeaderBarTemplate("Forbidden", call)) {
         content {
-            h3 { b { +"Not found:" } }
+            h3 { b { +"Forbidden:" } }
             hr()
-            p { +"The content you requested could not be found. Ensure that the URL is correct." }
+            p { +"You do not have enough privileges to perform that action." }
         }
     }
 }

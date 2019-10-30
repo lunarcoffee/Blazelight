@@ -61,10 +61,13 @@ object UserRegistrar : DBCacheable<User> {
 
     suspend fun addComment(commentId: Long, userId: Long) {
         val newCommentIds = userId.getUser()!!.commentIds + commentId
-        Database.userCol.updateOne(
-            User::id eq userId,
-            setValue(User::commentIds, newCommentIds)
-        )
+        Database.userCol.updateOne(User::id eq userId, setValue(User::commentIds, newCommentIds))
+        cacheFromDB(userId)
+    }
+
+    suspend fun addThread(threadId: Long, userId: Long) {
+        val newThreadIds = userId.getUser()!!.threadIds + threadId
+        Database.userCol.updateOne(User::id eq userId, setValue(User::threadIds, newThreadIds))
         cacheFromDB(userId)
     }
 

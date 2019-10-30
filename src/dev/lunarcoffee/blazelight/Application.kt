@@ -3,10 +3,8 @@ package dev.lunarcoffee.blazelight
 import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
-import dev.lunarcoffee.blazelight.site.routes.profile.profileRoute
-import dev.lunarcoffee.blazelight.site.routes.profile.profileSettingsRoute
-import dev.lunarcoffee.blazelight.site.routes.statuses.internalServerErrorStatus
-import dev.lunarcoffee.blazelight.site.routes.statuses.notFoundStatus
+import dev.lunarcoffee.blazelight.site.routes.statuses.*
+import dev.lunarcoffee.blazelight.site.routes.users.*
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -75,6 +73,7 @@ fun Application.configSessions() {
 
 fun Application.configStatusPages() {
     install(StatusPages) {
+        forbiddenStatus()
         notFoundStatus()
         internalServerErrorStatus()
     }
@@ -91,8 +90,7 @@ fun Application.configRouting() {
         }
 
         authenticate("loginAuth") {
-            profileRoute()
-            profileSettingsRoute()
+            usersIdSettingsRoute()
             logoutRoute()
 
             categoryPostRoute()
@@ -109,6 +107,9 @@ fun Application.configRouting() {
         registerPostRoute()
         loginRoute()
         loginPostRoute()
+
+        usersIdRoute()
+        usersRoute()
 
         forumsRoute()
         forumsViewRoute()

@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.site.routes.profile
+package dev.lunarcoffee.blazelight.site.routes.users
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
@@ -7,19 +7,27 @@ import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-fun Route.profileSettingsRoute() = get("/me/settings") {
-    val user = call.sessions.get<UserSession>()!!.getUser()!!
+fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
+    val user = call.parameters["id"]?.toLongOrNull()?.getUser()
+        ?: return@get call.respond(HttpStatusCode.NotFound)
+
+    // Prevent modification of other users' settings.
+    if (user.id != call.sessions.get<UserSession>()!!.getUser()?.id)
+        return@get call.respond(HttpStatusCode.Forbidden)
 
     call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
         content {
             breadcrumbs {
-                crumb("/me", "My Profile")
+                crumb("/users", "Users")
+                crumb("/users/${user.id}", user.username)
                 thisCrumb(call, "Settings")
             }
             br()
@@ -32,8 +40,8 @@ fun Route.profileSettingsRoute() = get("/me/settings") {
             p { +(user.settings.theme) }
 
             padding(16)
-            a(href = "/me/settings", classes = "button-1") { +"Save" }
-            a(href = "/me", classes = "button-1") { +"Discard" }
+            a(href = "/users/${user.id}/settings", classes = "button-1") { +"Save" }
+            a(href = "/users/${user.id}", classes = "button-1") { +"Discard" }
             padding(8)
         }
     }

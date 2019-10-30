@@ -1,6 +1,8 @@
 package dev.lunarcoffee.blazelight.model.api.forums
 
 import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
+import dev.lunarcoffee.blazelight.model.api.threads.getThread
+import dev.lunarcoffee.blazelight.model.api.users.UserRegistrar
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.DefaultForum
 import dev.lunarcoffee.blazelight.model.internal.forums.Forum
@@ -35,6 +37,7 @@ object ForumManager {
             setValue(Forum::threadIds, newThreadIds)
         )
         reloadFromDb(forumId)
+        UserRegistrar.addThread(threadId, threadId.getThread()!!.authorId)
     }
 
     suspend fun reloadFromDb(id: Long) {

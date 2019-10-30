@@ -21,7 +21,7 @@ fun Routing.loginRoute() = get("/login") {
             breadcrumbs { thisCrumb(call, "Login") }
             br()
 
-            h3 { +"Login to your account:" }
+            h3 { b { +"Login to your account:" } }
             hr()
             form(action = "/login", method = FormMethod.post) {
                 input(type = InputType.text, name = "username", classes = "fi-text fi-top") {
