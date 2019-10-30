@@ -41,10 +41,8 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
             }
             br()
 
-            if (categories.isEmpty()) {
+            if (categories.isEmpty())
                 p { +"There are no categories." }
-                hr()
-            }
 
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
@@ -82,6 +80,9 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
             }
 
             if (isAdmin) {
+                if (categories.isEmpty())
+                    hr()
+
                 h3 { +"Create a new forum category:" }
                 form(action = "/forums/category", method = FormMethod.post, classes = "f-inline") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {

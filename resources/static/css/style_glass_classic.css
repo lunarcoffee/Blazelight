@@ -28,7 +28,7 @@ hr {
 .hr-dot {
     border: none;
     border-top: 1px dotted #bbb;
-    background-color: white;
+    background-color: #f9faff;
 }
 
 h2, h3 {

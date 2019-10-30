@@ -70,7 +70,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                         p(classes = "rem-p8") {
                             +"Posts: ${author.commentIds.size}"
                             br()
-                            +"Joined on ${author.creationTime.toTimeDay(user)}"
+                            +"Joined: ${author.creationTime.toTimeDay(user)}"
                         }
                     }
                     div(classes = "comment") {
