@@ -17,6 +17,8 @@ class Cache<T : Comparable<T>>(private val limit: Int = 1024) : MutableSet<T> {
     override fun add(element: T): Boolean {
         if (storage.size >= limit)
             remove(storage.entries.first().value)
+        if (element in storage.values)
+            remove(storage.entries.find { it.value == element }!!.value)
         return storage.put(index++, element) != null
     }
 

@@ -1,7 +1,9 @@
 package dev.lunarcoffee.blazelight.model.api.threads
 
 import dev.lunarcoffee.blazelight.model.api.comments.CommentManager
+import dev.lunarcoffee.blazelight.model.api.comments.getComment
 import dev.lunarcoffee.blazelight.model.api.forums.ForumManager
+import dev.lunarcoffee.blazelight.model.api.users.UserRegistrar
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.*
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
@@ -37,6 +39,7 @@ object ThreadManager : DBCacheable<Thread> {
             setValue(Thread::commentIds, newCommentIds)
         )
         reloadFromDb(threadId)
+        UserRegistrar.addComment(commentId, commentId.getComment()!!.authorId)
     }
 
     override suspend fun cacheFromDB(id: Long): Thread? {

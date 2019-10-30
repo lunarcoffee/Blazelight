@@ -58,12 +58,21 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             padding(4)
 
             val user = call.sessions.get<UserSession>()?.getUser()
-            for (commentId in commentPage) {
+            for ((index, commentId) in commentPage.withIndex()) {
                 val comment = commentId.getComment()!!
                 val author = comment.authorId.getUser()!!
 
                 div(classes = "forum-list-item comment-list-item") {
-                    div(classes = "commenter-info") { p { +"Test" } }
+                    div(classes = "commenter-info") {
+                        a(href = "/users/${author.username}", classes = "a1 commenter-username") {
+                            b(classes = "title commenter-username") { +author.username }
+                        }
+                        p(classes = "rem-p8") {
+                            +"Posts: ${author.commentIds.size}"
+                            br()
+                            +"Joined on ${author.creationTime.toTimeDay(user)}"
+                        }
+                    }
                     div(classes = "comment") {
                         // TODO: BBCode
                         div(classes = "ctmr") {
@@ -72,22 +81,15 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                 b { +thread.title }
                                 padding(6)
                             }
-                            p(classes = "comment-content") {
-                                renderWithNewlines(comment.contentRaw)
-                            }
+                            p(classes = "comment-text") { renderWithNewlines(comment.contentRaw) }
                             padding(5)
                         }
                         div {
                             i(classes = "thread-l forum-topic") {
-                                // Thread author's initial post and timestamp
-                                +"Posted by "
-                                val creatorName = author.username
-                                a(href = "/users/$creatorName", classes = "a2") {
-                                    +creatorName
-                                }
-                                +" on ${comment.creationTime.toTimeDisplay(user)}"
-                                br()
+                                +comment.creationTime.toTimeDisplay(user)
+                                span(classes = "float-r") { +"#${index + 1}" }
                             }
+                            br()
                             hr(classes = "hr-dot cdv")
                         }
                     }

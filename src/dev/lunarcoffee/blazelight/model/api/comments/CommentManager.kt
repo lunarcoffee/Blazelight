@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.model.api.comments
 
 import dev.lunarcoffee.blazelight.model.api.threads.ThreadManager
+import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.Comment
 import dev.lunarcoffee.blazelight.model.internal.forums.UserComment

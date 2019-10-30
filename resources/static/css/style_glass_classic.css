@@ -224,7 +224,7 @@ h2, h3 {
     overflow-wrap: break-word;
 }
 
-.comment-content {
+.comment-text {
     font-size: 0.85rem;
     overflow-wrap: break-word;
 }
@@ -316,25 +316,35 @@ h2, h3 {
     float: left;
     margin-top: -4px;
     margin-bottom: 19px;
-    border-right: solid 1px #c9c9c9;
+    border-right: solid 1px #d4d2e1;
     margin-right: 12px;
-    background: #e5e5e5;
-    width: 150px;
+    background: #e8e6f4;
+    min-width: 160px;
+    padding: 12px 8px;
+    font-size: 0.9rem;
+}
 
+.rem-p8 {
+    font-size: 0.8rem;
+}
+
+.commenter-username {
+    margin-bottom: 8px;
 }
 
 .comment {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 150px;
+    min-height: 160px;
     padding-top: 4px;
+    max-width: calc(120vh - 264px);
 }
 
 .cdv {
-    margin-left: calc(-150px - 13px);
+    margin-left: calc(-150px - 39px);
     margin-top: 10px;
-    width: calc(100vw - calc((100vw - 120vh)) - 74px);
+    width: calc(120vh - 74px);
 }
 
 /* Comment-top margin reducer */
@@ -361,6 +371,10 @@ h2, h3 {
 
 .bc-a {
     font-size: 0.8rem;
+}
+
+.float-r {
+    float: right;
 }
 
 .bc-home {

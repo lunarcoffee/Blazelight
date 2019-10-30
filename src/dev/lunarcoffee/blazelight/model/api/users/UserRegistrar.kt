@@ -2,12 +2,13 @@ package dev.lunarcoffee.blazelight.model.api.users
 
 import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
-import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
-import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
 import dev.lunarcoffee.blazelight.model.internal.std.util.PasswordHasher
+import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
+import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.shared.language.Language
 import org.litote.kmongo.eq
+import org.litote.kmongo.setValue
 import java.security.SecureRandom
 import java.time.ZoneId
 
@@ -56,6 +57,15 @@ object UserRegistrar : DBCacheable<User> {
             UserLoginSuccess(user.id)
         else
             UserLoginFailure
+    }
+
+    suspend fun addComment(commentId: Long, userId: Long) {
+        val newCommentIds = userId.getUser()!!.commentIds + commentId
+        Database.userCol.updateOne(
+            User::id eq userId,
+            setValue(User::commentIds, newCommentIds)
+        )
+        cacheFromDB(userId)
     }
 
     override suspend fun cacheFromDB(id: Long): User? {
