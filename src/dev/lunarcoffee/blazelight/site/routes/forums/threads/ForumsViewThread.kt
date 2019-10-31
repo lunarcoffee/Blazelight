@@ -64,7 +64,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
 
                 div(classes = "forum-list-item comment-list-item") {
                     div(classes = "commenter-info") {
-                        a(href = "/users/${author.username}", classes = "a1 commenter-username") {
+                        a(href = "/users/${author.id}", classes = "a1 commenter-username") {
                             b(classes = "title commenter-username") { +author.username }
                         }
                         p(classes = "rem-p8") {
