@@ -3,8 +3,8 @@ package dev.lunarcoffee.blazelight.site.routes.forums.threads
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
-import dev.lunarcoffee.blazelight.site.std.bbcode.formattedTextInput
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.formattedTextInput
 import dev.lunarcoffee.blazelight.site.std.textOrEllipsis
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call

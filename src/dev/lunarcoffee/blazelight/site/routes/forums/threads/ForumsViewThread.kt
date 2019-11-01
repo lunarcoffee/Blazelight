@@ -7,6 +7,8 @@ import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import dev.lunarcoffee.blazelight.site.std.*
+import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeLexer
+import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeParser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -81,7 +83,11 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                 b { +thread.title }
                                 padding(6)
                             }
-                            p(classes = "comment-text") { renderWithNewlines(comment.contentRaw) }
+                            p(classes = "comment-text") {
+                                // TODO:
+//                                renderWithNewlines(comment.contentRaw)
+                                renderWithBBCode(comment.contentRaw)
+                            }
                             padding(5)
                         }
                         div {
