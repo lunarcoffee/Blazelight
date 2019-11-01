@@ -1,12 +1,14 @@
 package dev.lunarcoffee.blazelight.site.std
 
-import dev.lunarcoffee.blazelight.site.std.bbcode.*
+import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeRenderer
 import io.ktor.application.ApplicationCall
 import io.ktor.request.path
 import kotlinx.html.*
 
 fun String.textOrEllipsis(limit: Int) = take(limit) + if (length > limit) "..." else ""
+
 fun HtmlBlockTag.padding(height: Int) = div { style = "height: ${height}px;" }
+fun HtmlInlineTag.renderWithBBCode(text: String) = BBCodeRenderer(this).render(text)
 
 fun HtmlBlockTag.plusButton(url: String, alt: String) {
     a(href = url, classes = "b-img-a") {
@@ -17,14 +19,10 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
 fun HtmlInlineTag.renderWithNewlines(text: String) {
     val split = text.split("\n")
     for (line in split) {
-        +line
+        +line.replace(" ", "&nbsp")
         if (split.size != 1)
             br()
     }
-}
-
-fun HtmlInlineTag.renderWithBBCode(text: String) {
-    BBCodeRenderer(this).render(text)
 }
 
 fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {

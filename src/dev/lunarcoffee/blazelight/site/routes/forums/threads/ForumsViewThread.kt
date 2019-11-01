@@ -76,18 +76,13 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                         }
                     }
                     div(classes = "comment") {
-                        // TODO: BBCode
                         div(classes = "ctmr") {
                             // Show title on first comment.
                             if (thread.firstPost?.id == comment.id) {
                                 b { +thread.title }
                                 padding(6)
                             }
-                            p(classes = "comment-text") {
-                                // TODO:
-//                                renderWithNewlines(comment.contentRaw)
-                                renderWithBBCode(comment.contentRaw)
-                            }
+                            p(classes = "comment-text") { renderWithBBCode(comment.contentRaw) }
                             padding(5)
                         }
                         div {

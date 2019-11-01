@@ -4,7 +4,7 @@ import dev.lunarcoffee.blazelight.site.std.renderWithNewlines
 import kotlinx.html.*
 
 class BBCodeRenderer(private val rootTag: HtmlInlineTag) {
-    private var index = 0
+    private var index = 0 // Index of the token currently being evaluated.
     private lateinit var tokens: List<BBCodeToken>
 
     fun render(text: String) {

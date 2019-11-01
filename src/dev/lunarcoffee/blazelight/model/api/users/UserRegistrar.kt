@@ -13,12 +13,14 @@ import java.security.SecureRandom
 import java.time.ZoneId
 
 object UserRegistrar : DBCacheable<User> {
+    private val srng = SecureRandom()
+
+    private val EMAIL_REGEX = "[a-zA-Z0-9+.]+@[a-zA-Z0-9.]+".toRegex()
+    private val ILLEGAL_CHARS_REGEX = "[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u2060\uFEFF]"
+        .toRegex()
+
     val users = Cache<User>()
 
-    private val srng = SecureRandom()
-    private val emailRegex = """[a-zA-Z0-9+.]+@[a-zA-Z0-9.]+""".toRegex() // TODO: make this good!
-
-    // TODO: strip bad chars from name (extract to function (ext?)?).
     suspend fun tryRegister(
         email: String,
         name: String,
@@ -27,11 +29,11 @@ object UserRegistrar : DBCacheable<User> {
         language: Language
     ): UserRegisterResult {
 
-        if (!(email matches emailRegex))
+        if (!(email matches EMAIL_REGEX))
             return UserRegisterInvalidEmail
-        if (name.length !in 1..40)
+        if (name.length !in 1..40 || name.sanitize() != name)
             return UserRegisterInvalidName
-        if (password.length !in 8..1_000)
+        if (password.length !in 8..1_000 || password.sanitize() != password)
             return UserRegisterInvalidPassword
         if (Database.userCol.findOne(User::email eq email) != null)
             return UserRegisterDuplicateEmail
@@ -74,4 +76,6 @@ object UserRegistrar : DBCacheable<User> {
     override suspend fun cacheFromDB(id: Long): User? {
         return Database.userCol.findOne(User::id eq id)?.also { users += it }
     }
+
+    private fun String.sanitize() = replace(ILLEGAL_CHARS_REGEX, "").trim()
 }
