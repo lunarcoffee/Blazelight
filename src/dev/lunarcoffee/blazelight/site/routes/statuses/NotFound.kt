@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes.statuses
 
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.features.StatusPages
@@ -8,11 +9,11 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.html.*
 
 fun StatusPages.Configuration.notFoundStatus() = status(HttpStatusCode.NotFound) {
-    call.respondHtmlTemplate(HeaderBarTemplate("Not Found", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(s.notFound, call, s)) {
         content {
-            h3 { b { +"Not found:" } }
+            h3 { b { +s.notFoundHeading } }
             hr()
-            p { +"The content you requested could not be found. Ensure that the URL is correct." }
+            p { +s.notFoundNotice }
         }
     }
 }

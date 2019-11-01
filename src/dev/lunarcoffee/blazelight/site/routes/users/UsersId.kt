@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.users
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -20,10 +21,10 @@ fun Routing.usersIdRoute() = get("/users/{id}") {
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
-    call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(user.username, call, s)) {
         content {
             breadcrumbs {
-                crumb("/users", "Users")
+                crumb("/users", s.users)
                 thisCrumb(call, user.username)
             }
             br()
@@ -31,21 +32,21 @@ fun Routing.usersIdRoute() = get("/users/{id}") {
             h3(classes = "title") { b { +user.username } }
             hr()
             p {
-                +"Posts: ${user.commentIds.size}"
+                +"${s.posts}: ${user.commentIds.size}"
                 br()
-                +"Joined: ${user.creationTime.toTimeDay(user)}"
+                +"${s.joined}: ${user.creationTime.toTimeDay(user)}"
             }
             p { +user.username }
-            p { +(user.realName ?: "(unset)") }
-            p { +(user.description ?: "(unset)") }
-            p { +(user.settings.zoneId.id ?: "(unset)") }
+            p { +(user.realName ?: s.unsetParen) }
+            p { +(user.description ?: s.unsetParen) }
+            p { +(user.settings.zoneId.id ?: s.unsetParen) }
             p { +(user.settings.language.name) }
             p { +(user.settings.theme) }
 
             // Show a settings button if the viewer is viewing their own profile page.
             if (user.id == call.sessions.get<UserSession>()?.getUser()?.id) {
                 padding(16)
-                a(href = "/users/${user.id}/settings", classes = "button-1") { +"Settings" }
+                a(href = "/users/${user.id}/settings", classes = "button-1") { +s.settings }
                 padding(8)
             }
         }

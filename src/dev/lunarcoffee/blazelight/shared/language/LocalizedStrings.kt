@@ -16,6 +16,8 @@ class LocalizedStrings {
     lateinit var home: String
     lateinit var forums: String
     lateinit var tools: String
+    lateinit var myProfile: String
+    lateinit var logOut: String
 
     lateinit var registrationHeading: String
     lateinit var loginHeading: String
@@ -28,11 +30,11 @@ class LocalizedStrings {
 
     lateinit var newCategoryHeading: String
     lateinit var name: String
+    lateinit var newForum: String
 
-    lateinit var dateTimeSep: String
     lateinit var startedBy: String
     lateinit var lastPostBy: String
-    lateinit var on: String
+    lateinit var timeOn: String
 
     lateinit var thread: String
     lateinit var posts: String
@@ -50,4 +52,45 @@ class LocalizedStrings {
     lateinit var addPost: String
     lateinit var newPostHeading: String
     lateinit var threadIdFormat: String
+    lateinit var post: String
+
+    lateinit var first: String
+    lateinit var prev: String
+    lateinit var of: String
+    lateinit var next: String
+    lateinit var last: String
+
+    lateinit var forbidden: String
+    lateinit var forbiddenHeading: String
+    lateinit var forbiddenNotice: String
+    lateinit var internalServerError: String
+    lateinit var internalServerErrorHeading: String
+    lateinit var internalServerErrorNotice: String
+    lateinit var notFound: String
+    lateinit var notFoundHeading: String
+    lateinit var notFoundNotice: String
+
+    lateinit var users: String
+    lateinit var unsetParen: String
+
+    lateinit var noThreadsInForum: String
+    lateinit var noCategories: String
+    lateinit var noForumsInCategory: String
+
+    lateinit var invalidTitle1To300: String
+    lateinit var invalidContent1To10000: String
+    lateinit var invalidName1To100: String
+    lateinit var invalidTopic1To1000: String
+    lateinit var invalidEmail: String
+    lateinit var invalidUsername1To40: String
+    lateinit var invalidPassword8To1000: String
+
+    lateinit var noPermissions: String
+    lateinit var successForum: String
+    lateinit var invalidUsernameOrPassword: String
+    lateinit var loginToContinue: String
+    lateinit var emailTaken: String
+    lateinit var usernameTaken: String
+    lateinit var passwordConfirmFail: String
+    lateinit var successRegister: String
 }

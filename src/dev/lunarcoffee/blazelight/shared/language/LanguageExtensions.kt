@@ -16,9 +16,9 @@ private val PipelineContext<*, ApplicationCall>.language
 val PipelineContext<*, ApplicationCall>.s get() = language.strings
 
 // Replaces percent template codes in language files with [args].
-fun String.prep(vararg args: String): String {
+fun String.prep(vararg args: Any): String {
     var res = this
     for ((index, arg) in args.withIndex())
-        res = res.replace("%$index", arg)
+        res = res.replace("%$index", arg.toString())
     return res
 }

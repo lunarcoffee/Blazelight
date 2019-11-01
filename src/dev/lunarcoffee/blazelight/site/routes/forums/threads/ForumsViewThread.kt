@@ -6,9 +6,8 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.*
-import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeLexer
-import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeParser
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -40,11 +39,11 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
         .drop(page * BL_CONFIG.commentPageSize)
         .take(BL_CONFIG.commentPageSize)
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Thread - ${thread.id}", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate("${s.thread} - ${thread.id}", call, s)) {
         content {
             breadcrumbs {
                 val category = forum.categoryId.getCategory()!!
-                crumb("/forums", "Forums")
+                crumb("/forums", s.forums)
                 crumb("/forums/${category.name}#${category.name}", category.name)
                 crumb("/forums/view/${forum.id}", forum.name)
                 thisCrumb(call, thread.title.textOrEllipsis(60))
@@ -52,10 +51,10 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             br()
 
             h3 {
-                b { +"Thread" }
-                plusButton("/forums/view/${forum.id}/${thread.id}/add", "New Post")
+                b { +s.thread }
+                plusButton("/forums/view/${forum.id}/${thread.id}/add", s.newPost)
             }
-            pageNumbers(page, pageCount, call)
+            pageNumbers(page, pageCount, call, s)
             hr()
             padding(4)
 
@@ -70,9 +69,9 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                             b(classes = "title commenter-username") { +author.username }
                         }
                         p(classes = "rem-p8") {
-                            +"Posts: ${author.commentIds.size}"
+                            +"${s.posts}: ${author.commentIds.size}"
                             br()
-                            +"Joined: ${author.creationTime.toTimeDay(user)}"
+                            +"${s.joined}: ${author.creationTime.toTimeDay(user)}"
                         }
                     }
                     div(classes = "comment") {
@@ -99,7 +98,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
 
             padding(12)
             a(href = "/forums/view/${forum.id}/${thread.id}/add", classes = "button-1") {
-                +"New Post"
+                +s.newPost
             }
             padding(8)
         }

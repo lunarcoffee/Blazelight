@@ -35,7 +35,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
         .drop(page * BL_CONFIG.threadPageSize)
         .take(BL_CONFIG.threadPageSize)
 
-    call.respondHtmlTemplate(HeaderBarTemplate("${s.forums} - ${forum.name}", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate("${s.forums} - ${forum.name}", call, s)) {
         content {
             breadcrumbs {
                 val category = forum.categoryId.getCategory()!!
@@ -49,11 +49,11 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 b { +forum.name }
                 plusButton("/forums/view/${forum.id}/add", s.newThread)
             }
-            pageNumbers(page, pageCount, call)
+            pageNumbers(page, pageCount, call, s)
             hr()
 
             if (forum.threadIds.isEmpty()) {
-                p { +"There are no threads in this forum." }
+                p { +s.noThreadsInForum }
                 padding(8)
             } else {
                 // [user] is used for local time display.
@@ -76,14 +76,14 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                             +s.startedBy
                             val author = thread.firstPost!!.authorId.getUser()!!
                             a(href = "/users/${author.id}", classes = "a2") { +author.username }
-                            +" ${s.on} ${thread.creationTime.toTimeDisplay(user)}"
+                            +" ${s.timeOn} ${thread.creationTime.toTimeDisplay(user)}"
                             br()
 
                             // Last post author and timestamp.
                             +s.lastPostBy
                             val last = thread.lastPost!!.authorId.getUser()!!
                             a(href = "/users/${last.id}", classes = "a2") { +last.username }
-                            +" ${s.on} ${thread.lastPost!!.creationTime.toTimeDisplay(user)}"
+                            +" ${s.timeOn} ${thread.lastPost!!.creationTime.toTimeDisplay(user)}"
                         }
                         hr(classes = "hr-dot")
                     }

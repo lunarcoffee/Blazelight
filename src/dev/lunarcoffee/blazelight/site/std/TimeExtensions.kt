@@ -1,14 +1,12 @@
 package dev.lunarcoffee.blazelight.site.std
 
 import dev.lunarcoffee.blazelight.model.internal.users.User
-import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import java.time.*
 import java.time.chrono.ChronoLocalDate
 import java.time.chrono.ChronoZonedDateTime
 import java.time.format.DateTimeFormatter
 
-private val DEFAULT_FORMATTER = DateTimeFormatter
-    .ofPattern("EEE dd/MM/yyyy '${BL_CONFIG.ds.dateTimeSep}' h:mm:ss a")
+private val DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy @ h:mm:ss a")
 private val DAY_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
 fun <T : ChronoLocalDate> ChronoZonedDateTime<T>.format() = format(DEFAULT_FORMATTER)!!

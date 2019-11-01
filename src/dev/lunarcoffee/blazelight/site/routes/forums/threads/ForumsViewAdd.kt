@@ -2,6 +2,7 @@ package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.formattedTextInput
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -14,41 +15,39 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-private val specialMessages = listOf(
-    "That title is invalid! It must be 1 to 300 characters long (inclusive)!",
-    "That content is invalid! It must be 1 to 10000 characters long (inclusive)!"
-)
-
 fun Route.forumsViewAdd() = get("/forums/view/{id}/add") {
+    val specialMessages = listOf(s.invalidTitle1To300, s.invalidContent1To10000)
+
     val messageIndex = call.parameters["a"]?.toIntOrNull()
     val forum = call.parameters["id"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Forums - ${forum.name} - Add Thread", call)) {
+    val template = HeaderBarTemplate("${s.forums} - ${forum.name} - ${s.addThread}", call, s)
+    call.respondHtmlTemplate(template) {
         content {
             breadcrumbs {
                 val category = forum.categoryId.getCategory()!!
-                crumb("/forums", "Forums")
+                crumb("/forums", s.forums)
                 crumb("/forums/${category.name}#${category.name}", category.name)
                 crumb("/forums/view/${forum.id}", forum.name)
-                thisCrumb(call, "Add Thread")
+                thisCrumb(call, s.addThread)
             }
             br()
 
             h3 {
-                +"Create a new thread in "
+                +s.newThreadHeading
                 b { +forum.name }
                 +":"
             }
             hr()
             form(action = call.request.path(), method = FormMethod.post) {
                 input(type = InputType.text, name = "title", classes = "fi-text fi-top") {
-                    placeholder = "Title"
+                    placeholder = s.title
                 }
                 br()
-                formattedTextInput()
+                formattedTextInput(s)
                 hr()
-                input(type = InputType.submit, classes = "button-1") { value = "Create" }
+                input(type = InputType.submit, classes = "button-1") { value = s.create }
 
                 // This message will be displayed upon a special thread creation event.
                 if (messageIndex in specialMessages.indices)

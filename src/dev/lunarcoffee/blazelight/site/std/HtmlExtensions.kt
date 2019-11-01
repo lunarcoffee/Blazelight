@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.std
 
+import dev.lunarcoffee.blazelight.shared.language.LocalizedStrings
 import dev.lunarcoffee.blazelight.site.std.bbcode.BBCodeRenderer
 import io.ktor.application.ApplicationCall
 import io.ktor.request.path
@@ -16,9 +17,9 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
     }
 }
 
-fun HtmlBlockTag.formattedTextInput() = textArea(rows = "8", classes = "fti") {
+fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) = textArea(rows = "8", classes = "fti") {
     name = "content"
-    placeholder = "Type something..."
+    placeholder = s.typeSomething
 }
 
 fun HtmlInlineTag.renderWithNewlines(text: String) {
@@ -30,7 +31,12 @@ fun HtmlInlineTag.renderWithNewlines(text: String) {
     }
 }
 
-fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
+fun HtmlBlockTag.pageNumbers(
+    page: Int,
+    pageCount: Int,
+    call: ApplicationCall,
+    s: LocalizedStrings
+) {
     div(classes = "page-numbers") {
         // Show all page buttons if there are less than ten. If not, a navigator with first,
         // previous, next, last, and custom page selector buttons will be shown.
@@ -45,8 +51,8 @@ fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
         } else {
             if (page > 0) {
                 // First and previous page buttons.
-                a(href = call.request.path(), classes = "a2 a-page") { +"First" }
-                a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") { +"Prev" }
+                a(href = call.request.path(), classes = "a2 a-page") { +s.first }
+                a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") { +s.prev }
             }
             // Current page button/indicator.
             a(classes = "a2 a-page cursor-hand") {
@@ -54,13 +60,13 @@ fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
                     var page = parseInt(prompt("Enter the page to go to.", "${page + 1}"));
                     window.location.href = "${call.request.path()}?p=" + (page - 1);
                 """
-                +"(${page + 1} of $pageCount)"
+                +"(${page + 1} ${s.of} $pageCount)"
             }
             if (page < pageCount - 1) {
                 // Next and last page buttons.
-                a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") { +"Next" }
+                a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") { +s.next }
                 val last = pageCount - 1
-                a(href = "${call.request.path()}?p=$last", classes = "a2") { +"Last" }
+                a(href = "${call.request.path()}?p=$last", classes = "a2") { +s.last }
             }
         }
     }

@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.users
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -23,25 +24,25 @@ fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
     if (user.id != call.sessions.get<UserSession>()!!.getUser()?.id)
         return@get call.respond(HttpStatusCode.Forbidden)
 
-    call.respondHtmlTemplate(HeaderBarTemplate(user.username, call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(user.username, call, s)) {
         content {
             breadcrumbs {
-                crumb("/users", "Users")
+                crumb("/users", s.users)
                 crumb("/users/${user.id}", user.username)
-                thisCrumb(call, "Settings")
+                thisCrumb(call, s.settings)
             }
             br()
 
             p { +user.username }
-            p { +(user.realName ?: "(unset)") }
-            p { +(user.description ?: "(unset)") }
-            p { +(user.settings.zoneId.id ?: "(unset)") }
+            p { +(user.realName ?: s.unsetParen) }
+            p { +(user.description ?: s.unsetParen) }
+            p { +(user.settings.zoneId.id ?: s.unsetParen) }
             p { +(user.settings.language.name) }
             p { +(user.settings.theme) }
 
             padding(16)
-            a(href = "/users/${user.id}/settings", classes = "button-1") { +"Save" }
-            a(href = "/users/${user.id}", classes = "button-1") { +"Discard" }
+            a(href = "/users/${user.id}/settings", classes = "button-1") { +s.save }
+            a(href = "/users/${user.id}", classes = "button-1") { +s.discard }
             padding(8)
         }
     }
