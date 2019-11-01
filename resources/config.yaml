@@ -1,7 +1,8 @@
-resourceRoot: "resources"
-defaultStyle: "Glass Classic"
-headerBarText: "Blazelight"
-titleText: "Blazelight"
+resourceRoot:    "resources"
+defaultStyle:    "Glass Classic"
+headerBarText:   "Blazelight"
+titleText:       "Blazelight"
+defaultLangCode: "en-us"
 
-threadPageSize: 15
+threadPageSize:  15
 commentPageSize: 15

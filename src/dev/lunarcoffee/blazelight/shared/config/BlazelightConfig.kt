@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.shared.config
 
+import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import java.io.File
 import kotlin.properties.Delegates
 
@@ -8,6 +9,7 @@ class BlazelightConfig {
     lateinit var defaultStyle: String
     lateinit var headerBarText: String
     lateinit var titleText: String
+    lateinit var defaultLangCode: String
 
     var threadPageSize: Int by Delegates.notNull()
     var commentPageSize: Int by Delegates.notNull()
@@ -18,4 +20,10 @@ class BlazelightConfig {
             styleNameLine.substring(3, styleNameLine.lastIndex - 2) to it.name
         }
     }
+
+    // [LocalizedStrings] for default language.
+    val ds
+        get() = LanguageManager
+            .localizedStrings
+            .find { it.language.stringCode == defaultLangCode }!!
 }

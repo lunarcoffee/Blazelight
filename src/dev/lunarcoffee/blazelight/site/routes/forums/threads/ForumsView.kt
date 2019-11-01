@@ -5,6 +5,7 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -34,11 +35,11 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
         .drop(page * BL_CONFIG.threadPageSize)
         .take(BL_CONFIG.threadPageSize)
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Forums - ${forum.name}", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate("${s.forums} - ${forum.name}", call)) {
         content {
             breadcrumbs {
                 val category = forum.categoryId.getCategory()!!
-                crumb("/forums", "Forums")
+                crumb("/forums", s.forums)
                 crumb("/forums/${category.name}#${category.name}", category.name)
                 thisCrumb(call, forum.name)
             }
@@ -46,7 +47,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
 
             h3(classes = "title") {
                 b { +forum.name }
-                plusButton("/forums/view/${forum.id}/add", "New Thread")
+                plusButton("/forums/view/${forum.id}/add", s.newThread)
             }
             pageNumbers(page, pageCount, call)
             hr()
@@ -72,17 +73,17 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                         padding(5)
                         i(classes = "thread-l forum-topic title") {
                             // Thread author's initial post and timestamp
-                            +"Thread started by "
+                            +s.startedBy
                             val author = thread.firstPost!!.authorId.getUser()!!
                             a(href = "/users/${author.id}", classes = "a2") { +author.username }
-                            +" on ${thread.creationTime.toTimeDisplay(user)}"
+                            +" ${s.on} ${thread.creationTime.toTimeDisplay(user)}"
                             br()
 
                             // Last post author and timestamp.
-                            +"Last post by "
+                            +s.lastPostBy
                             val last = thread.lastPost!!.authorId.getUser()!!
                             a(href = "/users/${last.id}", classes = "a2") { +last.username }
-                            +" on ${thread.lastPost!!.creationTime.toTimeDisplay(user)}"
+                            +" ${s.on} ${thread.lastPost!!.creationTime.toTimeDisplay(user)}"
                         }
                         hr(classes = "hr-dot")
                     }
@@ -90,7 +91,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             }
 
             padding(12)
-            a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +"New Thread" }
+            a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +s.newThread }
             padding(8)
         }
     }

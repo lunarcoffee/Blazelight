@@ -1,0 +1,57 @@
+languageCode:        "en-us"
+
+# Text on standalone buttons.
+create:              "Create"
+newThread:           "New Thread"
+newPost:             "New Post"
+settings:            "Settings"
+save:                "Save"
+discard:             "Discard"
+register:            "Register"
+login:               "Login"
+
+# Text on header bar (including buttons).
+home:                "Home"
+forums:              "Forums"
+tools:               "Tools"
+
+# Registration and login pages.
+registrationHeading: "Register for an account:"
+loginHeading:        "Login to your account:"
+email:               "Email"
+username:            "Username"
+password:            "Password"
+retypePassword:      "Retype Password"
+timeZoneParen:       "(time zone)"
+languageParen:       "(language)"
+
+# Category forums view.
+newCategoryHeading:  "Create a new forum category:"
+name:                "Name"
+
+# Time items.
+dateTimeSep:         "at"
+startedBy:           "Thread started by "
+on:                  "on"
+lastPostBy:          "Last post by "
+
+# Thread posts view.
+thread:              "Thread"
+posts:               "Posts"
+joined:              "Joined"
+
+# Forum creation view.
+createForum:         "Create Forum"
+newForumHeading:     "Create a new forum in %0:"
+topic:               "Topic"
+
+# Thread creation view.
+addThread:           "Add Thread"
+newThreadHeading:    "Create a new thread in %0:"
+title:               "Title"
+typeSomething:       "Type something..."
+
+# Post creation view.
+addPost:             "Add Post"
+newPostHeading:      "Post to thread %0:"
+threadIdFormat:      "#%0"

@@ -1,8 +1,8 @@
 package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.model.api.users.*
-import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
+import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import io.ktor.application.call
 import io.ktor.request.receiveParameters
 import io.ktor.response.respondRedirect
@@ -17,7 +17,7 @@ fun Routing.registerPostRoute() = post("/register") {
     val password = params["password"]!!
     val passwordConfirm = params["password-c"]!!
     val timeZone = TimeZoneManager.toTimeZone(params["timeZone"]!!)
-    val language = LanguageManager.toLanguage(params["language"]!!)
+    val language = LanguageManager.toLanguage(params["language"]!!.toInt())
 
     if (password != passwordConfirm) {
         call.respondRedirect("/register?a=5")

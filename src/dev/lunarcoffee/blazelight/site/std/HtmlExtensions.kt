@@ -16,6 +16,11 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
     }
 }
 
+fun HtmlBlockTag.formattedTextInput() = textArea(rows = "8", classes = "fti") {
+    name = "content"
+    placeholder = "Type something..."
+}
+
 fun HtmlInlineTag.renderWithNewlines(text: String) {
     val split = text.split("\n")
     for (line in split) {
@@ -41,33 +46,22 @@ fun HtmlBlockTag.pageNumbers(page: Int, pageCount: Int, call: ApplicationCall) {
             if (page > 0) {
                 // First and previous page buttons.
                 a(href = call.request.path(), classes = "a2 a-page") { +"First" }
-                a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") {
-                    +"Prev"
-                }
+                a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") { +"Prev" }
             }
             // Current page button/indicator.
             a(classes = "a2 a-page cursor-hand") {
                 onClick = """
-                var page = parseInt(prompt("Enter the page to go to.", "${page + 1}"));
-                window.location.href = "${call.request.path()}?p=" + (page - 1);
-            """
+                    var page = parseInt(prompt("Enter the page to go to.", "${page + 1}"));
+                    window.location.href = "${call.request.path()}?p=" + (page - 1);
+                """
                 +"(${page + 1} of $pageCount)"
             }
             if (page < pageCount - 1) {
                 // Next and last page buttons.
-                a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") {
-                    +"Next"
-                }
+                a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") { +"Next" }
                 val last = pageCount - 1
-                a(href = "${call.request.path()}?p=$last", classes = "a2") {
-                    +"Last"
-                }
+                a(href = "${call.request.path()}?p=$last", classes = "a2") { +"Last" }
             }
         }
     }
-}
-
-fun HtmlBlockTag.formattedTextInput() = textArea(rows = "8", classes = "fti") {
-    name = "content"
-    placeholder = "Type something..."
 }

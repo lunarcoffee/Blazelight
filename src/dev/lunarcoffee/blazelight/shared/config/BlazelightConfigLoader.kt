@@ -15,6 +15,7 @@ fun loadBlazelightConfig(path: String?) {
 
             threadPageSize = 15
             commentPageSize = 15
+            defaultLangCode = "en-us"
         }
     } else {
         Yaml().loadAs(File(path).reader(), BlazelightConfig::class.java)
