@@ -19,7 +19,7 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
 fun HtmlInlineTag.renderWithNewlines(text: String) {
     val split = text.split("\n")
     for (line in split) {
-        +line.replace(' ', Typography.nbsp)
+        +line
         if (split.size != 1)
             br()
     }
