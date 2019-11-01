@@ -1,6 +1,9 @@
 package dev.lunarcoffee.blazelight.shared.language
 
 class LocalizedStrings {
+    // TODO: - special messages
+    //       - there are no categories (Forums.kt)
+
     lateinit var languageCode: String
     val language: Language by lazy { LanguageManager.toLanguage(languageCode) }
 
