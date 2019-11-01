@@ -2,6 +2,7 @@ package dev.lunarcoffee.blazelight.site.routes
 
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import dev.lunarcoffee.blazelight.shared.language.Language
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -10,41 +11,40 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*
 
-private val specialMessages = listOf(
-    "That email is invalid!",
-    "That username is invalid! It must be at most 40 characters long (inclusive).",
-    "That password is invalid! It must be 8 to 1000 characters long (inclusive).",
-    "That email is taken!",
-    "That username is taken!",
-    "The two passwords don't match!",
-    "Success! You may now log in."
-)
-
 fun Routing.registerRoute() = get("/register") {
+    val specialMessages = listOf(
+        s.invalidEmail,
+        s.invalidUsername1To40,
+        s.invalidPassword8To1000,
+        s.emailTaken,
+        s.usernameTaken,
+        s.passwordConfirmFail,
+        s.successRegister
+    )
     val messageIndex = call.parameters["a"]?.toIntOrNull()
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Register", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(s.register, call, s)) {
         content {
-            breadcrumbs { thisCrumb(call, "Register") }
+            breadcrumbs { thisCrumb(call, s.register) }
             br()
 
-            h3 { b { +"Register for an account:" } }
+            h3 { b { +s.registrationHeading } }
             hr()
             form(action = "/register", method = FormMethod.post) {
                 input(type = InputType.text, name = "email", classes = "fi-text") {
-                    placeholder = "Email"
+                    placeholder = s.email
                 }
                 br()
                 input(type = InputType.text, name = "username", classes = "fi-text") {
-                    placeholder = "Username"
+                    placeholder = s.username
                 }
                 br()
                 input(type = InputType.password, name = "password", classes = "fi-text") {
-                    placeholder = "Password"
+                    placeholder = s.password
                 }
                 br()
                 input(type = InputType.password, name = "password-c", classes = "fi-text") {
-                    placeholder = "Retype password"
+                    placeholder = s.retypePassword
                 }
                 hr()
                 select(classes = "fi-select") {
@@ -56,7 +56,7 @@ fun Routing.registerRoute() = get("/register") {
                         }
                     }
                 }
-                +"(time zone)"
+                +s.timeZoneParen
                 br()
                 select(classes = "fi-select") {
                     name = "language"
@@ -67,9 +67,9 @@ fun Routing.registerRoute() = get("/register") {
                         }
                     }
                 }
-                +"(language)"
+                +s.languageParen
                 hr()
-                input(type = InputType.submit, classes = "button-1") { value = "Register" }
+                input(type = InputType.submit, classes = "button-1") { value = s.register }
 
                 // This message will be displayed after attempting to register.
                 val color = if (messageIndex == specialMessages.lastIndex) "green" else "red"

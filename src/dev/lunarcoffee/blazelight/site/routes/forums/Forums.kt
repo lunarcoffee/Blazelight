@@ -3,6 +3,7 @@ package dev.lunarcoffee.blazelight.site.routes.forums
 import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.plusButton
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -16,24 +17,20 @@ import io.ktor.sessions.sessions
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 
-private val specialMessages = listOf(
-    "You don't have enough permissions to do that!",
-    "That name is invalid! It must be 1 to 100 characters long (inclusive)!",
-    "Success! Forum created."
-)
-
 fun Routing.forumsRoute() = get("/forums/{category?}") {
+    val specialMessages = listOf(s.invalidName1To100, s.noPermissions, s.successForum)
+
     val categories = CategoryManager.categories
     val messageIndex = call.parameters["a"]?.toIntOrNull()
 
     val user = call.sessions.get<UserSession>()?.getUser()
     val isAdmin = user?.isAdmin == true
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Forums", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(s.forums, call, s)) {
         content {
             val crumbName = call.parameters["category"]?.substringAfterLast("#")
             breadcrumbs {
-                crumb("/forums", "Forums")
+                crumb("/forums", s.forums)
 
                 // Add a category breadcrumb if the user has selected a category.
                 if (categories.any { it.name == crumbName })
@@ -42,7 +39,7 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
             br()
 
             if (categories.isEmpty())
-                p { +"There are no categories." }
+                p { +s.noCategories }
 
             for ((index, category) in categories.withIndex()) {
                 div(classes = if (index == categories.lastIndex && !isAdmin) "" else "category") {
@@ -57,13 +54,13 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
                                     +category.name
                             }
                             if (isAdmin)
-                                plusButton("/forums/add?b=${category.id}", "Add Forum")
+                                plusButton("/forums/add?b=${category.id}", s.newForum)
                         }
                     }
                     hr()
 
                     if (category.forumIds.isEmpty())
-                        p { +"There are no forums in this category." }
+                        p { +s.noForumsInCategory }
 
                     for (id in category.forumIds) {
                         val forum = runBlocking { id.getForum()!! }
@@ -83,13 +80,13 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
                 if (categories.isEmpty())
                     hr()
 
-                h3 { +"Create a new forum category:" }
+                h3 { +s.newCategoryHeading }
                 form(action = "/forums/category", method = FormMethod.post, classes = "f-inline") {
                     input(type = InputType.text, name = "name", classes = "fi-text fi-top") {
-                        placeholder = "Name"
+                        placeholder = s.name
                     }
                     input(type = InputType.submit, classes = "button-1 b-inline") {
-                        value = "Create"
+                        value = s.create
                     }
 
                     // This message will be displayed after an attempt to create a new category.

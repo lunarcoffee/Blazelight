@@ -1,57 +1,107 @@
-languageCode:        "en-us"
+languageCode:               "en-us"
 
 # Text on standalone buttons.
-create:              "Create"
-newThread:           "New Thread"
-newPost:             "New Post"
-settings:            "Settings"
-save:                "Save"
-discard:             "Discard"
-register:            "Register"
-login:               "Login"
+create:                     "Create"
+newThread:                  "New Thread"
+newPost:                    "New Post"
+settings:                   "Settings"
+save:                       "Save"
+discard:                    "Discard"
+register:                   "Register"
+login:                      "Login"
 
 # Text on header bar (including buttons).
-home:                "Home"
-forums:              "Forums"
-tools:               "Tools"
+home:                       "Home"
+forums:                     "Forums"
+tools:                      "Tools"
+myProfile:                  "My Profile"
+logOut:                     "Log Out"
 
 # Registration and login pages.
-registrationHeading: "Register for an account:"
-loginHeading:        "Login to your account:"
-email:               "Email"
-username:            "Username"
-password:            "Password"
-retypePassword:      "Retype Password"
-timeZoneParen:       "(time zone)"
-languageParen:       "(language)"
+registrationHeading:        "Register for an account:"
+loginHeading:               "Login to your account:"
+email:                      "Email"
+username:                   "Username"
+password:                   "Password"
+retypePassword:             "Retype Password"
+timeZoneParen:              "(time zone)"
+languageParen:              "(language)"
 
 # Category forums view.
-newCategoryHeading:  "Create a new forum category:"
-name:                "Name"
+newCategoryHeading:         "Create a new forum category:"
+name:                       "Name"
+newForum:                   "New Forum"
 
 # Time items.
-dateTimeSep:         "at"
-startedBy:           "Thread started by "
-on:                  "on"
-lastPostBy:          "Last post by "
+startedBy:                  "Thread started by "
+timeOn:                     "on"
+lastPostBy:                 "Last post by "
 
 # Thread posts view.
-thread:              "Thread"
-posts:               "Posts"
-joined:              "Joined"
+thread:                     "Thread"
+posts:                      "Posts"
+joined:                     "Joined"
 
 # Forum creation view.
-createForum:         "Create Forum"
-newForumHeading:     "Create a new forum in %0:"
-topic:               "Topic"
+createForum:                "Create Forum"
+newForumHeading:            "Create a new forum in "
+topic:                      "Topic"
 
 # Thread creation view.
-addThread:           "Add Thread"
-newThreadHeading:    "Create a new thread in %0:"
-title:               "Title"
-typeSomething:       "Type something..."
+addThread:                  "Add Thread"
+newThreadHeading:           "Create a new thread in "
+title:                      "Title"
+typeSomething:              "Type something..."
 
 # Post creation view.
-addPost:             "Add Post"
-newPostHeading:      "Post to thread %0:"
-threadIdFormat:      "#%0"
+addPost:                    "Add Post"
+newPostHeading:             "Post to thread "
+threadIdFormat:             "#%0"
+post:                       "Post"
+
+# Page movement bar items.
+first:                      "First"
+prev:                       "Prev"
+of:                         "Of"
+next:                       "Next"
+last:                       "Last"
+
+# Status pages.
+forbidden:                  "Forbidden"
+forbiddenHeading:           "Forbidden:"
+forbiddenNotice:            "You do not have enough privileges to perform that action."
+internalServerError:        "Internal Server Error"
+internalServerErrorHeading: "Internal server error:"
+internalServerErrorNotice:  "The remote server is currently experiencing a malfunction. Please try again later."
+notFound:                   "Not Found"
+notFoundHeading:            "Not found:"
+notFoundNotice:             "The content you requested could not be found. Ensure that the URL is correct."
+
+# User pages.
+users:                      "Users"
+unsetParen:                 "(unset)"
+
+# Special cases for various displays.
+noThreadsInForum:           "There are no threads in this forum."
+noCategories:               "There are no categories."
+noForumsInCategory:         "There are no forums in this category."
+
+# Invalid [x] status messages.
+invalidTitle1To300:         "That title is invalid! It must be 1 to 300 characters long (inclusive)!"
+invalidContent1To10000:     "That content is invalid! It must be 1 to 10000 characters long (inclusive)!"
+invalidName1To100:          "That name is invalid! It must be 1 to 100 characters long (inclusive)!"
+invalidTopic1To1000:        "That topic is invalid! It must be 1 to 1000 characters long (inclusive)!"
+invalidEmail:               "That email is invalid!"
+invalidUsername1To40:       "That username is invalid! It must be at most 40 characters long (inclusive)."
+invalidPassword8To1000:     "That password is invalid! It must be 8 to 1000 characters long (inclusive)."
+
+
+# Other status messages.
+noPermissions:       "You don't have enough permissions to do that!"
+successForum:               "Success! Forum created."
+invalidUsernameOrPassword:  "Invalid username or password!"
+loginToContinue:            "Please login to continue."
+emailTaken:                 "That email is taken!"
+usernameTaken:              "That username is taken!"
+passwordConfirmFail:        "The two passwords don't match!"
+successRegister:            "Success! You may now log in."

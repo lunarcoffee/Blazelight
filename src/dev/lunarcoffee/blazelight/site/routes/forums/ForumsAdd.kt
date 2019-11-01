@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -12,31 +13,26 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-private val specialMessages = listOf(
-    "You don't have enough permissions to do that!",
-    "That name is invalid! It must be 1 to 100 characters long (inclusive)!",
-    "That topic is invalid! It must be 1 to 1000 characters long (inclusive)!"
-)
-
 fun Route.forumsAddRoute() = get("/forums/add") {
+    val specialMessages = listOf(s.noPermissions, s.invalidName1To100, s.invalidTopic1To1000)
     val params = call.parameters
 
     val messageIndex = params["a"]?.toIntOrNull()
     val category = params["b"]?.toLongOrNull()?.getCategory()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
-    call.respondHtmlTemplate(HeaderBarTemplate("Add Forum", call)) {
+    call.respondHtmlTemplate(HeaderBarTemplate(s.createForum, call, s)) {
         content {
             breadcrumbs {
                 val name = category.name
-                crumb("/forums", "Forums")
+                crumb("/forums", s.forums)
                 crumb("/forums/$name#$name", name)
-                thisCrumb(call, "Create Forum")
+                thisCrumb(call, s.createForum)
             }
             br()
 
             h3(classes = "title") {
-                +"Create a new forum in "
+                +s.newForumHeading
                 b { +category.name }
                 +":"
             }
@@ -48,14 +44,14 @@ fun Route.forumsAddRoute() = get("/forums/add") {
                 }
 
                 input(type = InputType.text, name = "name", classes = "fi-text fi-top") {
-                    placeholder = "Name"
+                    placeholder = s.name
                 }
                 br()
                 input(type = InputType.text, name = "topic", classes = "fi-text") {
-                    placeholder = "Topic"
+                    placeholder = s.topic
                 }
                 hr()
-                input(type = InputType.submit, classes = "button-1") { value = "Create" }
+                input(type = InputType.submit, classes = "button-1") { value = s.create }
 
                 // This message will be displayed upon a special forum creation event.
                 if (messageIndex in specialMessages.indices)

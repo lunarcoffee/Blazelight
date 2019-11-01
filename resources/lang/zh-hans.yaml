@@ -1,0 +1,107 @@
+languageCode:               "zh-hans"
+
+# Text on standalone buttons.
+create:                     "中文"
+newThread:                  "中文"
+newPost:                    "中文"
+settings:                   "中文"
+save:                       "中文"
+discard:                    "中文"
+register:                   "中文"
+login:                      "中文"
+
+# Text on header bar (including buttons).
+home:                       "中文"
+forums:                     "中文"
+tools:                      "中文"
+myProfile:                  "中文"
+logOut:                     "中文"
+
+# Registration and login pages.
+registrationHeading:        "中文"
+loginHeading:               "中文"
+email:                      "中文"
+username:                   "中文"
+password:                   "中文"
+retypePassword:             "中文"
+timeZoneParen:              "中文"
+languageParen:              "中文"
+
+# Category forums view.
+newCategoryHeading:         "中文"
+name:                       "中文"
+newForum:                   "中文"
+
+# Time items.
+startedBy:                  "中文"
+timeOn:                     "中文"
+lastPostBy:                 "中文"
+
+# Thread posts view.
+thread:                     "中文"
+posts:                      "中文"
+joined:                     "中文"
+
+# Forum creation view.
+createForum:                "中文"
+newForumHeading:            "中文"
+topic:                      "中文"
+
+# Thread creation view.
+addThread:                  "中文"
+newThreadHeading:           "中文"
+title:                      "中文"
+typeSomething:              "中文"
+
+# Post creation view.
+addPost:                    "中文"
+newPostHeading:             "中文"
+threadIdFormat:             "中文"
+post:                       "中文"
+
+# Page movement bar items.
+first:                      "中文"
+prev:                       "中文"
+of:                         "中文"
+next:                       "中文"
+last:                       "中文"
+
+# Status pages.
+forbidden:                  "中文"
+forbiddenHeading:           "中文"
+forbiddenNotice:            "中文"
+internalServerError:        "中文"
+internalServerErrorHeading: "中文"
+internalServerErrorNotice:  "中文"
+notFound:                   "中文"
+notFoundHeading:            "中文"
+notFoundNotice:             "中文"
+
+# User pages.
+users:                      "中文"
+unsetParen:                 "中文"
+
+# Special cases for various displays.
+noThreadsInForum:           "中文"
+noCategories:               "中文"
+noForumsInCategory:         "中文"
+
+# Invalid [x] status messages.
+invalidTitle1To300:         "中文"
+invalidContent1To10000:     "中文"
+invalidName1To100:          "中文"
+invalidTopic1To1000:        "中文"
+invalidEmail:               "中文"
+invalidUsername1To40:       "中文"
+invalidPassword8To1000:     "中文"
+
+
+# Other status messages.
+noPermissions:       "中文"
+successForum:               "中文"
+invalidUsernameOrPassword:  "中文"
+loginToContinue:            "中文"
+emailTaken:                 "中文"
+usernameTaken:              "中文"
+passwordConfirmFail:        "中文"
+successRegister:            "中文"

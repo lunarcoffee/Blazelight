@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes.statuses
 
+import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.features.StatusPages
@@ -9,14 +10,11 @@ import kotlinx.html.*
 
 fun StatusPages.Configuration.internalServerErrorStatus() {
     status(HttpStatusCode.InternalServerError) {
-        call.respondHtmlTemplate(HeaderBarTemplate("Internal Server Error", call)) {
+        call.respondHtmlTemplate(HeaderBarTemplate(s.internalServerError, call, s)) {
             content {
-                h3 { b { +"Internal server error:" } }
+                h3 { b { +s.internalServerErrorHeading } }
                 hr()
-                p {
-                    +"The remote server is currently experiencing a malfunction. "
-                    +"Please try again later."
-                }
+                p { +s.internalServerErrorNotice }
             }
         }
     }
