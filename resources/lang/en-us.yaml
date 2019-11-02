@@ -62,7 +62,7 @@ post:                       "Post"
 # Page movement bar items.
 first:                      "First"
 prev:                       "Prev"
-of:                         "Of"
+of:                         "of"
 next:                       "Next"
 last:                       "Last"
 
