@@ -97,7 +97,7 @@ invalidPassword8To1000:     "That password is invalid! It must be 8 to 1000 char
 
 
 # Other status messages.
-noPermissions:       "You don't have enough permissions to do that!"
+noPermissions:              "You don't have enough permissions to do that!"
 successForum:               "Success! Forum created."
 invalidUsernameOrPassword:  "Invalid username or password!"
 loginToContinue:            "Please login to continue."
