@@ -21,12 +21,9 @@ class HeadTemplate(
             title(content = "${BL_CONFIG.titleText} - $titleText")
             link(href = "/css/${BL_CONFIG.styles[style]}", rel = "stylesheet", type = "text/css")
 
-            if (s.languageCode == "zh-hans") {
-                link(
-                    href = "https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap",
-                    rel = "stylesheet"
-                )
-            }
+            // Add the language-specific font if it exists.
+            if (s.language.fontUrl != null)
+                link(href = s.language.fontUrl, rel = "stylesheet")
         }
         body { insert(body) }
     }
