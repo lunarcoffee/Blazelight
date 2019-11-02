@@ -13,7 +13,7 @@ video {
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Noto Sans SC', sans-serif;
     background: #e2e0f7;
     width: calc(100vw - 34px);
     padding-left: 17px;

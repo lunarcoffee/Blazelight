@@ -19,7 +19,7 @@ class HeaderBarTemplate(
     val content = Placeholder<HtmlBlockTag>()
 
     override fun HTML.apply() {
-        insert(HeadTemplate(titleText, call.sessions.get<UserSession>()?.getUser())) {
+        insert(HeadTemplate(titleText, call.sessions.get<UserSession>()?.getUser(), s)) {
             body {
                 div(classes = "header-bar") {
                     h1(classes = "header-bar-title") { +BL_CONFIG.headerBarText }

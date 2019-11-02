@@ -1,21 +1,21 @@
 languageCode:               "zh-hans"
 
 # Text on standalone buttons.
-create:                     "中文"
-newThread:                  "中文"
-newPost:                    "中文"
-settings:                   "中文"
-save:                       "中文"
-discard:                    "中文"
-register:                   "中文"
-login:                      "中文"
+create:                     "新"
+newThread:                  "新"
+newPost:                    "新"
+settings:                   "设置"
+save:                       "确定"
+discard:                    "取消"
+register:                   "注册"
+login:                      "登录"
 
 # Text on header bar (including buttons).
 home:                       "中文"
 forums:                     "中文"
 tools:                      "中文"
-myProfile:                  "中文"
-logOut:                     "中文"
+myProfile:                  "我"
+logOut:                     "登出"
 
 # Registration and login pages.
 registrationHeading:        "中文"
