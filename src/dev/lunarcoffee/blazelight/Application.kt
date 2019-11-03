@@ -19,6 +19,12 @@ import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
 import java.io.File
 
+// TODO: (entire project)
+//  - Improve profile functionality
+//  - Implement user deletion/modification
+//  - Implement friendly BBCode text box
+//  - Implement more BBCode functionality
+
 @KtorExperimentalAPI
 @Suppress("unused")
 fun Application.module() {
