@@ -1,15 +1,23 @@
 package dev.lunarcoffee.blazelight.site.std.bbcode
 
+import java.util.*
+
 // Reads BBCode formatting tokens from some raw post content.
 class BBCodeLexer(val text: String) {
     private var pos = 0
     private var curChar = text[pos]
+    private val peekReturnQueue: Queue<BBCodeToken> = LinkedList<BBCodeToken>()
 
     fun nextToken(prevIsBracket: Boolean = false): BBCodeToken {
+        if (peekReturnQueue.isNotEmpty())
+            return peekReturnQueue.poll()
+
         return if (prevIsBracket) {
             when (curChar) {
                 '/' -> {
-                    readNext() // Skip slash.
+                    // Skip slash.
+                    readNext()
+
                     val tagName = readWhile("""[^]]""".toRegex())
                     if (tagName in TAG_NAMES)
                         BcTCloseTag(tagName).also { readNext() }
@@ -26,12 +34,21 @@ class BBCodeLexer(val text: String) {
                     val tagArg = tagContent.substringAfter("=", "")
 
                     if (tagName in TAG_NAMES) {
-                        if (tagName == "url")
-                            // TODO: we need some kind of "peekToken" to see the next token
-                            BcTOpenTag(tagName, tagArg.ifEmpty { tagContent })
-                                .also { readNext() }
-                        else
+                        if (tagName == "url") {
+                            // Skip closing bracket.
+                            readNext()
+
+                            // Use tag content as URL if no argument is provided.
+                            val nextToken = peekToken()
+                            if (nextToken is BcTText)
+                                BcTOpenTag(tagName, tagArg.ifEmpty { nextToken.text })
+                            // If the next token wasn't a [BcTText], that is an invalid URL tag, so
+                            // just interpret it as some text.
+                            else
+                                BcTOpenTag(tagName, tagArg.ifEmpty { "a" })
+                        } else {
                             BcTOpenTag(tagName, tagArg.ifEmpty { null }).also { readNext() }
+                        }
                     } else {
                         BcTText("[$tagContent")
                     }
@@ -47,6 +64,12 @@ class BBCodeLexer(val text: String) {
                 else -> BcTText(readWhile("""[^\[]""".toRegex()))
             }
         }
+    }
+
+    private fun peekToken(prevIsBracket: Boolean = false): BBCodeToken {
+        val next = nextToken(prevIsBracket)
+        peekReturnQueue.add(next)
+        return next
     }
 
     private fun readWhile(regex: Regex): String {
