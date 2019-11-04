@@ -26,14 +26,29 @@ class BBCodeRenderer(private val rootTag: HtmlInlineTag) {
                 renderBBCodeByTokens()
             }
             "url" -> a(href = tag.arg, target = "_blank", classes = "u") { renderBBCodeByTokens() }
+            "email" -> a(href = "mailto:${tag.arg}", classes = "u") { renderBBCodeByTokens() }
+            "color" -> span {
+                style = "color: ${tag.arg.substringBefore(";")};"
+                renderBBCodeByTokens()
+            }
+            "size" -> span {
+                val coercedSize = tag.arg.toIntOrNull()?.coerceIn(20, 200) ?: 100
+                style = "font-size: $coercedSize%;"
+                renderBBCodeByTokens()
+            }
+            "code" -> span {
+                style = "font-family: monospace;"
+                renderBBCodeByTokens(true)
+            }
+            "img" -> img(src = tag.arg)
             else -> renderBBCodeByTokens()
         }
     }
 
-    private fun HtmlInlineTag.renderBBCodeByTokens() {
+    private fun HtmlInlineTag.renderBBCodeByTokens(preserveAllFormatting: Boolean = false) {
         while (index <= tokens.lastIndex) {
             when (val token = tokens[index]) {
-                is BcTText -> renderWithNewlines(token.text)
+                is BcTText -> renderWithNewlines(token.text, preserveAllFormatting)
                 is BcTOpenTag -> renderBBCodeTag(token)
                 is BcTCloseTag -> return
             }

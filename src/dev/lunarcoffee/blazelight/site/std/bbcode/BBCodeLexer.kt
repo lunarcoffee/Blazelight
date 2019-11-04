@@ -35,10 +35,10 @@ class BBCodeLexer(val text: String) {
 
                     if (tagName in TAG_NAMES) {
                         readNext()
-                        if (tagName == "url")
-                            urlTag(tagName, tagArg, tagContent)
+                        if (tagName in IMPLICIT_ARG_TAG_NAMES)
+                            implicitArgTag(tagName, tagArg, tagContent)
                         else
-                            BcTOpenTag(tagName, tagArg.ifEmpty { null })
+                            BcTOpenTag(tagName, tagArg)
                     } else {
                         BcTText("[$tagContent")
                     }
@@ -56,13 +56,18 @@ class BBCodeLexer(val text: String) {
         }
     }
 
-    private fun urlTag(tagName: String, tagArg: String, tagContent: String): BBCodeToken {
+    // An "implicit arg" tag is one which has an optional argument which can either be specified
+    // directly, or will be taken from the content within the tag. For instance, <url> is one such
+    // tag, where an argument can be provided (<url=url_here>click here</url>), or not
+    // (<url>url_here</url>, essentially converted to <url=url_here>url_here</url>).
+    private fun implicitArgTag(tagName: String, tagArg: String, tagContent: String): BBCodeToken {
         val textTokens = mutableListOf<BcTText>()
         var nextToken = peekToken()
 
-        // Gather all text until the closing URL tag is met. This allows for formatting tags like
-        // <b> or <i> to be applied to a part of a link while still maintaining the full URL.
-        while (nextToken !is BcTCloseTag || nextToken.name != "url") {
+        // Gather all text until the closing tag is met. This allows for formatting tags like <b>
+        // or <i> to be applied to a part of the display content while still maintaining the full
+        // implicit tag argument.
+        while (nextToken !is BcTCloseTag || nextToken.name != tagName) {
             if (nextToken is BcTText)
                 textTokens += nextToken
             else if (nextToken is BcTEof)
@@ -71,7 +76,10 @@ class BBCodeLexer(val text: String) {
         }
 
         val text = textTokens.joinToString("") { it.text }
-        return BcTOpenTag(tagName, tagArg.ifEmpty { text.ifEmpty { null } })
+        return if (text.isEmpty())
+            BcTText("[$tagContent][/$tagName]")
+        else
+            BcTOpenTag(tagName, tagArg.ifEmpty { text })
     }
 
     private fun peekToken(prevIsBracket: Boolean = false): BBCodeToken {
@@ -95,6 +103,18 @@ class BBCodeLexer(val text: String) {
     }
 
     companion object {
-        private val TAG_NAMES = setOf("b", "i", "u", "s", "url")
+        private val TAG_NAMES = setOf(
+            "b",
+            "i",
+            "u",
+            "s",
+            "url",
+            "email",
+            "color",
+            "size",
+            "code",
+            "img"
+        )
+        private val IMPLICIT_ARG_TAG_NAMES = setOf("url", "email", "img")
     }
 }

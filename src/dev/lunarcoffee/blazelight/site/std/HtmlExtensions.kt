@@ -22,10 +22,10 @@ fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) = textArea(rows = "8", 
     placeholder = s.typeSomething
 }
 
-fun HtmlInlineTag.renderWithNewlines(text: String) {
+fun HtmlInlineTag.renderWithNewlines(text: String, preserveAllFormatting: Boolean = false) {
     val split = text.split("\n")
     for ((index, line) in split.withIndex()) {
-        +line
+        +if (preserveAllFormatting) line.replace(" ", "\u00A0") else line
         if (index != split.lastIndex)
             br()
     }
