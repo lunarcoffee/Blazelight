@@ -369,6 +369,19 @@ h2, h3 {
     filter: brightness(110%);
 }
 
+.post-index {
+    line-height: 20px;
+}
+
+.u {
+    color: #396fc8;
+    text-decoration: none;
+}
+
+.u:hover {
+    text-decoration: underline;
+}
+
 .bc-a {
     font-size: 0.8rem;
 }

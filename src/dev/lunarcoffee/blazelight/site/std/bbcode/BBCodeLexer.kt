@@ -8,8 +8,8 @@ class BBCodeLexer(val text: String) {
     private var curChar = text[pos]
     private val peekReturnQueue: Queue<BBCodeToken> = LinkedList<BBCodeToken>()
 
-    fun nextToken(prevIsBracket: Boolean = false): BBCodeToken {
-        if (peekReturnQueue.isNotEmpty())
+    fun nextToken(prevIsBracket: Boolean = false, skipQueue: Boolean = false): BBCodeToken {
+        if (!skipQueue && peekReturnQueue.isNotEmpty())
             return peekReturnQueue.poll()
 
         return if (prevIsBracket) {
@@ -34,21 +34,11 @@ class BBCodeLexer(val text: String) {
                     val tagArg = tagContent.substringAfter("=", "")
 
                     if (tagName in TAG_NAMES) {
-                        if (tagName == "url") {
-                            // Skip closing bracket.
-                            readNext()
-
-                            // Use tag content as URL if no argument is provided.
-                            val nextToken = peekToken()
-                            if (nextToken is BcTText)
-                                BcTOpenTag(tagName, tagArg.ifEmpty { nextToken.text })
-                            // If the next token wasn't a [BcTText], that is an invalid URL tag, so
-                            // just interpret it as some text.
-                            else
-                                BcTOpenTag(tagName, tagArg.ifEmpty { "a" })
-                        } else {
-                            BcTOpenTag(tagName, tagArg.ifEmpty { null }).also { readNext() }
-                        }
+                        readNext()
+                        if (tagName == "url")
+                            urlTag(tagName, tagArg, tagContent)
+                        else
+                            BcTOpenTag(tagName, tagArg.ifEmpty { null })
                     } else {
                         BcTText("[$tagContent")
                     }
@@ -58,7 +48,7 @@ class BBCodeLexer(val text: String) {
             when (curChar) {
                 '[' -> {
                     readNext()
-                    nextToken(true)
+                    nextToken(true, skipQueue)
                 }
                 '\u0000' -> BcTEof
                 else -> BcTText(readWhile("""[^\[]""".toRegex()))
@@ -66,8 +56,26 @@ class BBCodeLexer(val text: String) {
         }
     }
 
+    private fun urlTag(tagName: String, tagArg: String, tagContent: String): BBCodeToken {
+        val textTokens = mutableListOf<BcTText>()
+        var nextToken = peekToken()
+
+        // Gather all text until the closing URL tag is met. This allows for formatting tags like
+        // <b> or <i> to be applied to a part of a link while still maintaining the full URL.
+        while (nextToken !is BcTCloseTag || nextToken.name != "url") {
+            if (nextToken is BcTText)
+                textTokens += nextToken
+            else if (nextToken is BcTEof)
+                return BcTText("[$tagContent]")
+            nextToken = peekToken()
+        }
+
+        val text = textTokens.joinToString("") { it.text }
+        return BcTOpenTag(tagName, tagArg.ifEmpty { text.ifEmpty { null } })
+    }
+
     private fun peekToken(prevIsBracket: Boolean = false): BBCodeToken {
-        val next = nextToken(prevIsBracket)
+        val next = nextToken(prevIsBracket, true)
         peekReturnQueue.add(next)
         return next
     }

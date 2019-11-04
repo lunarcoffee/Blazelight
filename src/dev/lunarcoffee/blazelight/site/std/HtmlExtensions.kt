@@ -24,9 +24,9 @@ fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) = textArea(rows = "8", 
 
 fun HtmlInlineTag.renderWithNewlines(text: String) {
     val split = text.split("\n")
-    for (line in split) {
+    for ((index, line) in split.withIndex()) {
         +line
-        if (split.size != 1)
+        if (index != split.lastIndex)
             br()
     }
 }

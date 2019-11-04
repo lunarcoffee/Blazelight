@@ -87,7 +87,8 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                         div {
                             i(classes = "thread-l forum-topic") {
                                 +comment.creationTime.toTimeDisplay(user)
-                                span(classes = "float-r") { +"#${index + 1}" }
+                                val postNumber = page * BL_CONFIG.commentPageSize + index + 1
+                                span(classes = "float-r post-index") { +"#$postNumber" }
                             }
                             br()
                             hr(classes = "hr-dot cdv")

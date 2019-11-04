@@ -25,7 +25,7 @@ class BBCodeRenderer(private val rootTag: HtmlInlineTag) {
                 style = "text-decoration: line-through;"
                 renderBBCodeByTokens()
             }
-            "url" -> a(href = tag.arg) { renderBBCodeByTokens() }
+            "url" -> a(href = tag.arg, target = "_blank", classes = "u") { renderBBCodeByTokens() }
             else -> renderBBCodeByTokens()
         }
     }
