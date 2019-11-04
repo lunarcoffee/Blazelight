@@ -63,21 +63,24 @@ class BBCodeLexer(val text: String) {
     private fun implicitArgTag(tagName: String, tagArg: String, tagContent: String): BBCodeToken {
         val textTokens = mutableListOf<BcTText>()
         var nextToken = peekToken()
+        var imageInUrl = false
 
         // Gather all text until the closing tag is met. This allows for formatting tags like <b>
         // or <i> to be applied to a part of the display content while still maintaining the full
         // implicit tag argument.
         while (nextToken !is BcTCloseTag || nextToken.name != tagName) {
-            if (nextToken is BcTText)
-                textTokens += nextToken
-            else if (nextToken is BcTEof)
-                return BcTText("[$tagContent]")
+            when (nextToken) {
+                is BcTText -> textTokens += nextToken
+                is BcTEof -> return BcTText("[$tagContent]")
+                is BcTOpenTag -> if (nextToken.name == "img")
+                    imageInUrl = tagName == "url"
+            }
             nextToken = peekToken()
         }
 
         val text = textTokens.joinToString("") { it.text }
         return if (text.isEmpty())
-            BcTText("[$tagContent][/$tagName]")
+            if (imageInUrl) BcTOpenTag(tagName, tagArg) else BcTText("[$tagContent][/$tagName]")
         else
             BcTOpenTag(tagName, tagArg.ifEmpty { text })
     }
