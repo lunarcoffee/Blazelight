@@ -29,7 +29,7 @@ class BBCodeRenderer(private val rootTag: HtmlBlockInlineTag, private val s: Loc
                 style = "font-size: $coercedSize%;"
                 renderByTokens(preserveFormatting)
             }
-            "code" -> code { renderByTokens(true) }
+            "code" -> div(classes = "code comment-text") { code { renderByTokens(true) } }
             "url" -> a(href = tag.arg, target = "_blank", classes = "u") {
                 renderByTokens(preserveFormatting)
             }

@@ -26,8 +26,14 @@ hr {
 }
 
 code {
-    background: #eee;
-    border: solid 1px #d8d8d8;
+
+}
+
+.code {
+    background: #f8f4ff;
+    border: solid 1px #e4e2f2;
+    padding: 8px;
+    margin-bottom: 6px;
 }
 
 blockquote {
@@ -48,7 +54,7 @@ h2, h3 {
 }
 
 .px {
-    line-height: 24px;
+    line-height: 23px;
 }
 
 .header-bar {
