@@ -25,10 +25,6 @@ hr {
     background: #bbb;
 }
 
-code {
-
-}
-
 .code {
     background: #f8f4ff;
     border: solid 1px #e4e2f2;
@@ -315,6 +311,10 @@ h2, h3 {
 .page-numbers {
     margin-top: -21px;
     float: right;
+}
+
+.bottom-page-numbers {
+    margin-top: -1px;
 }
 
 .category {

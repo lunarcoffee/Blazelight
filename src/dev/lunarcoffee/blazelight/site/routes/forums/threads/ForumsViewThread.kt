@@ -97,10 +97,11 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                 }
             }
 
-            padding(12)
+            padding(6)
             a(href = "/forums/view/${forum.id}/${thread.id}/add", classes = "button-1") {
                 +s.newPost
             }
+            div(classes = "bottom-page-numbers") { pageNumbers(page, pageCount, call, s) }
             padding(8)
         }
     }
