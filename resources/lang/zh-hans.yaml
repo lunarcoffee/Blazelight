@@ -41,6 +41,7 @@ lastPostBy:                 "中文"
 thread:                     "中文"
 posts:                      "中文"
 joined:                     "中文"
+said:                       "说"
 
 # Forum creation view.
 createForum:                "中文"
@@ -97,7 +98,7 @@ invalidPassword8To1000:     "中文"
 
 
 # Other status messages.
-noPermissions:       "中文"
+noPermissions:              "中文"
 successForum:               "中文"
 invalidUsernameOrPassword:  "中文"
 loginToContinue:            "中文"

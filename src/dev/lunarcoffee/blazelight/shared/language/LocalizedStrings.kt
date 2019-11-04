@@ -39,6 +39,7 @@ class LocalizedStrings {
     lateinit var thread: String
     lateinit var posts: String
     lateinit var joined: String
+    lateinit var said: String
 
     lateinit var createForum: String
     lateinit var newForumHeading: String

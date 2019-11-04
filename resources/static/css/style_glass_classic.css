@@ -25,6 +25,18 @@ hr {
     background: #bbb;
 }
 
+code {
+    background: #eee;
+    border: solid 1px #d8d8d8;
+}
+
+blockquote {
+    background: #eee;
+    border: solid 1px #d8d8d8;
+    padding: 4px 8px 8px 8px;
+    margin-bottom: 6px;
+}
+
 .hr-dot {
     border: none;
     border-top: 1px dotted #bbb;
@@ -33,6 +45,10 @@ hr {
 
 h2, h3 {
     font-weight: normal;
+}
+
+.px {
+    line-height: 24px;
 }
 
 .header-bar {

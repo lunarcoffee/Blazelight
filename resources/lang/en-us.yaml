@@ -41,6 +41,7 @@ lastPostBy:                 "Last post by "
 thread:                     "Thread"
 posts:                      "Posts"
 joined:                     "Joined"
+said:                       "said"
 
 # Forum creation view.
 createForum:                "Create Forum"

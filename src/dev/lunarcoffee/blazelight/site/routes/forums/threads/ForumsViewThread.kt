@@ -81,7 +81,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                 b { +thread.title }
                                 padding(6)
                             }
-                            p(classes = "comment-text") { renderWithBBCode(comment.contentRaw) }
+                            p(classes = "comment-text") { renderWithBBCode(comment.contentRaw, s) }
                             padding(5)
                         }
                         div {
