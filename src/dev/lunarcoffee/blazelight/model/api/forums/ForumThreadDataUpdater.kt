@@ -10,13 +10,21 @@ import org.litote.kmongo.setValue
 object ForumThreadDataUpdater {
     suspend fun addThread(threadId: Long, forumId: Long) {
         val newThreadIds = forumId.getForum()!!.threadIds + threadId
-        Database.forumCol.updateOne(
-            Forum::id eq forumId,
-            setValue(Forum::threadIds, newThreadIds)
-        )
+        forumId.updateDbThreadIds(newThreadIds)
+
         ForumCache.reloadFromDb(forumId)
         UserThreadDataUpdater.addThread(threadId, threadId.getThread()!!.authorId)
     }
 
-    suspend fun deleteThread(): Nothing = throw NotImplementedError()
+    suspend fun deleteThread(threadId: Long, forumId: Long, authorId: Long) {
+        val newThreadIds = forumId.getForum()!!.threadIds - threadId
+        forumId.updateDbThreadIds(newThreadIds)
+
+        ForumCache.reloadFromDb(forumId)
+        UserThreadDataUpdater.deleteThread(threadId, authorId)
+    }
+
+    private suspend fun Long.updateDbThreadIds(newThreadIds: List<Long>) {
+        Database.forumCol.updateOne(Forum::id eq this, setValue(Forum::threadIds, newThreadIds))
+    }
 }

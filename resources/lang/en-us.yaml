@@ -1,5 +1,8 @@
 languageCode:               "en-us"
 
+# Standalone phrases.
+apoS:                       "'s"
+
 # Text on standalone buttons.
 create:                     "Create"
 newThread:                  "New Thread"
@@ -44,14 +47,23 @@ joined:                     "Joined"
 said:                       "said"
 delete:                     "Delete"
 forceDelete:                "Force Delete"
+deleteThread:               "Delete Thread"
+forceDeleteThread:          "Force Delete Thread"
+your:                       "your"
 
 # Thread post delete view.
 deletePostCap:              "Delete Post"
 forceDeletePostCap:         "Force Delete Post"
 deletePost:                 "Delete post "
 forceDeletePost:            "Force delete post "
-deleteConfirmMessage:       "Are you sure you want to delete %0 post?"
+deleteConfirmMessage:       "Are you sure you want to delete %0 post? This action cannot be undone."
 cancel:                     "Cancel"
+
+# Thread delete view.
+deleteThreadTitle:          "Delete thread "
+forceDeleteThreadTitle:     "Force delete thread "
+deleteThreadConfirmMessage: "Are you sure you want to delete %0 thread? This action cannot be undone, and"
+deleteThreadConfirmBold:    " deletes the entire thread."
 
 # Forum creation view.
 createForum:                "Create Forum"

@@ -5,14 +5,12 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.shared.language.prep
 import dev.lunarcoffee.blazelight.shared.language.s
+import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
-import dev.lunarcoffee.blazelight.site.std.formattedTextInput
-import dev.lunarcoffee.blazelight.site.std.textOrEllipsis
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.path
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
@@ -49,7 +47,7 @@ fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
                 +":"
             }
             hr()
-            form(action = call.request.path(), method = FormMethod.post) {
+            form(action = call.path, method = FormMethod.post) {
                 formattedTextInput(s)
                 hr()
                 input(type = InputType.submit, classes = "button-1") { value = s.post }

@@ -14,7 +14,11 @@ object UserThreadDataUpdater {
         UserCache.cacheFromDB(userId)
     }
 
-    suspend fun deleteThread(): Nothing = throw NotImplementedError()
+    suspend fun deleteThread(threadId: Long, userId: Long) {
+        val newThreadIds = userId.getUser()!!.threadIds - threadId
+        userId.updateDbUserThreadIds(newThreadIds)
+        UserCache.cacheFromDB(userId)
+    }
 
     private suspend fun Long.updateDbUserThreadIds(newThreadIds: List<Long>) {
         Database.userCol.updateOne(User::id eq this, setValue(User::threadIds, newThreadIds))

@@ -14,7 +14,6 @@ import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.path
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -92,17 +91,26 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                 span(classes = "float-r post-index") {
                                     val selfDeleting = author.id == user?.id
                                     if (selfDeleting || user?.isAdmin == true) {
-                                        a(
-                                            href = "${call.request.path()}/${comment.id}/delete",
-                                            classes = "a2 pa"
-                                        ) {
-                                            +if (selfDeleting) s.delete else s.forceDelete
+                                        if (index == 0) {
+                                            a(href = "${call.path}/delete", classes = "a2 pa") {
+                                                +if (selfDeleting)
+                                                    s.deleteThread
+                                                else
+                                                    s.forceDeleteThread
+                                            }
+                                        } else {
+                                            a(
+                                                href = "${call.path}/${comment.id}/delete",
+                                                classes = "a2 pa"
+                                            ) {
+                                                +if (selfDeleting) s.delete else s.forceDelete
+                                            }
                                         }
                                     }
 
                                     // Post number of the thread.
-                                    val postNumber = page * BL_CONFIG.commentPageSize + index + 1
-                                    +"#$postNumber"
+                                    val number = page * BL_CONFIG.commentPageSize + index + 1
+                                    +"#$number"
                                 }
                             }
                             br()

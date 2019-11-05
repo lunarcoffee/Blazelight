@@ -8,6 +8,7 @@ import kotlinx.html.*
 
 fun String.textOrEllipsis(limit: Int) = take(limit) + if (length > limit) "..." else ""
 fun HtmlBlockTag.padding(height: Int) = div { style = "height: ${height}px;" }
+val ApplicationCall.path get() = request.path()
 
 fun HtmlBlockInlineTag.renderWithBBCode(text: String, s: LocalizedStrings) {
     BBCodeRenderer(this, s).render(text)
@@ -46,29 +47,29 @@ fun HtmlBlockTag.pageNumbers(
             for (index in 0 until pageCount) {
                 // [padding] ensures there is no extra padding on the last element.
                 val padding = if (index < pageCount - 1) "a-page" else ""
-                a(href = "${call.request.path()}?p=$index", classes = "a2 $padding") {
+                a(href = "${call.path}?p=$index", classes = "a2 $padding") {
                     +if (index == page) "(${(index + 1)})" else (index + 1).toString()
                 }
             }
         } else {
             if (page > 0) {
                 // First and previous page buttons.
-                a(href = call.request.path(), classes = "a2 a-page") { +s.first }
-                a(href = "${call.request.path()}?p=${page - 1}", classes = "a2 a-page") { +s.prev }
+                a(href = call.path, classes = "a2 a-page") { +s.first }
+                a(href = "${call.path}?p=${page - 1}", classes = "a2 a-page") { +s.prev }
             }
             // Current page button/indicator.
             a(classes = "a2 a-page cursor-hand") {
                 onClick = """
                     var page = parseInt(prompt("Enter the page to go to.", "${page + 1}"));
-                    window.location.href = "${call.request.path()}?p=" + (page - 1);
+                    window.location.href = "${call.path}?p=" + (page - 1);
                 """
                 +"(${page + 1} ${s.of} $pageCount)"
             }
             if (page < pageCount - 1) {
                 // Next and last page buttons.
-                a(href = "${call.request.path()}?p=${page + 1}", classes = "a2 a-page") { +s.next }
+                a(href = "${call.path}?p=${page + 1}", classes = "a2 a-page") { +s.next }
                 val last = pageCount - 1
-                a(href = "${call.request.path()}?p=$last", classes = "a2") { +s.last }
+                a(href = "${call.path}?p=$last", classes = "a2") { +s.last }
             }
         }
     }

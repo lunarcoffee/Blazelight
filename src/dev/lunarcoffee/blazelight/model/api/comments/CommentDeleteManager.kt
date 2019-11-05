@@ -10,7 +10,6 @@ object CommentDeleteManager {
         CommentCache.comments.removeIf { it.id == comment.id }
         Database.commentCol.deleteOne(Comment::id eq comment.id)
 
-        // This call will begin propagating the reloading of in-memory data.
         ThreadCommentDataUpdater.deleteComment(comment.id, threadId, comment.authorId)
     }
 }

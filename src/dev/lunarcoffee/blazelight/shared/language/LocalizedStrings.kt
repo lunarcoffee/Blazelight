@@ -4,6 +4,8 @@ class LocalizedStrings {
     lateinit var languageCode: String
     val language: Language by lazy { LanguageManager.toLanguage(languageCode) }
 
+    lateinit var apoS: String
+
     lateinit var create: String
     lateinit var newThread: String
     lateinit var newPost: String
@@ -42,6 +44,9 @@ class LocalizedStrings {
     lateinit var said: String
     lateinit var delete: String
     lateinit var forceDelete: String
+    lateinit var deleteThread: String
+    lateinit var forceDeleteThread: String
+    lateinit var your: String
 
     lateinit var deletePostCap: String
     lateinit var forceDeletePostCap: String
@@ -49,6 +54,11 @@ class LocalizedStrings {
     lateinit var forceDeletePost: String
     lateinit var deleteConfirmMessage: String
     lateinit var cancel: String
+
+    lateinit var deleteThreadTitle: String
+    lateinit var forceDeleteThreadTitle: String
+    lateinit var deleteThreadConfirmMessage: String
+    lateinit var deleteThreadConfirmBold: String
 
     lateinit var createForum: String
     lateinit var newForumHeading: String

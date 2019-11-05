@@ -21,8 +21,6 @@ import java.io.File
 
 // TODO: (entire project)
 //  - Improve profile functionality
-//  - Implement user deletion/modification
-//  - Refactor *Managers perhaps into *AddManager, *DeleteManager, *EditManager
 //  - Implement friendly BBCode text box
 
 @KtorExperimentalAPI
@@ -109,6 +107,8 @@ fun Application.configRouting() {
 
             forumsViewThreadDelete()
             forumsViewThreadDeleteGo()
+            forumsViewThreadCommentDelete()
+            forumsViewThreadCommentDeleteGo()
         }
 
         homeRoute()
