@@ -42,6 +42,16 @@ thread:                     "Thread"
 posts:                      "Posts"
 joined:                     "Joined"
 said:                       "said"
+delete:                     "Delete"
+forceDelete:                "Force Delete"
+
+# Thread post delete view.
+deletePostCap:              "Delete Post"
+forceDeletePostCap:         "Force Delete Post"
+deletePost:                 "Delete post "
+forceDeletePost:            "Force delete post "
+deleteConfirmMessage:       "Are you sure you want to delete %0 post?"
+cancel:                     "Cancel"
 
 # Forum creation view.
 createForum:                "Create Forum"
@@ -57,7 +67,7 @@ typeSomething:              "Type something..."
 # Post creation view.
 addPost:                    "Add Post"
 newPostHeading:             "Post to thread "
-threadIdFormat:             "#%0"
+entityIdFormat:             "#%0"
 post:                       "Post"
 
 # Page movement bar items.
@@ -95,7 +105,6 @@ invalidTopic1To1000:        "That topic is invalid! It must be 1 to 1000 charact
 invalidEmail:               "That email is invalid!"
 invalidUsername1To40:       "That username is invalid! It must be at most 40 characters long (inclusive)."
 invalidPassword8To1000:     "That password is invalid! It must be 8 to 1000 characters long (inclusive)."
-
 
 # Other status messages.
 noPermissions:              "You don't have enough permissions to do that!"

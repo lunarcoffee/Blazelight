@@ -1,6 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes.forums
 
-import dev.lunarcoffee.blazelight.model.api.categories.CategoryManager
+import dev.lunarcoffee.blazelight.model.api.categories.CategoryCache
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.s
@@ -20,7 +20,7 @@ import kotlinx.html.*
 fun Routing.forumsRoute() = get("/forums/{category?}") {
     val specialMessages = listOf(s.invalidName1To100, s.noPermissions, s.successForum)
 
-    val categories = CategoryManager.categories
+    val categories = CategoryCache.categories
     val messageIndex = call.parameters["a"]?.toIntOrNull()
 
     val user = call.sessions.get<UserSession>()?.getUser()

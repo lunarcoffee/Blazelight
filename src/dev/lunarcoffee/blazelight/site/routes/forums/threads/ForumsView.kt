@@ -90,7 +90,7 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 }
             }
 
-            padding(6)
+            padding(if (forum.threadIds.isEmpty()) 12 else 6)
             a(href = "/forums/view/${forum.id}/add", classes = "button-1") { +s.newThread }
             div(classes = "bottom-page-numbers") { pageNumbers(page, pageCount, call, s) }
             padding(8)

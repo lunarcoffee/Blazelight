@@ -1,7 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
-import dev.lunarcoffee.blazelight.model.api.comments.CommentAddResult
-import dev.lunarcoffee.blazelight.model.api.comments.CommentManager
+import dev.lunarcoffee.blazelight.model.api.comments.*
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.model.internal.forums.UserComment
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -22,7 +21,7 @@ fun Route.forumsViewThreadAddPost() = post("/forums/view/{forumId}/{threadId}/ad
     val user = call.sessions.get<UserSession>()!!.getUser()!!
 
     val comment = UserComment(content, user.id)
-    if (CommentManager.add(comment, threadId) == CommentAddResult.INVALID_CONTENT)
+    if (CommentAddManager.add(comment, threadId) == CommentAddResult.INVALID_CONTENT)
         call.respondRedirect("/forums/view/$forumId/$threadId/add?a=0")
     else
         call.respondRedirect("/forums/view/$forumId/$threadId")

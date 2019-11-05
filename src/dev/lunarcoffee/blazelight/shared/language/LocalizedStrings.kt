@@ -40,6 +40,15 @@ class LocalizedStrings {
     lateinit var posts: String
     lateinit var joined: String
     lateinit var said: String
+    lateinit var delete: String
+    lateinit var forceDelete: String
+
+    lateinit var deletePostCap: String
+    lateinit var forceDeletePostCap: String
+    lateinit var deletePost: String
+    lateinit var forceDeletePost: String
+    lateinit var deleteConfirmMessage: String
+    lateinit var cancel: String
 
     lateinit var createForum: String
     lateinit var newForumHeading: String
@@ -52,7 +61,7 @@ class LocalizedStrings {
 
     lateinit var addPost: String
     lateinit var newPostHeading: String
-    lateinit var threadIdFormat: String
+    lateinit var entityIdFormat: String
     lateinit var post: String
 
     lateinit var first: String

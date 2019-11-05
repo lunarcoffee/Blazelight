@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.model.api.users
+package dev.lunarcoffee.blazelight.model.api.users.registrar
 
 sealed class UserLoginResult
 

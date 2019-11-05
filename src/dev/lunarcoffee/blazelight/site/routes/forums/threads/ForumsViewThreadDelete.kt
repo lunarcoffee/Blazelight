@@ -1,12 +1,15 @@
 package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
+import dev.lunarcoffee.blazelight.model.api.comments.getComment
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
+import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.prep
 import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
-import dev.lunarcoffee.blazelight.site.std.formattedTextInput
+import dev.lunarcoffee.blazelight.site.std.padding
+import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.std.textOrEllipsis
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -16,18 +19,29 @@ import io.ktor.request.path
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
+fun Route.forumsViewThreadDelete() = get("/forums/view/{forumId}/{threadId}/{commentId}/delete") {
     val params = call.parameters
 
-    val messageIndex = params["a"]?.toIntOrNull()
+    val user = call.sessions.get<UserSession>()!!.getUser()!!
+    val comment = params["commentId"]?.toLongOrNull()?.getComment()
+        ?: return@get call.respond(HttpStatusCode.NotFound)
+    val selfDeleting = user.id == comment.authorId
+
+    // Ensure that the deleter is the comment's author, or is an administrator.
+    if (!selfDeleting && !user.isAdmin)
+        return@get call.respond(HttpStatusCode.Forbidden)
+
     val forum = params["forumId"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
     val thread = params["threadId"]?.toLongOrNull()?.getThread()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
-    val template = HeaderBarTemplate("${s.thread} - ${thread.id} - ${s.addPost}", call, s)
+    val pageTitle = if (selfDeleting) s.deletePostCap else s.forceDeletePostCap
+    val template = HeaderBarTemplate("${s.thread} - ${thread.id} - $pageTitle", call, s)
     call.respondHtmlTemplate(template) {
         content {
             breadcrumbs {
@@ -39,27 +53,22 @@ fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
                     "/forums/view/${forum.id}/${thread.id}",
                     "Thread: ${thread.title.textOrEllipsis(60)}"
                 )
-                thisCrumb(call, s.addPost)
+                thisCrumb(call, "Delete Post")
             }
             br()
 
             h3 {
-                +s.newPostHeading
-                b { +s.entityIdFormat.prep(thread.id) }
+                +if (selfDeleting) s.deletePost else s.forceDeletePost
+                b { +"#${comment.id}" }
                 +":"
             }
             hr()
-            form(action = call.request.path(), method = FormMethod.post) {
-                formattedTextInput(s)
-                hr()
-                input(type = InputType.submit, classes = "button-1") { value = s.post }
+            p { +s.deleteConfirmMessage.prep(if (selfDeleting) "your" else "${user.username}'s") }
 
-                // This message will be displayed upon a special thread creation event.
-                if (messageIndex == 0)
-                    span(classes = "red") { +s.invalidContent1To10000 }
-            }
-
-            // TODO: Attachments, emotes, thread icon.
+            padding(20)
+            a(href = "${call.request.path()}/go", classes = "button-1") { +s.delete }
+            a(href = "/forums/view/${forum.id}/${thread.id}", classes = "button-1") { +s.cancel }
+            padding(8)
         }
     }
 }

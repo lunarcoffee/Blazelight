@@ -43,6 +43,13 @@ posts:                      "中文"
 joined:                     "中文"
 said:                       "说"
 
+# Thread post delete view.
+deletePostCap:              "中文"
+forceDeletePostCap:         "中文"
+deletePost:                 "中文"
+deleteConfirmMessage:       "中文"
+cancel:                     "中文"
+
 # Forum creation view.
 createForum:                "中文"
 newForumHeading:            "中文"
@@ -57,7 +64,7 @@ typeSomething:              "中文"
 # Post creation view.
 addPost:                    "中文"
 newPostHeading:             "中文"
-threadIdFormat:             "中文"
+entityIdFormat:             "中%0文"
 post:                       "中文"
 
 # Page movement bar items.

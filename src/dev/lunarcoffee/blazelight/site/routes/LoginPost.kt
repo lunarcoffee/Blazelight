@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.model.api.users.UserLoginSuccess
-import dev.lunarcoffee.blazelight.model.api.users.UserRegistrar
+import dev.lunarcoffee.blazelight.model.api.users.registrar.UserLoginManager
+import dev.lunarcoffee.blazelight.model.api.users.registrar.UserLoginSuccess
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.call
 import io.ktor.request.receiveParameters
@@ -17,7 +17,7 @@ fun Routing.loginPostRoute() = post("/login") {
     val username = params["username"]!!
     val password = params["password"]!!
 
-    val loginResult = UserRegistrar.tryLogin(username, password)
+    val loginResult = UserLoginManager.tryLogin(username, password)
     if (loginResult is UserLoginSuccess) {
         call.sessions.set(UserSession(loginResult.id))
         call.respondRedirect("/")

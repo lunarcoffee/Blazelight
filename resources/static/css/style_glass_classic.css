@@ -304,6 +304,10 @@ h2, h3 {
     text-decoration: red underline;
 }
 
+.pa {
+    margin-right: 15px;
+}
+
 .green {
     color: #29a829;
 }

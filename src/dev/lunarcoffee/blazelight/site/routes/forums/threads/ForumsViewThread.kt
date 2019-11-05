@@ -14,6 +14,7 @@ import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.http.HttpStatusCode
+import io.ktor.request.path
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -24,6 +25,7 @@ import kotlin.math.ceil
 
 fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
     val params = call.parameters
+
     val forum = params["forumId"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
     val thread = params["threadId"]?.toLongOrNull()?.getThread()
@@ -46,7 +48,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                 crumb("/forums", s.forums)
                 crumb("/forums/${category.name}#${category.name}", category.name)
                 crumb("/forums/view/${forum.id}", forum.name)
-                thisCrumb(call, thread.title.textOrEllipsis(60))
+                thisCrumb(call, "Thread: ${thread.title.textOrEllipsis(60)}")
             }
             br()
 
@@ -87,8 +89,21 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                         div {
                             i(classes = "thread-l forum-topic") {
                                 +comment.creationTime.toTimeDisplay(user)
-                                val postNumber = page * BL_CONFIG.commentPageSize + index + 1
-                                span(classes = "float-r post-index") { +"#$postNumber" }
+                                span(classes = "float-r post-index") {
+                                    val selfDeleting = author.id == user?.id
+                                    if (selfDeleting || user?.isAdmin == true) {
+                                        a(
+                                            href = "${call.request.path()}/${comment.id}/delete",
+                                            classes = "a2 pa"
+                                        ) {
+                                            +if (selfDeleting) s.delete else s.forceDelete
+                                        }
+                                    }
+
+                                    // Post number of the thread.
+                                    val postNumber = page * BL_CONFIG.commentPageSize + index + 1
+                                    +"#$postNumber"
+                                }
                             }
                             br()
                             hr(classes = "hr-dot cdv")
