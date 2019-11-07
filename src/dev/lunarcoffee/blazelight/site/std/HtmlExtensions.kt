@@ -25,6 +25,10 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
     }
 }
 
+fun HtmlBlockTag.deleteButton(url: String, alt: String) {
+    a(href = url, classes = "b-img-b") { img(alt = alt, src = "/img/x-red.png", classes = "b-x") }
+}
+
 fun HtmlInlineTag.renderWithNewlines(text: String, preserveAllFormatting: Boolean = false) {
     val split = text.split("\n")
     for ((index, line) in split.withIndex()) {

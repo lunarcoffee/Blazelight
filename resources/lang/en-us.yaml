@@ -34,6 +34,7 @@ languageParen:              "(language)"
 newCategoryHeading:         "Create a new forum category:"
 name:                       "Name"
 newForum:                   "New Forum"
+deleteForum:                "Delete Forum"
 
 # Time items.
 startedBy:                  "Thread started by "
@@ -62,7 +63,7 @@ cancel:                     "Cancel"
 # Thread delete view.
 deleteThreadTitle:          "Delete thread "
 forceDeleteThreadTitle:     "Force delete thread "
-deleteThreadConfirmMessage: "Are you sure you want to delete %0 thread? This action cannot be undone, and"
+deleteThreadConfirmMessage: "Are you sure you want to force delete %0 thread? This action cannot be undone, and"
 deleteThreadConfirmBold:    " deletes the entire thread."
 
 # Forum creation view.

@@ -33,6 +33,7 @@ class LocalizedStrings {
     lateinit var newCategoryHeading: String
     lateinit var name: String
     lateinit var newForum: String
+    lateinit var deleteForum: String
 
     lateinit var startedBy: String
     lateinit var lastPostBy: String

@@ -23,6 +23,7 @@ import kotlinx.html.*
 import kotlin.math.ceil
 
 fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
+    val user = call.sessions.get<UserSession>()?.getUser()
     val params = call.parameters
 
     val forum = params["forumId"]?.toLongOrNull()?.getForum()
@@ -54,12 +55,14 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             h3 {
                 b { +s.thread }
                 plusButton("/forums/view/${forum.id}/${thread.id}/add", s.newPost)
+
+                if (user?.isAdmin == true || user?.id == thread.authorId)
+                    deleteButton("/forums/view/${forum.id}/${thread.id}/delete", s.deletePostCap)
             }
             pageNumbers(page, pageCount, call, s)
             hr()
             padding(4)
 
-            val user = call.sessions.get<UserSession>()?.getUser()
             for ((index, commentId) in commentPage.withIndex()) {
                 val comment = commentId.getComment()!!
                 val author = comment.authorId.getUser()!!

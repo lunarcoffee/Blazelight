@@ -22,6 +22,7 @@ import kotlinx.html.*
 import kotlin.math.ceil
 
 fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
+    val user = call.sessions.get<UserSession>()?.getUser()
     val forum = call.parameters["id"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
@@ -48,6 +49,9 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
             h3(classes = "title") {
                 b { +forum.name }
                 plusButton("/forums/view/${forum.id}/add", s.newThread)
+
+                if (user?.isAdmin == true)
+                    deleteButton("/forums/view/${forum.id}/delete", s.deleteForum)
             }
             pageNumbers(page, pageCount, call, s)
             hr()

@@ -383,7 +383,11 @@ h2, h3 {
 }
 
 .b-img-a {
-    padding-left: 9px;
+    padding-left: 14px;
+}
+
+.b-img-b {
+    padding-left: 10px;
 }
 
 .b-plus {
@@ -393,6 +397,16 @@ h2, h3 {
 
 .b-plus:hover {
     filter: brightness(110%);
+}
+
+.b-x {
+    height: 12px;
+    padding-bottom: 1px;
+    filter: brightness(115%);
+}
+
+.b-x:hover {
+    filter: brightness(150%);
 }
 
 .post-index {

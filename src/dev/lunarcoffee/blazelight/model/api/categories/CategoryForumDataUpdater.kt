@@ -11,12 +11,22 @@ object CategoryForumDataUpdater {
         val category = forum.categoryId.getCategory() ?: return
         val newForums = category.forumIds + forum.id
 
-        Database.categoryCol.updateOne(
-            Category::id eq category.id,
-            setValue(Category::forumIds, newForums)
-        )
+        forum.id.updateDbForumIds(newForums)
         CategoryCache.reloadFromDb()
     }
 
-    suspend fun deleteForum(): Nothing = throw NotImplementedError()
+    suspend fun deleteForum(forum: Forum) {
+        val category = forum.categoryId.getCategory() ?: return
+        val newForums = category.forumIds - forum.id
+
+        forum.id.updateDbForumIds(newForums)
+        CategoryCache.reloadFromDb()
+    }
+
+    suspend fun Long.updateDbForumIds(newForums: List<Long>) {
+        Database.categoryCol.updateOne(
+            Category::id eq this,
+            setValue(Category::forumIds, newForums)
+        )
+    }
 }
