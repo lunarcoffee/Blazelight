@@ -9,7 +9,7 @@ enum class Language(
 ) {
     ENGLISH("English", "en-us", 0),
     MANDARIN(
-        "\u4E2D\u6587", // Mandarin characters for "mandarin."
+        "\u7B80\u4F53\u4E2D\u6587", // Chinese characters for "Simplified Chinese."
         "zh-hans",
         1,
         "https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap"

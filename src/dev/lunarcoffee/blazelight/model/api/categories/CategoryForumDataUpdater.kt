@@ -11,7 +11,7 @@ object CategoryForumDataUpdater {
         val category = forum.categoryId.getCategory() ?: return
         val newForums = category.forumIds + forum.id
 
-        forum.id.updateDbForumIds(newForums)
+        forum.categoryId.updateDbForumIds(newForums)
         CategoryCache.reloadFromDb()
     }
 
@@ -19,11 +19,11 @@ object CategoryForumDataUpdater {
         val category = forum.categoryId.getCategory() ?: return
         val newForums = category.forumIds - forum.id
 
-        forum.id.updateDbForumIds(newForums)
+        forum.categoryId.updateDbForumIds(newForums)
         CategoryCache.reloadFromDb()
     }
 
-    suspend fun Long.updateDbForumIds(newForums: List<Long>) {
+    private suspend fun Long.updateDbForumIds(newForums: List<Long>) {
         Database.categoryCol.updateOne(
             Category::id eq this,
             setValue(Category::forumIds, newForums)

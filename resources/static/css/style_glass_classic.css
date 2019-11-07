@@ -402,7 +402,7 @@ h2, h3 {
 .b-x {
     height: 12px;
     padding-bottom: 1px;
-    filter: brightness(115%);
+    filter: brightness(110%);
 }
 
 .b-x:hover {

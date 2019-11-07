@@ -44,25 +44,16 @@ fun Route.forumsViewDelete() = get("/forums/view/{forumId}/delete") {
             br()
 
             h3 {
-                +if (selfDeleting) s.deleteThreadTitle else s.forceDeleteThreadTitle
-                b { +"#${thread.id}" }
+                +s.deleteForumTitle
+                b { +forum.name }
                 +":"
             }
             hr()
-            p {
-                // "Your thread" or "OtherPerson's thread."
-                val threadNoun = if (selfDeleting)
-                    s.your
-                else
-                    "${thread.authorId.getUser()!!.username}${s.apoS}"
-
-                +s.deleteThreadConfirmMessage.prep(threadNoun)
-                b { +s.deleteThreadConfirmBold }
-            }
+            p { +s.deleteForumConfirmMessage }
 
             padding(20)
             a(href = "${call.path}/go", classes = "button-1") { +s.delete }
-            a(href = "/forums/view/${forum.id}/${thread.id}", classes = "button-1") { +s.cancel }
+            a(href = "/forums/view/${forum.id}/", classes = "button-1") { +s.cancel }
             padding(8)
         }
     }

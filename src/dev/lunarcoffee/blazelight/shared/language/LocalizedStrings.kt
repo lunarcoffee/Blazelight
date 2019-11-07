@@ -35,6 +35,9 @@ class LocalizedStrings {
     lateinit var newForum: String
     lateinit var deleteForum: String
 
+    lateinit var deleteForumTitle: String
+    lateinit var deleteForumConfirmMessage: String
+
     lateinit var startedBy: String
     lateinit var lastPostBy: String
     lateinit var timeOn: String
