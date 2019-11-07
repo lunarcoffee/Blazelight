@@ -5,6 +5,7 @@ import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
+import dev.lunarcoffee.blazelight.site.std.deleteButton
 import dev.lunarcoffee.blazelight.site.std.plusButton
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
@@ -53,8 +54,10 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
                                 else
                                     +category.name
                             }
-                            if (isAdmin)
+                            if (isAdmin) {
                                 plusButton("/forums/add?b=${category.id}", s.newForum)
+                                deleteButton("/forums/${category.id}/delete", s.deleteCategory)
+                            }
                         }
                     }
                     hr()

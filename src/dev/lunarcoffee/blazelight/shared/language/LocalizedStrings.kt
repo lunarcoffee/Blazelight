@@ -30,6 +30,10 @@ class LocalizedStrings {
     lateinit var timeZoneParen: String
     lateinit var languageParen: String
 
+    lateinit var deleteCategory: String
+    lateinit var deleteCategoryTitle: String
+    lateinit var deleteCategoryConfirmMessage: String
+
     lateinit var newCategoryHeading: String
     lateinit var name: String
     lateinit var newForum: String
@@ -62,7 +66,6 @@ class LocalizedStrings {
     lateinit var deleteThreadTitle: String
     lateinit var forceDeleteThreadTitle: String
     lateinit var deleteThreadConfirmMessage: String
-    lateinit var deleteThreadConfirmBold: String
 
     lateinit var createForum: String
     lateinit var newForumHeading: String

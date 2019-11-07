@@ -105,6 +105,8 @@ fun Application.configRouting() {
             forumsViewThreadAdd()
             forumsViewThreadAddPost()
 
+            forumsCategoryDelete()
+            forumsCategoryDeleteGo()
             forumsViewDelete()
             forumsViewDeleteGo()
             forumsViewThreadDelete()

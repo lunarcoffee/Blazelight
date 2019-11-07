@@ -64,9 +64,7 @@ fun Route.forumsViewThreadDelete() = get("/forums/view/{forumId}/{threadId}/dele
                     s.your
                 else
                     "${thread.authorId.getUser()!!.username}${s.apoS}"
-
                 +s.deleteThreadConfirmMessage.prep(threadNoun)
-                b { +s.deleteThreadConfirmBold }
             }
 
             padding(20)
