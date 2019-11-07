@@ -60,7 +60,11 @@ fun Route.forumsViewThreadDelete() = get("/forums/view/{forumId}/{threadId}/dele
             hr()
             p {
                 // "Your thread" or "OtherPerson's thread."
-                val threadNoun = if (selfDeleting) s.your else "${user.username}${s.apoS}"
+                val threadNoun = if (selfDeleting)
+                    s.your
+                else
+                    "${thread.authorId.getUser()!!.username}${s.apoS}"
+
                 +s.deleteThreadConfirmMessage.prep(threadNoun)
                 b { +s.deleteThreadConfirmBold }
             }

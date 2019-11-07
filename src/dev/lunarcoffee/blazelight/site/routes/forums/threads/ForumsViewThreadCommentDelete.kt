@@ -70,7 +70,10 @@ fun Route.forumsViewThreadCommentDelete() {
                 }
                 hr()
                 p {
-                    val commentNoun = if (selfDeleting) s.your else "${user.username}${s.apoS}"
+                    val commentNoun = if (selfDeleting)
+                        s.your
+                    else
+                        "${comment.authorId.getUser()!!.username}${s.apoS}"
                     +s.deleteConfirmMessage.prep(commentNoun)
                 }
 
