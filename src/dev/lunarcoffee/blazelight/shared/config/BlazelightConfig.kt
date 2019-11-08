@@ -22,8 +22,7 @@ class BlazelightConfig {
     }
 
     // [LocalizedStrings] for default language.
-    val ds
-        get() = LanguageManager
-            .localizedStrings
-            .find { it.language.stringCode == defaultLangCode }!!
+    val ds by lazy {
+        LanguageManager.localizedStrings.find { it.language.stringCode == defaultLangCode }!!
+    }
 }
