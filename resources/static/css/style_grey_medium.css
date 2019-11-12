@@ -1,0 +1,474 @@
+/* Grey Medium */
+
+/* Reset styles. */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
+figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #171717;
+    width: calc(100vw - 34px);
+    padding-left: 17px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #474747;
+}
+
+.code {
+    background: #373737;
+    border: solid 1px #444;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+
+blockquote {
+    background: #444;
+    border: solid 1px #555;
+    padding: 4px 8px 8px 8px;
+    margin-bottom: 6px;
+}
+
+.hr-dot {
+    border: none;
+    border-top: 1px dotted #474747;
+    background-color: #252525;
+}
+
+h2, h3 {
+    font-weight: normal;
+}
+
+.px {
+    line-height: 23px;
+}
+
+.header-bar {
+    width: available;
+    color: #ddd;
+    height: auto;
+    padding-bottom: 14px;
+    margin: 0 calc((100vw - 120vh) / 2);
+    background: #252525;
+    border-radius: 0 0 6px 6px;
+}
+
+.header-bar-title {
+    color: #eee;
+    font-size: 3rem;
+    padding-left: 34px;
+    padding-top: 19px;
+    padding-bottom: 1px;
+}
+
+.header-bar-button-row {
+    display: inline-block;
+    margin-top: 16px;
+    width: 100%;
+    background: linear-gradient(
+            180deg,
+            rgb(105, 105, 105) 0%,
+            rgba(78, 78, 78, 1) 5%,
+            rgba(65, 65, 65, 1) 50%,
+            rgb(58, 58, 58) 94%,
+            rgb(51, 51, 51) 99%
+    );
+    padding: 10px 0;
+}
+
+.header-bar-lp {
+    background: linear-gradient(
+            180deg,
+            rgb(105, 105, 105) 0%,
+            rgba(78, 78, 78, 1) 5%,
+            rgba(65, 65, 65, 1) 50%,
+            rgb(58, 58, 58) 94%,
+            rgb(51, 51, 51) 99%
+    );
+    padding-right: 19px;
+    width: 19px;
+}
+
+.header-bar-button {
+    color: #eee;
+    background: linear-gradient(
+            180deg,
+            rgb(105, 105, 105) 0%,
+            rgba(78, 78, 78, 1) 5%,
+            rgba(65, 65, 65, 1) 50%,
+            rgb(58, 58, 58) 94%,
+            rgb(51, 51, 51) 99%
+    );
+    padding: 10px 20px;
+    text-decoration: none;
+    border-left: solid 1px #232323;
+    border-right: solid 1px #4b4b4b;
+}
+
+.header-bar-button:hover {
+    background: linear-gradient(
+            180deg,
+            rgba(126, 126, 126, 1) 0%,
+            rgb(110, 110, 110) 5%,
+            rgb(104, 104, 104) 42%,
+            rgb(79, 79, 79) 94%,
+            rgb(67, 67, 67) 99%
+    );
+}
+
+.hbb-left {
+    border-left: solid 1px #232323;
+    box-shadow: -1px 0 0 0 #4b4b4b;
+    margin-left: 19px;
+}
+
+.hbb-right {
+    border-right: inset 1px #4b4b4b;
+    box-shadow: 1px 0 0 0 #232323;
+}
+
+
+.header-bar-top-menu {
+    float: right;
+    display: inline-block;
+    margin-top: -3.7rem;
+    padding-right: 1.8rem;
+}
+
+.header-top-button {
+    padding-left: 22px;
+    color: #eee;
+    text-decoration: none;
+}
+
+.header-top-button:hover {
+    text-decoration: underline;
+}
+
+.content {
+    background: #252525;
+    color: #ddd;
+    width: available;
+    margin: 14px calc((100vw - 120vh) / 2);
+    min-height: inherit;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.fi-text {
+    color: #ddd;
+    border: solid 1px #474747;
+    background: #333;
+    border-radius: 2px;
+    padding: 6px 7px;
+    font-size: 0.9rem;
+    margin: 3px 0;
+    outline: none;
+    width: 10vw;
+}
+
+.fi-text:hover {
+    border-color: #595959;
+}
+
+.fi-select {
+    color: #ddd;
+    border: solid 1px #474747;
+    border-radius: 2px;
+    padding: 6px 7px 6px 4px;
+    width: 7vw;
+    height: 31px;
+    font-size: 0.9rem;
+    margin: 3px 10px 3px 0;
+    outline: none;
+    background: #333;
+}
+
+.fi-select:hover {
+    border-color: #595959;
+}
+
+.button-1 {
+    border: none;
+    border-radius: 2px;
+    padding: 8px 16px;
+    margin-top: 2px;
+    margin-right: 14px;
+    font-size: 0.9rem;
+    color: #eee;
+    background: linear-gradient(
+            180deg,
+            rgb(105, 105, 105) 0%,
+            rgba(78, 78, 78, 1) 5%,
+            rgba(65, 65, 65, 1) 60%,
+            rgb(58, 58, 58) 100%
+    );
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-1:hover {
+    color: white;
+    background: linear-gradient(
+            180deg,
+            rgba(126, 126, 126, 1) 0%,
+            rgb(110, 110, 110) 5%,
+            rgb(104, 104, 104) 55%,
+            rgb(79, 79, 79) 100%
+    );
+}
+
+.title {
+    overflow-wrap: break-word;
+}
+
+.comment-text {
+    font-size: 0.85rem;
+    overflow-wrap: break-word;
+}
+
+.ba-wrap {
+    margin: 12px 0 8px 0;
+}
+
+.f-inline {
+    margin-top: 6px;
+    padding-top: 1px;
+    display: inline-block;
+}
+
+.f-page {
+    margin-top: 6px;
+    padding-top: 1px;
+    display: inline-block;
+}
+
+.b-inline {
+    height: 30px;
+    padding-top: 7px;
+    margin-left: 8px;
+}
+
+.p {
+    height: 4px;
+}
+
+.a1 {
+    text-decoration: none;
+    color: #ddd;
+}
+
+.a1:hover {
+    text-decoration: underline;
+}
+
+.a2 {
+    text-decoration: none;
+    color: #aaa;
+}
+
+.a2:hover {
+    text-decoration: underline;
+}
+
+.a-page {
+    padding-right: 6px;
+}
+
+.red {
+    color: #cc2222;
+}
+
+.red-u:hover {
+    text-decoration: red underline;
+}
+
+.pa {
+    margin-right: 15px;
+}
+
+.green {
+    color: #29a829;
+}
+
+.page-numbers {
+    margin-top: -21px;
+    float: right;
+}
+
+.bottom-page-numbers {
+    margin-top: -1px;
+}
+
+.category {
+    margin-bottom: 16px;
+}
+
+.forum-list-item {
+    padding: 2px 0;
+}
+
+.forum-topic {
+    color: #aaa;
+    font-size: 0.8rem;
+    padding-top: 2px;
+}
+
+.comment-list-item {
+    display: flex;
+}
+
+.commenter-info {
+    float: left;
+    margin-top: -4px;
+    margin-bottom: 19px;
+    border-right: solid 1px #3a3a3a;
+    margin-right: 12px;
+    background: #2e2e2e;
+    min-width: 160px;
+    padding: 12px 8px;
+    font-size: 0.9rem;
+}
+
+.rem-p8 {
+    font-size: 0.8rem;
+}
+
+.commenter-username {
+    margin-bottom: 8px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+    padding-top: 4px;
+    max-width: calc(120vh - 264px);
+}
+
+.cdv {
+    margin-left: calc(-150px - 39px);
+    margin-top: 10px;
+    width: calc(120vh - 74px);
+}
+
+/* Comment-top margin reducer */
+.ctmr {
+    margin-top: -6px;
+}
+
+.inline {
+    display: inline;
+}
+
+.post-image {
+    max-width: 40%;
+}
+
+.footer-text {
+    color: #bfbfbf;
+    margin-top: -6px;
+    font-size: 0.8rem;
+}
+
+.footer-sep {
+    padding: 0 12px;
+    color: #333;
+    margin-top: -2px;
+    font-size: 1.2rem;
+    position: relative;
+    top: 0.1rem;
+}
+
+.b-img-a {
+    padding-left: 14px;
+}
+
+.b-img-b {
+    padding-left: 8px;
+}
+
+.b-plus {
+    height: 14px;
+    filter: brightness(80%) grayscale(100%);
+}
+
+.b-plus:hover {
+    filter: brightness(110%) grayscale(100%) ;
+}
+
+.b-x {
+    height: 12px;
+    padding-bottom: 1px;
+    filter: brightness(115%) grayscale(100%);
+}
+
+.b-x:hover {
+    filter: brightness(180%) grayscale(100%);
+}
+
+.post-index {
+    line-height: 20px;
+}
+
+.u {
+    color: #3f7bde;
+    text-decoration: none;
+}
+
+.u:hover {
+    text-decoration: underline;
+}
+
+.bc-a {
+    font-size: 0.8rem;
+}
+
+.float-r {
+    float: right;
+}
+
+.bc-home {
+    width: 18px;
+    margin-bottom: -3px;
+    filter: brightness(100%) grayscale(100%) drop-shadow(0 0 1px #fff);
+}
+
+.bc-home:hover {
+    filter: grayscale(100%) brightness(120%) drop-shadow(0 0 1px #fff);
+}
+
+.cursor-hand {
+    cursor: pointer;
+}
+
+.bc-arrow {
+    width: 9px;
+    padding: 0 8px;
+    filter: invert(50%);
+}
+
+.thread-l {
+    color: #777;
+}
+
+/* */
+
+*:focus {
+    outline: none;
+}
+
+* {
+    outline: none;
+}

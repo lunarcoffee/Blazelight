@@ -1,9 +1,11 @@
 package dev.lunarcoffee.blazelight.site.routes.users
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.padding
+import dev.lunarcoffee.blazelight.site.std.path
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -32,6 +34,23 @@ fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
                 thisCrumb(call, s.settings)
             }
             br()
+
+            h3 { b { +"Select theme:" } }
+            padding(4)
+            form(action = "${call.path}/set", method = FormMethod.post) {
+                select(classes = "fi-select") {
+                    name = "theme"
+                    for (styleName in BL_CONFIG.styles.keys) {
+                        option {
+                            value = styleName
+                            +styleName
+                        }
+                    }
+                }
+                br()
+                input(type = InputType.submit, classes = "button-1") { value = s.save }
+            }
+            hr()
 
             p { +user.username }
             p { +(user.realName ?: s.unsetParen) }

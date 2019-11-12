@@ -1,6 +1,5 @@
 package dev.lunarcoffee.blazelight.shared.config
 
-import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import java.io.File
 import kotlin.properties.Delegates
 
