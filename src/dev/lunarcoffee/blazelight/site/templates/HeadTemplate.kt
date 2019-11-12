@@ -40,7 +40,7 @@ class HeadTemplate(
                 sep()
                 +"Last updated on ${System.currentTimeMillis().toTimeDisplay(user)}"
             }
-            padding(14)
+            padding(10)
         }
     }
 
