@@ -36,7 +36,7 @@ class BBCodeRenderer(private val rootTag: HtmlBlockInlineTag, private val s: Loc
             "email" -> a(href = "mailto:${tag.arg}", classes = "u") {
                 renderByTokens(preserveFormatting)
             }
-            "img" -> img(src = tag.arg)
+            "img" -> a(href = tag.arg) { img(src = tag.arg, classes = "post-image") }
             "quote" -> blockQuote(classes = "comment-text") {
                 b(classes = "px") { +if (tag.arg.isEmpty()) "Quote:" else "${tag.arg} ${s.said}:" }
                 br()

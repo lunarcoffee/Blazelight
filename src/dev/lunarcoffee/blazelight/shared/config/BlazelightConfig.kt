@@ -20,9 +20,4 @@ class BlazelightConfig {
             styleNameLine.substring(3, styleNameLine.lastIndex - 2) to it.name
         }
     }
-
-    // [LocalizedStrings] for default language.
-    val ds by lazy {
-        LanguageManager.localizedStrings.find { it.language.stringCode == defaultLangCode }!!
-    }
 }

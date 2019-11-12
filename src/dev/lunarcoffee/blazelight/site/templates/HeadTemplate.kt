@@ -3,8 +3,11 @@ package dev.lunarcoffee.blazelight.site.templates
 import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import dev.lunarcoffee.blazelight.shared.language.LocalizedStrings
+import dev.lunarcoffee.blazelight.site.std.padding
+import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
 import io.ktor.html.*
 import kotlinx.html.*
+import java.time.ZoneId
 
 class HeadTemplate(
     private val titleText: String,
@@ -25,6 +28,25 @@ class HeadTemplate(
             if (s.language.fontUrl != null)
                 link(href = s.language.fontUrl, rel = "stylesheet")
         }
-        body { insert(body) }
+        body {
+            insert(body)
+            p(classes = "footer-text") {
+                this@p.style = "text-align: center;"
+                val timeZoneName = user?.settings?.zoneId?.id ?: ZoneId.systemDefault().id
+
+                +"Times displayed are $timeZoneName."
+                sep()
+                a(href = GITHUB_LINK, target = "_blank", classes = "a2") { +"GitHub" }
+                sep()
+                +"Last updated on ${System.currentTimeMillis().toTimeDisplay(user)}"
+            }
+            padding(14)
+        }
+    }
+
+    private fun P.sep() = b(classes = "footer-sep") { +"/" }
+
+    companion object {
+        private const val GITHUB_LINK = "https://github.com/LunarCoffee/Blazelight"
     }
 }
