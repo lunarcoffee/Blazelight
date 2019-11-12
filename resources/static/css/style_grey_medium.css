@@ -42,7 +42,7 @@ blockquote {
 .hr-dot {
     border: none;
     border-top: 1px dotted #474747;
-    background-color: #252525;
+    background-color: #272727;
 }
 
 h2, h3 {
@@ -59,7 +59,7 @@ h2, h3 {
     height: auto;
     padding-bottom: 14px;
     margin: 0 calc((100vw - 120vh) / 2);
-    background: #252525;
+    background: #272727;
     border-radius: 0 0 6px 6px;
 }
 
@@ -156,7 +156,7 @@ h2, h3 {
 }
 
 .content {
-    background: #252525;
+    background: #272727;
     color: #ddd;
     width: available;
     margin: 14px calc((100vw - 120vh) / 2);
@@ -457,6 +457,23 @@ h2, h3 {
     width: 9px;
     padding: 0 8px;
     filter: invert(50%);
+}
+
+.fti {
+    width: 40vw;
+    color: #ddd;
+    background: #333;
+    font-family: sans-serif;
+    border: solid 1px #474747;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin: 3px 0 -2px 0;
+    outline: none;
+}
+
+.fti:hover {
+    border-color: #595959;
 }
 
 .thread-l {
