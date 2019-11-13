@@ -26,10 +26,15 @@ registrationHeading:          "Register for an account:"
 loginHeading:                 "Login to your account:"
 email:                        "Email"
 username:                     "Username"
+realName:                     "Real Name"
+description:                  "Description"
 password:                     "Password"
 retypePassword:               "Retype Password"
 timeZoneParen:                "(time zone)"
 languageParen:                "(language)"
+
+# Other form input labels.
+themeParen:                   "(theme)"
 
 # Category delete view.
 deleteCategory:               "Delete Category"

@@ -3,6 +3,8 @@ package dev.lunarcoffee.blazelight.site.routes.users
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.model.api.users.registrar.UserEditManager
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
+import dev.lunarcoffee.blazelight.shared.TimeZoneManager
+import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -22,9 +24,26 @@ fun Route.usersIdSettingsSetRoute() = post("/users/{id}/settings/set") {
     if (user.id != call.sessions.get<UserSession>()!!.getUser()?.id)
         return@post call.respond(HttpStatusCode.Forbidden)
 
-    val themeName = call.receiveParameters()["theme"]!!
-    val newUserSettings = user.settings.apply { theme = themeName }
-    val newUser = user.apply { settings = newUserSettings }
+    val params = call.receiveParameters()
+
+    val realName = params["realName"]!!
+    val description = params["description"]!!
+
+    val timeZone = TimeZoneManager.toTimeZone(params["timeZone"]!!)
+    val language = LanguageManager.toLanguage(params["language"]!!.toInt())
+    val themeName = params["theme"]!!
+
+    val newUserSettings = user.settings.copy(
+        zoneId = timeZone,
+        language = language,
+        theme = themeName
+    )
+
+    val newUser = user.apply {
+        this@apply.realName = realName
+        this@apply.description = description
+        settings = newUserSettings
+    }
 
     // Edit the settings, and send them back to their user page.
     UserEditManager.edit(newUser)

@@ -1,4 +1,4 @@
-/* Grey Medium */
+/* Underground */
 
 /* Reset styles. */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
@@ -174,7 +174,7 @@ h2, h3 {
     font-size: 0.9rem;
     margin: 3px 0;
     outline: none;
-    width: 10vw;
+    width: 230px;
 }
 
 .fi-text:hover {
@@ -186,7 +186,7 @@ h2, h3 {
     border: solid 1px #474747;
     border-radius: 2px;
     padding: 6px 7px 6px 4px;
-    width: 7vw;
+    width: 200px;
     height: 31px;
     font-size: 0.9rem;
     margin: 3px 10px 3px 0;

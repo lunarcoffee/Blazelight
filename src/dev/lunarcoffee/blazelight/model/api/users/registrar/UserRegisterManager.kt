@@ -48,8 +48,8 @@ object UserRegisterManager {
         return UserRegisterSuccess
     }
 
-    suspend fun registerDeleted(copyUser: User, name: String) {
-        val user = DefaultUser(copyUser, name)
+    suspend fun registerDeleted(copyUser: User, deleted: String) {
+        val user = DeletedDefaultUser(copyUser, deleted)
         Database.userCol.insertOne(user)
         UserCache.users += user
     }

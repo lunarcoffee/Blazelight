@@ -26,10 +26,14 @@ class LocalizedStrings {
     lateinit var loginHeading: String
     lateinit var email: String
     lateinit var username: String
+    lateinit var realName: String
+    lateinit var description: String
     lateinit var password: String
     lateinit var retypePassword: String
     lateinit var timeZoneParen: String
     lateinit var languageParen: String
+
+    lateinit var themeParen: String
 
     lateinit var deleteCategory: String
     lateinit var deleteCategoryTitle: String

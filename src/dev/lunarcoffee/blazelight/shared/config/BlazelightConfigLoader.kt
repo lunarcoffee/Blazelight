@@ -9,7 +9,7 @@ fun loadBlazelightConfig(path: String?) {
     BL_CONFIG = if (path == null) {
         BlazelightConfig().apply {
             resourceRoot = "resources"
-            defaultStyle = "Grey Medium"
+            defaultStyle = "Underground"
             headerBarText = "Blazelight"
             titleText = headerBarText
 

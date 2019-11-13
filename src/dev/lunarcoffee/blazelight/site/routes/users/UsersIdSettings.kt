@@ -1,7 +1,9 @@
 package dev.lunarcoffee.blazelight.site.routes.users
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
+import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
+import dev.lunarcoffee.blazelight.shared.language.Language
 import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.padding
@@ -35,35 +37,69 @@ fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
             }
             br()
 
-            h3 { b { +"Select theme:" } }
+            h3(classes = "title") { b { +"Modify settings:" } }
+            hr()
             padding(4)
             form(action = "${call.path}/set", method = FormMethod.post) {
+                input(type = InputType.text, name = "realName", classes = "fi-text") {
+                    placeholder = s.realName
+                    value = user.realName ?: ""
+                }
+                br()
+                input(type = InputType.text, name = "description", classes = "fi-text") {
+                    placeholder = s.description
+                    value = user.description ?: ""
+                }
+                br()
+                hr()
+
                 select(classes = "fi-select") {
-                    name = "theme"
-                    for (styleName in BL_CONFIG.styles.keys) {
+                    name = "timeZone"
+                    for ((index, zoneId) in TimeZoneManager.timeZones.withIndex()) {
                         option {
-                            value = styleName
-                            +styleName
+                            if (zoneId == user.settings.zoneId)
+                                selected = true
+                            value = index.toString()
+                            +zoneId.id
                         }
                     }
                 }
+                +s.timeZoneParen
+
                 br()
+                select(classes = "fi-select") {
+                    name = "language"
+                    for ((index, lang) in Language.values().withIndex()) {
+                        option {
+                            if (lang.name == user.settings.language.name)
+                                selected = true
+                            value = index.toString()
+                            +lang.languageName
+                        }
+                    }
+                }
+                +s.languageParen
+
+                br()
+                select(classes = "fi-select") {
+                    name = "theme"
+                    for (themeName in BL_CONFIG.styles.keys) {
+                        option {
+                            if (user.settings.theme == themeName)
+                                selected = true
+                            value = themeName
+                            +themeName
+                        }
+                    }
+                }
+                +s.themeParen
+                br()
+                hr()
+
                 input(type = InputType.submit, classes = "button-1") { value = s.save }
+                a(href = "/users/${user.id}", classes = "button-1") { +s.discard }
+                a(href = "/users/${user.id}/delete", classes = "button-1") { +s.deleteAccount }
             }
-            hr()
-
-            p { +user.username }
-            p { +(user.realName ?: s.unsetParen) }
-            p { +(user.description ?: s.unsetParen) }
-            p { +(user.settings.zoneId.id ?: s.unsetParen) }
-            p { +(user.settings.language.name) }
-            p { +(user.settings.theme) }
-
-            padding(16)
-            a(href = "/users/${user.id}/settings", classes = "button-1") { +s.save }
-            a(href = "/users/${user.id}", classes = "button-1") { +s.discard }
-            a(href = "/users/${user.id}/delete", classes = "button-1") { +s.deleteAccount }
-            padding(8)
         }
     }
 }
