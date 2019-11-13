@@ -12,6 +12,7 @@ class LocalizedStrings {
     lateinit var settings: String
     lateinit var save: String
     lateinit var discard: String
+    lateinit var deleteAccount: String
     lateinit var register: String
     lateinit var login: String
 
@@ -41,6 +42,9 @@ class LocalizedStrings {
 
     lateinit var deleteForumTitle: String
     lateinit var deleteForumConfirmMessage: String
+
+    lateinit var deleteAccountTitle: String
+    lateinit var deleteAccountConfirmMessage: String
 
     lateinit var startedBy: String
     lateinit var lastPostBy: String

@@ -8,13 +8,22 @@ class DefaultUser(
     override var settings: UserSettings
 ) : User {
 
-    override val description: String? = null
-    override val realName: String? = null
+    // Constructor to be used for creation of "dummy" users for representing deleted users.
+    constructor(user: User, name: String) : this(name, "", "", byteArrayOf(), user.settings) {
+        description = user.description
+        realName = name
+        commentIds += user.commentIds
+        threadIds += user.threadIds
+        creationTime = user.creationTime
+    }
 
-    override val commentIds = emptyList<Long>()
-    override val threadIds = emptyList<Long>()
+    override var description: String? = null
+    override var realName: String? = null
 
-    override val creationTime = System.currentTimeMillis()
+    override val commentIds = mutableListOf<Long>()
+    override val threadIds = mutableListOf<Long>()
+
+    override var creationTime = System.currentTimeMillis()
     override val id = settings.userId
 
     override var isAdmin = false

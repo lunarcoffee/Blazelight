@@ -96,6 +96,8 @@ fun Application.configRouting() {
         authenticate("loginAuth") {
             usersIdSettingsRoute()
             usersIdSettingsSetRoute()
+            usersIdDeleteRoute()
+            usersIdDeleteGoRoute()
             logoutRoute()
 
             categoryPostRoute()

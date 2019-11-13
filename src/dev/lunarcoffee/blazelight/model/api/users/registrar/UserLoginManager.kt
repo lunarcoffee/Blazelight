@@ -7,6 +7,10 @@ import org.litote.kmongo.eq
 
 object UserLoginManager {
     suspend fun tryLogin(username: String, password: String): UserLoginResult {
+        // You cannot log into a deleted account.
+        if (username == UserDeleteManager.DELETED_USER_NAME)
+            return UserLoginFailure
+
         val user = Database.userCol.findOne(User::username eq username)
             ?: return UserLoginFailure
 

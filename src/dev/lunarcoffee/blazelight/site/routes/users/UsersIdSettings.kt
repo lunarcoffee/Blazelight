@@ -62,6 +62,7 @@ fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
             padding(16)
             a(href = "/users/${user.id}/settings", classes = "button-1") { +s.save }
             a(href = "/users/${user.id}", classes = "button-1") { +s.discard }
+            a(href = "/users/${user.id}/delete", classes = "button-1") { +s.deleteAccount }
             padding(8)
         }
     }

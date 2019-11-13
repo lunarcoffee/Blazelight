@@ -22,34 +22,36 @@ object UserRegisterManager {
         name: String,
         password: String,
         timeZone: ZoneId,
-        language: Language,
-        bypassChecks: Boolean = false, // This and the following are used in user deletion.
-        forceId: Long = UniqueIDGenerator.nextId()
+        language: Language
     ): UserRegisterResult {
 
-        if (!bypassChecks) {
-            if (!(email matches EMAIL_REGEX))
-                return UserRegisterInvalidEmail
-            if (name.length !in 1..40 || name.sanitize() != name)
-                return UserRegisterInvalidName
-            if (password.length !in 8..1_000 || password.sanitize() != password)
-                return UserRegisterInvalidPassword
-            if (Database.userCol.findOne(User::email eq email) != null)
-                return UserRegisterDuplicateEmail
-            if (Database.userCol.findOne(User::username eq name) != null)
-                return UserRegisterDuplicateName
-        }
+        if (!(email matches EMAIL_REGEX))
+            return UserRegisterInvalidEmail
+        if (name.length !in 1..40 || name.sanitize() != name)
+            return UserRegisterInvalidName
+        if (password.length !in 8..1_000 || password.sanitize() != password)
+            return UserRegisterInvalidPassword
+        if (Database.userCol.findOne(User::email eq email) != null)
+            return UserRegisterDuplicateEmail
+        if (Database.userCol.findOne(User::username eq name) != null)
+            return UserRegisterDuplicateName
 
         val salt = ByteArray(16)
         srng.nextBytes(salt)
         val passwordHash = PasswordHasher(password, salt).hash()
 
-        val settings = UserSettings(timeZone, language, forceId)
+        val settings = UserSettings(timeZone, language, UniqueIDGenerator.nextId())
         val user = DefaultUser(name, email, passwordHash, salt, settings)
         Database.userCol.insertOne(user)
         UserCache.users += user
 
         return UserRegisterSuccess
+    }
+
+    suspend fun registerDeleted(copyUser: User, name: String) {
+        val user = DefaultUser(copyUser, name)
+        Database.userCol.insertOne(user)
+        UserCache.users += user
     }
 
     private fun String.sanitize() = replace(ILLEGAL_CHARS_REGEX, "").trim()

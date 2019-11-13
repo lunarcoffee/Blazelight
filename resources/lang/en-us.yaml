@@ -10,6 +10,7 @@ newPost:                      "New Post"
 settings:                     "Settings"
 save:                         "Save"
 discard:                      "Discard"
+deleteAccount:                "Delete Account"
 register:                     "Register"
 login:                        "Login"
 
@@ -44,6 +45,10 @@ deleteForum:                  "Delete Forum"
 # Category forum delete view.
 deleteForumTitle:             "Delete forum "
 deleteForumConfirmMessage:    "Are you sure you want to delete this forum? This action cannot be undone, and will delete all threads in the forum."
+
+# Account delete view.
+deleteAccountTitle:           "Delete account:"
+deleteAccountConfirmMessage:  "Are you sure you want to delete your account? This action cannot be undone, but will preserve your posts and threads."
 
 # Time items.
 startedBy:                    "Thread started by "
