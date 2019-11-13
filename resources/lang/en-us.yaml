@@ -136,6 +136,8 @@ invalidTopic1To1000:          "That topic is invalid! It must be 1 to 1000 chara
 invalidEmail:                 "That email is invalid!"
 invalidUsername1To40:         "That username is invalid! It must be at most 40 characters long (inclusive)."
 invalidPassword8To1000:       "That password is invalid! It must be 8 to 1000 characters long (inclusive)."
+invalidRealName:              "That real name is invalid! It must be 100 characters in length at most!"
+invalidDescription:           "That description is invalid! It must be 500 characters in length at most!"
 
 # Other status messages.
 noPermissions:                "You don't have enough permissions to do that!"

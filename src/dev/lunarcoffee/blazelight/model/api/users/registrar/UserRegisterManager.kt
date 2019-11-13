@@ -6,16 +6,14 @@ import dev.lunarcoffee.blazelight.model.internal.std.util.PasswordHasher
 import dev.lunarcoffee.blazelight.model.internal.std.util.UniqueIDGenerator
 import dev.lunarcoffee.blazelight.model.internal.users.*
 import dev.lunarcoffee.blazelight.shared.language.Language
+import dev.lunarcoffee.blazelight.shared.sanitize
 import org.litote.kmongo.eq
 import java.security.SecureRandom
 import java.time.ZoneId
 
 object UserRegisterManager {
     private val srng = SecureRandom()
-
     private val EMAIL_REGEX = "[a-zA-Z0-9+.]+@[a-zA-Z0-9.]+".toRegex()
-    private val ILLEGAL_CHARS_REGEX = "[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u2060\uFEFF]"
-        .toRegex()
 
     suspend fun tryRegister(
         email: String,
@@ -26,26 +24,26 @@ object UserRegisterManager {
     ): UserRegisterResult {
 
         if (!(email matches EMAIL_REGEX))
-            return UserRegisterInvalidEmail
+            return UserRegisterResult.INVALID_EMAIL
         if (name.length !in 1..40 || name.sanitize() != name)
-            return UserRegisterInvalidName
+            return UserRegisterResult.INVALID_NAME
         if (password.length !in 8..1_000 || password.sanitize() != password)
-            return UserRegisterInvalidPassword
+            return UserRegisterResult.INVALID_PASSWORD
         if (Database.userCol.findOne(User::email eq email) != null)
-            return UserRegisterDuplicateEmail
+            return UserRegisterResult.DUPLICATE_EMAIL
         if (Database.userCol.findOne(User::username eq name) != null)
-            return UserRegisterDuplicateName
+            return UserRegisterResult.DUPLICATE_USERNAME
 
         val salt = ByteArray(16)
         srng.nextBytes(salt)
         val passwordHash = PasswordHasher(password, salt).hash()
 
-        val settings = UserSettings(timeZone, language, UniqueIDGenerator.nextId())
+        val settings = UserSettings(UniqueIDGenerator.nextId(), timeZone, language)
         val user = DefaultUser(name, email, passwordHash, salt, settings)
         Database.userCol.insertOne(user)
         UserCache.users += user
 
-        return UserRegisterSuccess
+        return UserRegisterResult.SUCCESS
     }
 
     suspend fun registerDeleted(copyUser: User, deleted: String) {
@@ -53,6 +51,4 @@ object UserRegisterManager {
         Database.userCol.insertOne(user)
         UserCache.users += user
     }
-
-    private fun String.sanitize() = replace(ILLEGAL_CHARS_REGEX, "").trim()
 }

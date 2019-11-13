@@ -5,17 +5,17 @@ import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 
 interface User : Dateable, Identifiable {
     val username: String
-    val description: String?
+    var description: String?
 
     // Private hidden or optionally publicly displayed information.
     val email: String
-    val realName: String?
+    var realName: String?
     val passwordHash: String
     val passwordSalt: ByteArray
 
     val commentIds: List<Long>
     val threadIds: List<Long>
 
-    val settings: UserSettings
+    var settings: UserSettings
     val isAdmin: Boolean
 }

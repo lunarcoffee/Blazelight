@@ -5,6 +5,8 @@ import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.users.*
+import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsRoute
+import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSetRoute
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.*
 import io.ktor.auth.*

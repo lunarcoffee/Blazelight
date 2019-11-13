@@ -35,7 +35,7 @@ fun Route.usersIdDeleteRoute() = get("/users/{id}/delete") {
             }
             br()
 
-            h3 { +s.deleteAccountTitle }
+            h3 { b { +s.deleteAccountTitle } }
             hr()
             p { +s.deleteAccountConfirmMessage }
 

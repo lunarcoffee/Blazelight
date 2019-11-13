@@ -1,10 +1,10 @@
-package dev.lunarcoffee.blazelight.site.routes.users
+package dev.lunarcoffee.blazelight.site.routes.users.settings
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
-import dev.lunarcoffee.blazelight.model.api.users.registrar.UserEditManager
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import dev.lunarcoffee.blazelight.shared.language.LanguageManager
+import dev.lunarcoffee.blazelight.shared.sanitize
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -26,26 +26,19 @@ fun Route.usersIdSettingsSetRoute() = post("/users/{id}/settings/set") {
 
     val params = call.receiveParameters()
 
-    val realName = params["realName"]!!
-    val description = params["description"]!!
+    val realName = params["realName"]!!.sanitize()
+    val description = params["description"]!!.sanitize()
 
     val timeZone = TimeZoneManager.toTimeZone(params["timeZone"]!!)
     val language = LanguageManager.toLanguage(params["language"]!!.toInt())
     val themeName = params["theme"]!!
 
-    val newUserSettings = user.settings.copy(
-        zoneId = timeZone,
-        language = language,
-        theme = themeName
-    )
-
-    val newUser = user.apply {
-        this@apply.realName = realName
-        this@apply.description = description
-        settings = newUserSettings
+    val updateResult = UserSettingsUpdateManager
+        .update(user, realName, description, timeZone, language, themeName)
+    val index = when (updateResult) {
+        UserSettingsUpdateResult.INVALID_REAL_NAME -> 0
+        UserSettingsUpdateResult.INVALID_DESCRIPTION -> 1
+        UserSettingsUpdateResult.SUCCESS -> return@post call.respondRedirect("/users/${user.id}")
     }
-
-    // Edit the settings, and send them back to their user page.
-    UserEditManager.edit(newUser)
-    call.respondRedirect("/users/${user.id}")
+    call.respondRedirect("/users/${user.id}/settings?a=$index")
 }

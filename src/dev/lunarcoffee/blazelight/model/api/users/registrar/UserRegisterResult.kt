@@ -1,10 +1,10 @@
 package dev.lunarcoffee.blazelight.model.api.users.registrar
 
-sealed class UserRegisterResult
-
-object UserRegisterSuccess : UserRegisterResult()
-object UserRegisterInvalidEmail : UserRegisterResult()
-object UserRegisterInvalidName : UserRegisterResult()
-object UserRegisterInvalidPassword : UserRegisterResult()
-object UserRegisterDuplicateEmail : UserRegisterResult()
-object UserRegisterDuplicateName : UserRegisterResult()
+enum class UserRegisterResult {
+    SUCCESS,
+    INVALID_EMAIL,
+    INVALID_NAME,
+    INVALID_PASSWORD,
+    DUPLICATE_EMAIL,
+    DUPLICATE_USERNAME
+}

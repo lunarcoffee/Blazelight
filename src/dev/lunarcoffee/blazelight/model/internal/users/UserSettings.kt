@@ -5,9 +5,9 @@ import dev.lunarcoffee.blazelight.shared.language.Language
 import java.time.ZoneId
 
 data class UserSettings(
+    val userId: Long,
     val zoneId: ZoneId,
     val language: Language,
-    val userId: Long,
     var theme: String = BL_CONFIG.defaultStyle,
     val buttonOutline: Boolean = false
 )

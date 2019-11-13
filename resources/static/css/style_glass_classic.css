@@ -182,7 +182,7 @@ h2, h3 {
     font-size: 0.9rem;
     margin: 3px 0;
     outline: none;
-    width: 10vw;
+    width: 230px;
     box-shadow: #50506c 0 0 3px;
 }
 
@@ -194,7 +194,7 @@ h2, h3 {
     border: solid 1px #464774;
     border-radius: 4px;
     padding: 4px 4px 4px 1px;
-    width: 7vw;
+    width: 200px;
     height: 27px;
     font-size: 0.9rem;
     margin: 3px 10px 3px 0;
@@ -212,7 +212,7 @@ h2, h3 {
     border-radius: 4px;
     padding: 8px 16px;
     margin-top: 2px;
-    margin-right: 14px;
+    margin-right: 12px;
     font-size: 0.9rem;
     color: white;
     text-shadow: white 0 0 3px;

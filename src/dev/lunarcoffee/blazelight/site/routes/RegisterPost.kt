@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes
 
-import dev.lunarcoffee.blazelight.model.api.users.registrar.*
+import dev.lunarcoffee.blazelight.model.api.users.registrar.UserRegisterManager
+import dev.lunarcoffee.blazelight.model.api.users.registrar.UserRegisterResult
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
 import dev.lunarcoffee.blazelight.shared.language.LanguageManager
 import io.ktor.application.call
@@ -26,12 +27,12 @@ fun Routing.registerPostRoute() = post("/register") {
 
     // This will index into a list of registration status messages in [Routing.registerRoute].
     val index = when (UserRegisterManager.tryRegister(email, username, password, zone, language)) {
-        is UserRegisterInvalidEmail -> 0
-        is UserRegisterInvalidName -> 1
-        is UserRegisterInvalidPassword -> 2
-        is UserRegisterDuplicateEmail -> 3
-        is UserRegisterDuplicateName -> 4
-        else -> 6
+        UserRegisterResult.INVALID_EMAIL -> 0
+        UserRegisterResult.INVALID_NAME -> 1
+        UserRegisterResult.INVALID_PASSWORD -> 2
+        UserRegisterResult.DUPLICATE_EMAIL -> 3
+        UserRegisterResult.DUPLICATE_USERNAME -> 4
+        UserRegisterResult.SUCCESS -> 6
     }
     call.respondRedirect("/register?a=$index")
 }

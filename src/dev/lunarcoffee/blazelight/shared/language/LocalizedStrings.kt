@@ -119,6 +119,8 @@ class LocalizedStrings {
     lateinit var invalidEmail: String
     lateinit var invalidUsername1To40: String
     lateinit var invalidPassword8To1000: String
+    lateinit var invalidRealName: String
+    lateinit var invalidDescription: String
 
     lateinit var noPermissions: String
     lateinit var successForum: String

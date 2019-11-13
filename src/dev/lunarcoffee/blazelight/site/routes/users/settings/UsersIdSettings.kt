@@ -1,4 +1,4 @@
-package dev.lunarcoffee.blazelight.site.routes.users
+package dev.lunarcoffee.blazelight.site.routes.users.settings
 
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.TimeZoneManager
@@ -21,6 +21,9 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
+    val specialMessages = listOf(s.invalidRealName, s.invalidDescription)
+    val messageIndex = call.parameters["a"]?.toIntOrNull()
+
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
@@ -99,6 +102,10 @@ fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
                 input(type = InputType.submit, classes = "button-1") { value = s.save }
                 a(href = "/users/${user.id}", classes = "button-1") { +s.discard }
                 a(href = "/users/${user.id}/delete", classes = "button-1") { +s.deleteAccount }
+
+                // This message will be displayed after attempting to update one's settings.
+                if (messageIndex in specialMessages.indices)
+                    span(classes = "red") { +specialMessages[messageIndex!!] }
             }
         }
     }
