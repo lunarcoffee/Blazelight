@@ -14,8 +14,8 @@ object ThreadAddManager {
         if (content.length !in 1..10_000)
             return ThreadAddResult.INVALID_CONTENT
 
-        val comment = UserComment(content, user.id)
         val thread = UserThread(title, user.id, forumId)
+        val comment = UserComment(content, user.id, thread.id)
 
         ThreadCache.threads += thread
         Database.threadCol.insertOne(thread)

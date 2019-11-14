@@ -1,11 +1,11 @@
 package dev.lunarcoffee.blazelight.site.routes.users
 
+import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.s
+import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
-import dev.lunarcoffee.blazelight.site.std.padding
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
-import dev.lunarcoffee.blazelight.site.std.toTimeDay
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
@@ -18,6 +18,7 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Routing.usersIdRoute() = get("/users/{id}") {
+    val viewingUser = call.sessions.get<UserSession>()?.getUser()
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
@@ -32,17 +33,65 @@ fun Routing.usersIdRoute() = get("/users/{id}") {
             h3(classes = "title") { b { +user.username } }
             hr()
             padding(6)
-            p { +"${s.posts}: ${user.commentIds.size}" }
-            p { +"${s.joined}: ${user.creationTime.toTimeDay(user)}" }
-            p { +"${s.realName}: ${user.realName ?: s.noneParen}" }
-            p { +"${s.description}: ${user.description ?: s.noneParen}" }
+            p {
+                b { +s.joined }
+                +": ${user.creationTime.toTimeDay(user)}"
+                br()
+                b { +s.posts }
+                +": ${user.commentIds.size}"
+                br()
+                b { +s.realName }
+                +": ${user.realName ?: s.noneParen}"
+                br()
+                b { +s.description }
+                +": ${user.description ?: s.noneParen}"
+            }
 
             padding(4)
             hr()
             padding(4)
-            user.settings.run {
-                p { +"${s.timeZone}: ${zoneId.id}" }
-                p { +"${s.languageWord}: ${language.languageName}" }
+            p {
+                b { +s.timeZone }
+                +": ${user.settings.zoneId.id}"
+                br()
+                b { +s.languageWord }
+                +": ${user.settings.language.languageName}"
+            }
+
+            padding(4)
+            hr()
+            padding(4)
+            p {
+                b { +s.threads }
+                +": ${user.threadIds.size}"
+                br()
+                b { +s.recentThreads }
+                +": "
+
+                if (user.threadIds.isEmpty()) {
+                    +"(none)"
+                } else {
+                    br()
+                    padding(6)
+
+                    val orderedThreads = user
+                        .threadIds
+                        .asSequence()
+                        .mapNotNull { it.getThread() }
+                        .sortedByDescending { it.creationTime }
+                        .take(8)
+
+                    for (thread in orderedThreads) {
+                        a(href = "/forums/view/${thread.forumId}/${thread.id}", classes = "a2") {
+                            +thread.title.textOrEllipsis(70)
+                            +" (${thread.commentIds.size})"
+                        }
+                        i(classes = "forum-topic ltab") {
+                            +thread.creationTime.toTimeDisplay(viewingUser)
+                        }
+                        br()
+                    }
+                }
             }
 
             // Show a settings button if the viewer is viewing their own profile page.

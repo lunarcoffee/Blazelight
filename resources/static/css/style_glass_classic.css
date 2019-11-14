@@ -367,6 +367,10 @@ h2, h3 {
     max-width: calc(120vh - 264px);
 }
 
+.ltab {
+    float: right;
+}
+
 .cdv {
     margin-left: calc(-150px - 39px);
     margin-top: 10px;

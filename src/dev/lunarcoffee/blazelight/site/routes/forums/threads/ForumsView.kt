@@ -60,9 +60,6 @@ fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
                 p { +s.noThreadsInForum }
                 padding(8)
             } else {
-                // [user] is used for local time display.
-                val user = call.sessions.get<UserSession>()?.getUser()
-
                 for (threadId in threadPage) {
                     val thread = threadId.getThread()!!
 

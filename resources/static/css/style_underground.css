@@ -476,6 +476,10 @@ h2, h3 {
     border-color: #595959;
 }
 
+.ltab {
+    float: right;
+}
+
 .thread-l {
     color: #777;
 }

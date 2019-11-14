@@ -57,7 +57,10 @@ class LocalizedStrings {
     lateinit var timeOn: String
 
     lateinit var thread: String
+    lateinit var threads: String
+    lateinit var recentThreads: String
     lateinit var posts: String
+    lateinit var recentPosts: String
     lateinit var joined: String
     lateinit var said: String
     lateinit var delete: String
