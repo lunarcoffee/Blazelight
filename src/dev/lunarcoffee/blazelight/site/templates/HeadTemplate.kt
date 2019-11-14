@@ -4,7 +4,7 @@ import dev.lunarcoffee.blazelight.model.internal.users.User
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import dev.lunarcoffee.blazelight.shared.language.LocalizedStrings
 import dev.lunarcoffee.blazelight.site.std.padding
-import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
+import dev.lunarcoffee.blazelight.site.std.toTimeTime
 import io.ktor.html.*
 import kotlinx.html.*
 import java.time.ZoneId
@@ -38,7 +38,7 @@ class HeadTemplate(
                 sep()
                 a(href = GITHUB_LINK, target = "_blank", classes = "a2") { +"GitHub" }
                 sep()
-                +"Last updated on ${System.currentTimeMillis().toTimeDisplay(user)}"
+                +"Last updated at ${System.currentTimeMillis().toTimeTime(user)}"
             }
             padding(10)
         }

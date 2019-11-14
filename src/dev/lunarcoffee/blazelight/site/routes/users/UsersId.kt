@@ -76,10 +76,9 @@ fun Routing.usersIdRoute() = get("/users/{id}") {
 
                     val orderedThreads = user
                         .threadIds
-                        .asSequence()
-                        .mapNotNull { it.getThread() }
+                        .takeLast(8)
+                        .map { it.getThread()!! }
                         .sortedByDescending { it.creationTime }
-                        .take(8)
 
                     for (thread in orderedThreads) {
                         a(href = "/forums/view/${thread.forumId}/${thread.id}", classes = "a2") {

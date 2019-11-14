@@ -8,12 +8,11 @@ import java.time.format.DateTimeFormatter
 
 private val DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy @ h:mm:ss a")
 private val DAY_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+private val TIME_FORMATTER = DateTimeFormatter.ofPattern("h:mm:ss a")
 
 fun <T : ChronoLocalDate> ChronoZonedDateTime<T>.format() = format(DEFAULT_FORMATTER)!!
 fun <T : ChronoLocalDate> ChronoZonedDateTime<T>.formatDay() = format(DAY_FORMATTER)!!
-
-fun Long.toTimeDisplay(user: User?) = toTime(user).format()
-fun Long.toTimeDay(user: User?) = toTime(user).formatDay()
+fun <T : ChronoLocalDate> ChronoZonedDateTime<T>.formatTime() = format(TIME_FORMATTER)!!
 
 fun Long.toTime(user: User?): ZonedDateTime {
     return ZonedDateTime.ofInstant(
@@ -21,3 +20,7 @@ fun Long.toTime(user: User?): ZonedDateTime {
         user?.settings?.zoneId ?: ZoneId.systemDefault()
     )!!
 }
+
+fun Long.toTimeDisplay(user: User?) = toTime(user).format()
+fun Long.toTimeDay(user: User?) = toTime(user).formatDay()
+fun Long.toTimeTime(user: User?) = toTime(user).formatTime()
