@@ -128,6 +128,12 @@ notFoundNotice:               "The content you requested could not be found. Ens
 users:                        "Users"
 noneParen:                    "(none)"
 
+# Help section.
+help:                         "Help"
+helpDescription:              "Help topics"
+helpBBCodeDescription:        "Formatting text with BBCode"
+formattedTextNotice:          "You can create formatted text with BBCode."
+
 # Special cases for various displays.
 noThreadsInForum:             "There are no threads in this forum."
 noCategories:                 "There are no categories."

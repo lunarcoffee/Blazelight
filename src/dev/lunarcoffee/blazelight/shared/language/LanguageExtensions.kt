@@ -14,6 +14,8 @@ private val PipelineContext<*, ApplicationCall>.language
         ?: LanguageManager.toLanguage(BL_CONFIG.defaultLangCode)
 
 val PipelineContext<*, ApplicationCall>.s get() = language.strings
+val PipelineContext<*, ApplicationCall>.languageResourceRoot
+    get() = "${BL_CONFIG.resourceRoot}/lang/${s.language.stringCode}"
 
 // Replaces percent template codes in language files with [args].
 fun String.prep(vararg args: Any): String {

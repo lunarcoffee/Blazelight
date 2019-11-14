@@ -4,6 +4,7 @@ import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
+import dev.lunarcoffee.blazelight.site.routes.tools.*
 import dev.lunarcoffee.blazelight.site.routes.users.*
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsRoute
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSetRoute
@@ -22,7 +23,7 @@ import org.slf4j.event.Level
 import java.io.File
 
 // TODO: (entire project)
-//  - Improve profile functionality
+//  - Implement editing
 //  - Implement friendly BBCode text box
 
 @KtorExperimentalAPI
@@ -132,5 +133,9 @@ fun Application.configRouting() {
         forumsRoute()
         forumsViewRoute()
         forumsViewThread()
+
+        toolsRoute()
+        toolsHelpRoute()
+        toolsHelpTopicRoute()
     }
 }

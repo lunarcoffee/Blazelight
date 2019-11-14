@@ -14,11 +14,6 @@ fun HtmlBlockInlineTag.renderWithBBCode(text: String, s: LocalizedStrings) {
     BBCodeRenderer(this, s).render(text)
 }
 
-fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) = textArea(rows = "8", classes = "fti") {
-    name = "content"
-    placeholder = s.typeSomething
-}
-
 fun HtmlBlockTag.plusButton(url: String, alt: String) {
     a(href = url, classes = "b-img-a") {
         img(alt = alt, src = "/img/green-plus.png", classes = "b-plus")
@@ -27,6 +22,16 @@ fun HtmlBlockTag.plusButton(url: String, alt: String) {
 
 fun HtmlBlockTag.deleteButton(url: String, alt: String) {
     a(href = url, classes = "b-img-b") { img(alt = alt, src = "/img/x-red.png", classes = "b-x") }
+}
+
+fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) {
+    textArea(rows = "8", classes = "fti") {
+        name = "content"
+        placeholder = s.typeSomething
+    }
+    br()
+    padding(2)
+    a(href = "/tools/help/bbcode", classes = "a1 forum-topic") { +s.formattedTextNotice }
 }
 
 fun HtmlInlineTag.renderWithNewlines(text: String, preserveAllFormatting: Boolean = false) {

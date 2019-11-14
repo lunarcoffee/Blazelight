@@ -113,6 +113,11 @@ class LocalizedStrings {
     lateinit var users: String
     lateinit var noneParen: String
 
+    lateinit var help: String
+    lateinit var helpDescription: String
+    lateinit var helpBBCodeDescription: String
+    lateinit var formattedTextNotice: String
+
     lateinit var noThreadsInForum: String
     lateinit var noCategories: String
     lateinit var noForumsInCategory: String
