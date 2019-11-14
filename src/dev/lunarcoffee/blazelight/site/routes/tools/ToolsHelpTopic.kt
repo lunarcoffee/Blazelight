@@ -29,7 +29,7 @@ fun Routing.toolsHelpTopicRoute() = get("/tools/help/{topic}") {
 
             h3(classes = "title") { b { +topicName } }
             hr()
-            p { renderWithBBCode(topicText, s) }
+            p { renderWithBBCode(topicText, s, true) }
         }
     }
 }

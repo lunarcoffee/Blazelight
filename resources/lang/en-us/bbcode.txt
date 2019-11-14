@@ -1,3 +1,20 @@
 # Formatting text with BBCode
-[b]test[/b]
-test
+Typing with normal text is fine, but it can fail to express some intentions properly. BBCode is a markup language (very similar to HTML) which allows controlled formatting of text. With it, text like [i]this[/i] and [u]this[/u] can easily be expressed, among other things. The syntax is composed of "tags," like \[b] and \[u], each with a "closing" counterpart, \[/b] and \[/u] in this case. When these tags surround some text, as in \[b]this\[/b], they change the way it looks. Multiple tags can surround one piece of text, combining their effects.
+
+[b][size=117]Basic text styling:[/size][/b]
+[hr][/hr]Bold:
+\[b]text\[/b] -> [b]text[/b]
+Italicized:[size=150][/size]
+\[i]text\[/i] -> [i]text[/i]
+Underlined:[size=150][/size]
+\[u]text\[/u] -> [u]text[/u]
+Struckthrough:[size=150][/size]
+\[s]text\[/s] -> [s]text[/s]
+
+[b][size=117]Changing size and color:[/size][/b]
+[hr][/hr]Size is represented as a percentage of the regular size. Text can be as small as 20% or as large as 200%. To use the tag looks like:
+\[size=130]text\[/size] -> [size=130]text[/size]
+\[size=70]text\[/size] -> [size=70]text[/size]
+[size=150][/size]Color is another way to format your text. You can use any common color (specifically HTML color) or a hex code:
+\[color=red]text\[/color] -> [color=red]text[/color]
+\[color=#8BE8BE]text\[/color] -> [color=#8BE8BE]text[/color]

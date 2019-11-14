@@ -10,8 +10,12 @@ fun String.textOrEllipsis(limit: Int) = take(limit) + if (length > limit) "..." 
 fun HtmlBlockTag.padding(height: Int) = div { style = "height: ${height}px;" }
 val ApplicationCall.path get() = request.path()
 
-fun HtmlBlockInlineTag.renderWithBBCode(text: String, s: LocalizedStrings) {
-    BBCodeRenderer(this, s).render(text)
+fun HtmlBlockInlineTag.renderWithBBCode(
+    text: String,
+    s: LocalizedStrings,
+    allowHr: Boolean = false
+) {
+    BBCodeRenderer(this, s).render(text, allowHr)
 }
 
 fun HtmlBlockTag.plusButton(url: String, alt: String) {

@@ -1,0 +1,3 @@
+# Formatting text with BBCode (Simplified Chinese)
+[b]test[/b]
+chinese version :)
