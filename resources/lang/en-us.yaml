@@ -30,7 +30,9 @@ realName:                     "Real Name"
 description:                  "Description"
 password:                     "Password"
 retypePassword:               "Retype Password"
+timeZone:                     "Time Zone"
 timeZoneParen:                "(time zone)"
+languageWord:                 "Language"
 languageParen:                "(language)"
 
 # Other form input labels.
@@ -121,7 +123,7 @@ notFoundNotice:               "The content you requested could not be found. Ens
 
 # User pages.
 users:                        "Users"
-unsetParen:                   "(unset)"
+noneParen:                    "(none)"
 
 # Special cases for various displays.
 noThreadsInForum:             "There are no threads in this forum."

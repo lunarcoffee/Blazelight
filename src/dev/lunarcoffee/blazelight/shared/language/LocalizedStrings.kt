@@ -30,7 +30,9 @@ class LocalizedStrings {
     lateinit var description: String
     lateinit var password: String
     lateinit var retypePassword: String
+    lateinit var timeZone: String
     lateinit var timeZoneParen: String
+    lateinit var languageWord: String
     lateinit var languageParen: String
 
     lateinit var themeParen: String
@@ -106,7 +108,7 @@ class LocalizedStrings {
     lateinit var notFoundNotice: String
 
     lateinit var users: String
-    lateinit var unsetParen: String
+    lateinit var noneParen: String
 
     lateinit var noThreadsInForum: String
     lateinit var noCategories: String

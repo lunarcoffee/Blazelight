@@ -31,21 +31,25 @@ fun Routing.usersIdRoute() = get("/users/{id}") {
 
             h3(classes = "title") { b { +user.username } }
             hr()
-            p {
-                +"${s.posts}: ${user.commentIds.size}"
-                br()
-                +"${s.joined}: ${user.creationTime.toTimeDay(user)}"
+            padding(6)
+            p { +"${s.posts}: ${user.commentIds.size}" }
+            p { +"${s.joined}: ${user.creationTime.toTimeDay(user)}" }
+            p { +"${s.realName}: ${user.realName ?: s.noneParen}" }
+            p { +"${s.description}: ${user.description ?: s.noneParen}" }
+
+            padding(4)
+            hr()
+            padding(4)
+            user.settings.run {
+                p { +"${s.timeZone}: ${zoneId.id}" }
+                p { +"${s.languageWord}: ${language.languageName}" }
             }
-            p { +user.username }
-            p { +(user.realName ?: s.unsetParen) }
-            p { +(user.description ?: s.unsetParen) }
-            p { +(user.settings.zoneId.id ?: s.unsetParen) }
-            p { +(user.settings.language.name) }
-            p { +(user.settings.theme) }
 
             // Show a settings button if the viewer is viewing their own profile page.
             if (user.id == call.sessions.get<UserSession>()?.getUser()?.id) {
-                padding(16)
+                padding(6)
+                hr()
+                padding(14)
                 a(href = "/users/${user.id}/settings", classes = "button-1") { +s.settings }
                 padding(8)
             }
