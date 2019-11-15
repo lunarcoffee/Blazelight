@@ -16,16 +16,18 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
-    val params = call.parameters
+fun Route.forumsViewThreadEdit() = get("/forums/view/{forumId}/{threadId}/edit") {
+    val specialMessages = listOf(s.invalidTitle1To300, s.invalidContent1To10000)
 
+    val params = call.parameters
     val messageIndex = params["a"]?.toIntOrNull()
+
     val forum = params["forumId"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)
     val thread = params["threadId"]?.toLongOrNull()?.getThread()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
-    val template = HeaderBarTemplate("${s.thread} - ${thread.id} - ${s.addPost}", call, s)
+    val template = HeaderBarTemplate("${s.thread} - ${thread.id} - ${s.editThreadCap}", call, s)
     call.respondHtmlTemplate(template) {
         content {
             breadcrumbs {
@@ -37,23 +39,28 @@ fun Route.forumsViewThreadAdd() = get("/forums/view/{forumId}/{threadId}/add") {
                     "/forums/view/${forum.id}/${thread.id}",
                     "Thread: ${thread.title.textOrEllipsis(60)}"
                 )
-                thisCrumb(call, s.addPost)
+                thisCrumb(call, s.editThreadCap)
             }
             br()
 
             h3 {
-                +s.newPostHeading
+                +s.editThread
                 b { +s.entityIdFormat.prep(thread.id) }
                 +":"
             }
             hr()
             form(action = call.path, method = FormMethod.post) {
-                formattedTextInput(s)
+                input(type = InputType.text, name = "title", classes = "fi-text fi-top") {
+                    placeholder = s.title
+                    value = thread.title
+                }
+                br()
+                formattedTextInput(s, thread.firstPost!!.contentRaw)
                 hr()
-                input(type = InputType.submit, classes = "button-1") { value = s.post }
+                input(type = InputType.submit, classes = "button-1") { value = s.save }
 
-                if (messageIndex == 0)
-                    span(classes = "red") { +s.invalidContent1To10000 }
+                if (messageIndex in specialMessages.indices)
+                    span(classes = "red") { +specialMessages[messageIndex!!] }
             }
 
             // TODO: Attachments, emotes, thread icon.

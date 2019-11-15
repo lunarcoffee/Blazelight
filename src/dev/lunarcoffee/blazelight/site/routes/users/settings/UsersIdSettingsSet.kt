@@ -16,7 +16,7 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-fun Route.usersIdSettingsSetRoute() = post("/users/{id}/settings/set") {
+fun Route.usersIdSettingsSet() = post("/users/{id}/settings/set") {
     val user = call.parameters["id"]?.toLongOrNull()?.getUser() as? DefaultUser
         ?: return@post call.respond(HttpStatusCode.NotFound)
 

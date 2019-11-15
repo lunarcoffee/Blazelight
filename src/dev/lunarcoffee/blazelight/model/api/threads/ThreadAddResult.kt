@@ -5,3 +5,5 @@ enum class ThreadAddResult {
     INVALID_CONTENT,
     SUCCESS
 }
+
+typealias ThreadEditResult = ThreadAddResult

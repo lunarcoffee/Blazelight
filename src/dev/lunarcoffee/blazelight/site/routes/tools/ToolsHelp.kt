@@ -9,7 +9,7 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*
 
-fun Routing.toolsHelpRoute() = get("/tools/help") {
+fun Routing.toolsHelp() = get("/tools/help") {
     call.respondHtmlTemplate(HeaderBarTemplate("${s.tools} - ${s.help}", call, s)) {
         content {
             breadcrumbs {

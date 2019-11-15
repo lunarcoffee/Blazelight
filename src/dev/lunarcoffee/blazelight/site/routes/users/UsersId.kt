@@ -17,7 +17,7 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-fun Routing.usersIdRoute() = get("/users/{id}") {
+fun Routing.usersId() = get("/users/{id}") {
     val viewingUser = call.sessions.get<UserSession>()?.getUser()
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)

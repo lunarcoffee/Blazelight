@@ -20,7 +20,7 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-fun Route.usersIdSettingsRoute() = get("/users/{id}/settings") {
+fun Route.usersIdSettings() = get("/users/{id}/settings") {
     val specialMessages = listOf(s.invalidRealName, s.invalidDescription)
     val messageIndex = call.parameters["a"]?.toIntOrNull()
 

@@ -11,7 +11,7 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-fun Route.forumsAddPostRoute() = post("/forums/add") {
+fun Route.forumsAddPost() = post("/forums/add") {
     val params = call.receiveParameters()
 
     val categoryId = params["category"]!!.toLong()

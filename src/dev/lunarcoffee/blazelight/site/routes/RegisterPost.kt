@@ -10,7 +10,7 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.Routing
 import io.ktor.routing.post
 
-fun Routing.registerPostRoute() = post("/register") {
+fun Routing.registerPost() = post("/register") {
     val params = call.receiveParameters()
 
     val email = params["email"]!!

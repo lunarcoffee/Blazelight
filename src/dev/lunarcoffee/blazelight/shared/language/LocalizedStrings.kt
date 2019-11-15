@@ -73,12 +73,21 @@ class LocalizedStrings {
     lateinit var forceDeletePostCap: String
     lateinit var deletePost: String
     lateinit var forceDeletePost: String
-    lateinit var deleteConfirmMessage: String
+    lateinit var deletePostConfirmMessage: String
+    lateinit var forceDeletePostConfirmMessage: String
     lateinit var cancel: String
+
+    lateinit var editThread: String
+    lateinit var editThreadCap: String
+
+    lateinit var edit: String
+    lateinit var editPostCap: String
+    lateinit var editPost: String
 
     lateinit var deleteThreadTitle: String
     lateinit var forceDeleteThreadTitle: String
     lateinit var deleteThreadConfirmMessage: String
+    lateinit var forceDeleteThreadConfirmMessage: String
 
     lateinit var createForum: String
     lateinit var newForumHeading: String

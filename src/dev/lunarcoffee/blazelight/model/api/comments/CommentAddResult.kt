@@ -4,3 +4,5 @@ enum class CommentAddResult {
     INVALID_CONTENT,
     SUCCESS
 }
+
+typealias CommentEditResult = CommentAddResult

@@ -92,11 +92,27 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                             i(classes = "thread-l forum-topic") {
                                 +comment.creationTime.toTimeDisplay(user)
                                 span(classes = "float-r post-index") {
-                                    val selfDeleting = author.id == user?.id
-                                    if (selfDeleting || user?.isAdmin == true) {
+                                    val selfAuthor = author.id == user?.id
+
+                                    if (selfAuthor) {
+                                        if (index == 0) {
+                                            a(href = "${call.path}/edit", classes = "a2 pa") {
+                                                +s.editThreadCap
+                                            }
+                                        } else {
+                                            a(
+                                                href = "${call.path}/${commentId}/edit",
+                                                classes = "a2 pa"
+                                            ) {
+                                                +s.edit
+                                            }
+                                        }
+                                    }
+
+                                    if (selfAuthor || user?.isAdmin == true) {
                                         if (index == 0) {
                                             a(href = "${call.path}/delete", classes = "a2 pa") {
-                                                +if (selfDeleting)
+                                                +if (selfAuthor)
                                                     s.deleteThread
                                                 else
                                                     s.forceDeleteThread
@@ -106,7 +122,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                                 href = "${call.path}/${comment.id}/delete",
                                                 classes = "a2 pa"
                                             ) {
-                                                +if (selfDeleting) s.delete else s.forceDelete
+                                                +if (selfAuthor) s.delete else s.forceDelete
                                             }
                                         }
                                     }

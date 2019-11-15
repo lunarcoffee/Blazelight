@@ -13,7 +13,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-fun Route.forumsAddRoute() = get("/forums/add") {
+fun Route.forumsAdd() = get("/forums/add") {
     val specialMessages = listOf(s.noPermissions, s.invalidName1To100, s.invalidTopic1To1000)
     val params = call.parameters
 

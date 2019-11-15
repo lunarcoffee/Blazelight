@@ -21,7 +21,7 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 import kotlin.math.ceil
 
-fun Routing.forumsViewRoute() = get("/forums/view/{id}") {
+fun Routing.forumsView() = get("/forums/view/{id}") {
     val user = call.sessions.get<UserSession>()?.getUser()
     val forum = call.parameters["id"]?.toLongOrNull()?.getForum()
         ?: return@get call.respond(HttpStatusCode.NotFound)

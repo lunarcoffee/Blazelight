@@ -6,8 +6,8 @@ import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.tools.*
 import dev.lunarcoffee.blazelight.site.routes.users.*
-import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsRoute
-import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSetRoute
+import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettings
+import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSet
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -86,6 +86,7 @@ fun Application.configStatusPages() {
 }
 
 fun Application.configRouting() {
+    // Route names with less than two words should have "route" appended to their function names.
     routing {
         static {
             staticRootFolder = File("resources/static")
@@ -96,20 +97,29 @@ fun Application.configRouting() {
         }
 
         authenticate("loginAuth") {
-            usersIdSettingsRoute()
-            usersIdSettingsSetRoute()
-            usersIdDeleteRoute()
-            usersIdDeleteGoRoute()
+            // Private user account tasks.
+            usersIdSettings()
+            usersIdSettingsSet()
+            usersIdDelete()
+            usersIdDeleteGo()
             logoutRoute()
 
-            categoryPostRoute()
-            forumsAddRoute()
-            forumsAddPostRoute()
+            // Creating new entities within the forum system.
+            categoryPost()
+            forumsAdd()
+            forumsAddPost()
             forumsViewAdd()
             forumsViewAddPost()
             forumsViewThreadAdd()
             forumsViewThreadAddPost()
 
+            // Editing entities.
+            forumsViewThreadEdit()
+            forumsViewThreadEditRoutePost()
+            forumsViewThreadCommentEdit()
+            forumsViewThreadCommentEditPost()
+
+            // Deleting entities.
             forumsCategoryDelete()
             forumsCategoryDeleteGo()
             forumsViewDelete()
@@ -120,21 +130,25 @@ fun Application.configRouting() {
             forumsViewThreadCommentDeleteGo()
         }
 
+        // Basic user management.
         homeRoute()
         registerRoute()
-        registerPostRoute()
+        registerPost()
         loginRoute()
-        loginPostRoute()
+        loginPost()
 
-        usersIdRoute()
+        // Public user account tasks.
+        usersId()
         usersRoute()
 
+        // Public forum viewing tasks.
         forumsRoute()
-        forumsViewRoute()
+        forumsView()
         forumsViewThread()
 
+        // Public tools and help.
         toolsRoute()
-        toolsHelpRoute()
-        toolsHelpTopicRoute()
+        toolsHelp()
+        toolsHelpTopic()
     }
 }

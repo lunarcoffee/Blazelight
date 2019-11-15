@@ -74,7 +74,12 @@ fun Route.forumsViewThreadCommentDelete() {
                         s.your
                     else
                         "${comment.authorId.getUser()!!.username}${s.apoS}"
-                    +s.deleteConfirmMessage.prep(commentNoun)
+
+                    val message = if (selfDeleting)
+                        s.deletePostConfirmMessage
+                    else
+                        s.forceDeletePostConfirmMessage
+                    +message.prep(commentNoun)
                 }
 
                 padding(20)

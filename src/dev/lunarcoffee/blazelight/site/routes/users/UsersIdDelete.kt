@@ -17,7 +17,7 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
-fun Route.usersIdDeleteRoute() = get("/users/{id}/delete") {
+fun Route.usersIdDelete() = get("/users/{id}/delete") {
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 

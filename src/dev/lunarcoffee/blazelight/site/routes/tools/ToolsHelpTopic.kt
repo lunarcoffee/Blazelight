@@ -12,7 +12,7 @@ import io.ktor.routing.get
 import kotlinx.html.*
 import java.io.File
 
-fun Routing.toolsHelpTopicRoute() = get("/tools/help/{topic}") {
+fun Routing.toolsHelpTopic() = get("/tools/help/{topic}") {
     val topic = call.parameters["topic"]!!
     val topicTextLines = File("$languageResourceRoot/$topic.txt").readLines()
     val topicName = topicTextLines[0].substringAfter("#").trim()

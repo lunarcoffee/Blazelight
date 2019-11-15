@@ -11,7 +11,7 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-fun Route.categoryPostRoute() = post("/forums/category") {
+fun Route.categoryPost() = post("/forums/category") {
     val name = call.receiveParameters()["name"]!!
     val user = call.sessions.get<UserSession>()!!.getUser()!!
 

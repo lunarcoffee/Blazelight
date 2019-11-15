@@ -28,10 +28,11 @@ fun HtmlBlockTag.deleteButton(url: String, alt: String) {
     a(href = url, classes = "b-img-b") { img(alt = alt, src = "/img/x-red.png", classes = "b-x") }
 }
 
-fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings) {
+fun HtmlBlockTag.formattedTextInput(s: LocalizedStrings, init: String = "") {
     textArea(rows = "8", classes = "fti") {
         name = "content"
         placeholder = s.typeSomething
+        +init
     }
     br()
     padding(2)

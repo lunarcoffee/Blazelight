@@ -11,7 +11,7 @@ import io.ktor.routing.post
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
 
-fun Routing.loginPostRoute() = post("/login") {
+fun Routing.loginPost() = post("/login") {
     val params = call.receiveParameters()
 
     val username = params["username"]!!

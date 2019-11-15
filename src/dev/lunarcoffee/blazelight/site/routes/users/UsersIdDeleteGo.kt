@@ -11,7 +11,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.sessions.*
 
-fun Route.usersIdDeleteGoRoute() = get("/users/{id}/delete/go") {
+fun Route.usersIdDeleteGo() = get("/users/{id}/delete/go") {
     val user = call.parameters["id"]?.toLongOrNull()?.getUser()
         ?: return@get call.respond(HttpStatusCode.NotFound)
 
