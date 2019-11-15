@@ -13,9 +13,9 @@ val ApplicationCall.path get() = request.path()
 fun HtmlBlockInlineTag.renderWithBBCode(
     text: String,
     s: LocalizedStrings,
-    allowHr: Boolean = false
+    internal: Boolean = false
 ) {
-    BBCodeRenderer(this, s).render(text, allowHr)
+    BBCodeRenderer(this, s).render(text, internal)
 }
 
 fun HtmlBlockTag.plusButton(url: String, alt: String) {

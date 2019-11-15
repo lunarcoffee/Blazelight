@@ -112,7 +112,8 @@ class BBCodeLexer(val text: String) {
     companion object {
         private val TAG_NAMES = setOf(
             "b", "i", "u", "s", "color", "size", "code", // Stylistic tags.
-            "url", "email", "img", "quote", "hr" // Functional tags.
+            "url", "email", "img", "quote",              // Functional tags.
+            "hr"                                         // Internal use tags.
         )
         private val IMPLICIT_ARG_TAG_NAMES = setOf("url", "email", "img")
     }

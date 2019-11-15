@@ -17,4 +17,26 @@ Struckthrough:[size=150][/size]
 \[size=70]text\[/size] -> [size=70]text[/size]
 [size=150][/size]Color is another way to format your text. You can use any common color (specifically HTML color) or a hex code:
 \[color=red]text\[/color] -> [color=red]text[/color]
-\[color=#8BE8BE]text\[/color] -> [color=#8BE8BE]text[/color]
+\[color=#6DC79E]text\[/color] -> [color=#6DC79E]text[/color]
+
+[b][size=117]Linking things:[/size][/b]
+[hr][/hr]Quite often, it is desirable to link another site. This can be done as:
+\[url]https://google.com\[/url] -> [url]https://google.com[/url]
+\[url=https://google.com]Google\[/url] -> [url=https://google.com]Google[/url]
+[size=150][/size]Other times, it would be nice to embed an image from another site:
+\[img]https://your.favorite.site/nice_image.png\[/img]
+[size=150][/size]More rarely, you may wish to embed an email link that automatically opens up the viewer's email client:
+\[email]abc@def.com\[/email] -> [email]abc@def.com[/email]
+
+[b][size=117]Quoting and monospaced text:[/size][/b]
+[hr][/hr]Emphasizing quoted text is easy, and it is optional to provide the quoted entity's name:
+\[quote]Anonymous quote\[/quote] ->
+[quote]Anonymous quote[/quote]
+\[quote=Rob]Authored quote\[/quote] ->
+[quote=Rob]Authored quote[/quote]
+[size=120][/size]Sometimes, a monospaced font can help align things, or display code neatly:
+\[code]Hello, world! This text is monospaced.\[/code] ->
+[code]Hello, world! This text is monospaced.[/code][size=140][/size]
+[b][size=117]Other information:[/size][/b]
+[hr][/hr]All of the mentioned tags will span multiple lines (some might be capable of counterintuitive things). It is also possible to combine multiple tags for their style and functionality (\[img] might behave unexpectedly sometimes):
+\[b]\[i]\[color=green]Hello! \[url=https://google.com]Google\[/url]\[/color] is my \[u]favorite\[/u] site.\[/i]\[/b] -> [b][i][color=green]Hello! [url=https://google.com]Google[/url][/color] is my [u]favorite[/u] site.[/i][/b]

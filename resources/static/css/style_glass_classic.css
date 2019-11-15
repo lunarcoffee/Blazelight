@@ -207,6 +207,11 @@ h2, h3 {
     box-shadow: #50506c 0 0 4px;
 }
 
+.in-block {
+    margin-top: 8px;
+    margin-bottom: -10px;
+}
+
 .button-1 {
     border: none;
     border-radius: 4px;

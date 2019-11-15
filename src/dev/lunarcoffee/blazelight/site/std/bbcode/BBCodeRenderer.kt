@@ -8,61 +8,73 @@ class BBCodeRenderer(private val rootTag: HtmlBlockInlineTag, private val s: Loc
     private var index = 0 // Index of the token currently being evaluated.
     private lateinit var tokens: List<BBCodeToken>
 
-    fun render(text: String, allowHr: Boolean) {
+    fun render(text: String, internal: Boolean) {
         tokens = BBCodeParser(BBCodeLexer(text)).getTokens()
-        rootTag.renderByTokens(allowHr = allowHr)
+        rootTag.renderByTokens(internal = internal)
     }
 
     private fun HtmlBlockInlineTag.renderBBCodeTag(
         tag: BcTOpenTag,
         preserveFormatting: Boolean,
-        allowHr: Boolean = false
+        internal: Boolean = false
     ) {
         index++ // Skip the opening [tag].
-        if (allowHr && tag.name == "hr") {
+        if (internal && tag.name == "hr") {
             hr()
-            renderByTokens(preserveFormatting, allowHr)
+            renderByTokens(preserveFormatting, internal)
+            return
         }
 
         when (tag.name) {
-            "b" -> b { renderByTokens(preserveFormatting, allowHr) }
-            "i" -> i { renderByTokens(preserveFormatting, allowHr) }
-            "u" -> ins { renderByTokens(preserveFormatting, allowHr) }
-            "s" -> del { renderByTokens(preserveFormatting, allowHr) }
+            "b" -> b { renderByTokens(preserveFormatting, internal) }
+            "i" -> i { renderByTokens(preserveFormatting, internal) }
+            "u" -> ins { renderByTokens(preserveFormatting, internal) }
+            "s" -> del { renderByTokens(preserveFormatting, internal) }
             "color" -> span {
                 style = "color: ${tag.arg.substringBefore(";")};"
-                renderByTokens(preserveFormatting, allowHr)
+                renderByTokens(preserveFormatting, internal)
             }
             "size" -> span {
-                val coercedSize = tag.arg.toIntOrNull()?.coerceIn(20, 200) ?: 100
-                style = "font-size: $coercedSize%;"
-                renderByTokens(preserveFormatting, allowHr)
+                val size = tag.arg.toIntOrNull()
+                val coercedSize = size?.coerceIn(20, 200) ?: 100
+                val actualSize = if (internal) size else coercedSize
+
+                style = "font-size: $actualSize%;"
+                renderByTokens(preserveFormatting, internal)
             }
-            "code" -> div(classes = "code comment-text") { code { renderByTokens(true) } }
+            "code" -> {
+                val internalClass = if (internal) "in-block" else ""
+                div(classes = "code comment-text $internalClass") { code { renderByTokens(true) } }
+            }
             "url" -> a(href = tag.arg, target = "_blank", classes = "u") {
-                renderByTokens(preserveFormatting, allowHr)
+                renderByTokens(preserveFormatting, internal)
             }
             "email" -> a(href = "mailto:${tag.arg}", classes = "u") {
-                renderByTokens(preserveFormatting, allowHr)
+                renderByTokens(preserveFormatting, internal)
             }
             "img" -> a(href = tag.arg) { img(src = tag.arg, classes = "post-image") }
-            "quote" -> blockQuote(classes = "comment-text") {
-                b(classes = "px") { +if (tag.arg.isEmpty()) "Quote:" else "${tag.arg} ${s.said}:" }
-                br()
-                this@renderBBCodeTag.renderByTokens(preserveFormatting, allowHr)
+            "quote" -> {
+                val internalClass = if (internal) "in-block" else ""
+                blockQuote(classes = "comment-text $internalClass") {
+                    b(classes = "px") {
+                        +if (tag.arg.isEmpty()) "Quote:" else "${tag.arg} ${s.said}:"
+                    }
+                    br()
+                    this@renderBBCodeTag.renderByTokens(preserveFormatting, internal)
+                }
             }
-            else -> renderByTokens(preserveFormatting, allowHr)
+            else -> renderByTokens(preserveFormatting, internal)
         }
     }
 
     private fun HtmlBlockInlineTag.renderByTokens(
         preserveAllFormatting: Boolean = false,
-        allowHr: Boolean = false
+        internal: Boolean = false
     ) {
         while (index <= tokens.lastIndex) {
             when (val token = tokens[index]) {
                 is BcTText -> renderWithNewlines(token.text, preserveAllFormatting)
-                is BcTOpenTag -> renderBBCodeTag(token, preserveAllFormatting, allowHr)
+                is BcTOpenTag -> renderBBCodeTag(token, preserveAllFormatting, internal)
                 is BcTCloseTag -> return
             }
             index++
