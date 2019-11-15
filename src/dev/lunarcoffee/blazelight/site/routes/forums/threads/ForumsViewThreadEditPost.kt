@@ -17,25 +17,21 @@ fun Route.forumsViewThreadEditRoutePost() = post("/forums/view/{forumId}/{thread
     val params = call.receiveParameters()
 
     val user = call.sessions.get<UserSession>()!!.getUser()!!
-    val originalThread = call.parameters["threadId"]!!.toLongOrNull()?.getThread()
+    val thread = call.parameters["threadId"]!!.toLongOrNull()?.getThread()
         ?: return@post call.respond(HttpStatusCode.NotFound)
 
     // Ensure only the author can edit their thread.
-    if (user.id != originalThread.authorId)
+    if (user.id != thread.authorId)
         return@post call.respond(HttpStatusCode.Forbidden)
 
     val forumId = call.parameters["forumId"]!!.toLong()
     val title = params["title"]!!
     val content = params["content"]!!
 
-    // Make new modified objects.
-    val thread = originalThread.apply { this@apply.title = title }
-    val firstPost = thread.firstPost!!.apply { contentRaw = content }
-
-    val index = when (ThreadEditManager.edit(thread, firstPost)) {
+    val index = when (ThreadEditManager.edit(thread.id, title, content)) {
         ThreadAddResult.INVALID_NAME -> 0
         ThreadAddResult.INVALID_CONTENT -> 1
-        else -> return@post call.respondRedirect("/forums/view/$forumId")
+        else -> return@post call.respondRedirect("/forums/view/$forumId/${thread.id}")
     }
-    call.respondRedirect("/forums/view/$forumId/add?a=$index")
+    call.respondRedirect("/forums/view/$forumId/${thread.id}/edit?a=$index")
 }

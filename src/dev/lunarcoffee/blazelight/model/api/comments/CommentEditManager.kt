@@ -6,13 +6,14 @@ import dev.lunarcoffee.blazelight.model.internal.forums.UserComment
 import org.litote.kmongo.eq
 
 object CommentEditManager {
-    suspend fun edit(comment: Comment): CommentEditResult {
-        if (comment.contentRaw.length !in 1..10_000)
+    suspend fun edit(commentId: Long, content: String): CommentEditResult {
+        if (content.length !in 1..10_000)
             return CommentEditResult.INVALID_CONTENT
 
-        CommentCache.comments.removeIf { it.id == comment.id }
+        val comment = commentId.getComment()!!.apply { contentRaw = content }
+        CommentCache.comments.removeIf { it.id == commentId }
         CommentCache.comments += comment
-        Database.commentCol.replaceOne(Comment::id eq comment.id, comment as UserComment)
+        Database.commentCol.replaceOne(Comment::id eq commentId, comment as UserComment)
 
         return CommentEditResult.SUCCESS
     }

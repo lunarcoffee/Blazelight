@@ -1,6 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
-import dev.lunarcoffee.blazelight.model.api.comments.*
+import dev.lunarcoffee.blazelight.model.api.comments.CommentAddResult
+import dev.lunarcoffee.blazelight.model.api.comments.CommentEditManager
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.call
@@ -28,10 +29,9 @@ fun Route.forumsViewThreadCommentEditPost() {
         val forumId = params["forumId"]!!.toLong()
         val threadId = params["threadId"]!!.toLong()
 
-        val comment = commentId.getComment()!!.apply { contentRaw = content }
         call.respondRedirect(
-            if (CommentEditManager.edit(comment) == CommentAddResult.INVALID_CONTENT)
-                "/forums/view/$forumId/$threadId/edit?a=0"
+            if (CommentEditManager.edit(commentId, content) == CommentAddResult.INVALID_CONTENT)
+                "/forums/view/$forumId/$threadId/$commentId/edit?a=0"
             else
                 "/forums/view/$forumId/$threadId"
         )
