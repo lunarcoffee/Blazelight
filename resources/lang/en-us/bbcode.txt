@@ -1,5 +1,5 @@
 # Formatting text with BBCode
-Typing with normal text is fine, but it can fail to express some intentions properly. BBCode is a markup language (very similar to HTML) which allows controlled formatting of text. With it, text like [i]this[/i] and [u]this[/u] can easily be expressed, among other things. The syntax is composed of "tags," like \[b] and \[u], each with a "closing" counterpart, \[/b] and \[/u] in this case. When these tags surround some text, as in \[b]this\[/b], they change the way it looks. Multiple tags can surround one piece of text, combining their effects.
+Typing with normal text is fine, but it can fail to express some intentions properly. BBCode is a markup language (very similar to HTML) which allows controlled formatting of text. With it, text like [i]this[/i] and [u]this[/u] can easily be expressed, among other things. The syntax is composed of 'tags,' like \[b] and \[u], each with a 'closing' counterpart, \[/b] and \[/u] in this case. When these tags surround some text, as in \[b]this\[/b], they change the way it looks. Multiple tags can surround one piece of text, combining their effects.
 
 [b][size=117]Basic text styling:[/size][/b]
 [hr][/hr]Bold:
@@ -40,3 +40,5 @@ Struckthrough:[size=150][/size]
 [b][size=117]Other information:[/size][/b]
 [hr][/hr]All of the mentioned tags will span multiple lines (some might be capable of counterintuitive things). It is also possible to combine multiple tags for their style and functionality (\[img] might behave unexpectedly sometimes):
 \[b]\[i]\[color=green]Hello! \[url=https://google.com]Google\[/url]\[/color] is my \[u]favorite\[/u] site.\[/i]\[/b] -> [b][i][color=green]Hello! [url=https://google.com]Google[/url][/color] is my [u]favorite[/u] site.[/i][/b]
+[size=150][/size]Another topic worthy of mention is 'escaping.' If you want to type a tag or other entity which would normally not display as itself (i.e. \[b]this\[/b] would display as [b]this[/b], without the tags), you can prefix the text with a backslash:
+\\\[b]text\\\[/b] -> \[b]text\[/b]

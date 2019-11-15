@@ -24,7 +24,6 @@ import java.io.File
 
 // TODO: (entire project)
 //  - Implement editing
-//  - Implement friendly BBCode text box
 
 @KtorExperimentalAPI
 @Suppress("unused")
