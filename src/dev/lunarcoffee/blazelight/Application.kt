@@ -22,9 +22,6 @@ import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
 import java.io.File
 
-// TODO: (entire project)
-//  - Implement editing
-
 @KtorExperimentalAPI
 @Suppress("unused")
 fun Application.module() {
