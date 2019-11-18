@@ -170,3 +170,7 @@ emailTaken:                             "That email is taken!"
 usernameTaken:                          "That username is taken!"
 passwordConfirmFail:                    "The two passwords don't match!"
 successRegister:                        "Success! You may now log in."
+
+im:                                     "IM"
+imCap:                                  "Messaging"
+messages:                               "Messages"

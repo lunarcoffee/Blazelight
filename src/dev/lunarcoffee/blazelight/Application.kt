@@ -5,6 +5,7 @@ import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.tools.*
+import dev.lunarcoffee.blazelight.site.routes.im.imRoute
 import dev.lunarcoffee.blazelight.site.routes.users.*
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettings
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSet
@@ -94,14 +95,12 @@ fun Application.configRouting() {
         }
 
         authenticate("loginAuth") {
-            // Private user account tasks.
             usersIdSettings()
             usersIdSettingsSet()
             usersIdDelete()
             usersIdDeleteGo()
             logoutRoute()
 
-            // Creating new entities within the forum system.
             categoryPost()
             forumsAdd()
             forumsAddPost()
@@ -110,13 +109,11 @@ fun Application.configRouting() {
             forumsViewThreadAdd()
             forumsViewThreadAddPost()
 
-            // Editing entities.
             forumsViewThreadEdit()
             forumsViewThreadEditRoutePost()
             forumsViewThreadCommentEdit()
             forumsViewThreadCommentEditPost()
 
-            // Deleting entities.
             forumsCategoryDelete()
             forumsCategoryDeleteGo()
             forumsViewDelete()
@@ -125,25 +122,23 @@ fun Application.configRouting() {
             forumsViewThreadDeleteGo()
             forumsViewThreadCommentDelete()
             forumsViewThreadCommentDeleteGo()
+
+            imRoute()
         }
 
-        // Basic user management.
         homeRoute()
         registerRoute()
         registerPost()
         loginRoute()
         loginPost()
 
-        // Public user account tasks.
         usersId()
         usersRoute()
 
-        // Public forum viewing tasks.
         forumsRoute()
         forumsView()
         forumsViewThread()
 
-        // Public tools and help.
         toolsRoute()
         toolsHelp()
         toolsHelpTopic()

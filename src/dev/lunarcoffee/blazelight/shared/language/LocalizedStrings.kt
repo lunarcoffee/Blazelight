@@ -149,4 +149,8 @@ class LocalizedStrings {
     lateinit var usernameTaken: String
     lateinit var passwordConfirmFail: String
     lateinit var successRegister: String
+
+    lateinit var im: String
+    lateinit var imCap: String
+    lateinit var messages: String
 }

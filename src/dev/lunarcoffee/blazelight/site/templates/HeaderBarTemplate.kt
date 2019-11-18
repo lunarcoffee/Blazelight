@@ -29,6 +29,7 @@ class HeaderBarTemplate(
                             a(href = "/register", classes = "header-top-button") { +s.register }
                             a(href = "/login", classes = "header-top-button") { +s.login }
                         } else {
+                            a(href = "/im", classes = "header-top-button") { +s.messages }
                             a(href = "/users/${user.id}", classes = "header-top-button") {
                                 +s.myProfile
                             }
