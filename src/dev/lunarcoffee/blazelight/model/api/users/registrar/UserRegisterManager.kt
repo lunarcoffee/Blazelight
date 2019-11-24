@@ -5,6 +5,7 @@ import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.std.util.PasswordHasher
 import dev.lunarcoffee.blazelight.model.internal.std.util.UniqueIDGenerator
 import dev.lunarcoffee.blazelight.model.internal.users.*
+import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMDataList
 import dev.lunarcoffee.blazelight.shared.language.Language
 import dev.lunarcoffee.blazelight.shared.sanitize
 import org.litote.kmongo.eq
@@ -39,7 +40,8 @@ object UserRegisterManager {
         val passwordHash = PasswordHasher(password, salt).hash()
 
         val settings = UserSettings(UniqueIDGenerator.nextId(), timeZone, language)
-        val user = DefaultUser(name, email, passwordHash, salt, settings)
+        val imDataList = UserIMDataList(settings.userId) // TODO
+        val user = DefaultUser(name, email, passwordHash, salt, imDataList, settings)
         Database.userCol.insertOne(user)
         UserCache.users += user
 
