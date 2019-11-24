@@ -1,5 +1,7 @@
 package dev.lunarcoffee.blazelight.model.internal.users
 
+import dev.lunarcoffee.blazelight.model.internal.users.im.IMData
+
 open class DefaultUser(
     override val username: String,
     override val email: String,
@@ -15,7 +17,9 @@ open class DefaultUser(
     override val threadIds = mutableListOf<Long>()
 
     override var creationTime = System.currentTimeMillis()
-    override val id = settings.userId
+    final override val id = settings.userId
+
+    override val imData = emptyList<IMData>()
 
     override var isAdmin = false
 }
