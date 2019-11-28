@@ -1,13 +1,11 @@
 package dev.lunarcoffee.blazelight.model.internal.users
 
-import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMDataList
-
 class DeletedDefaultUser(user: User, deleted: String) : DefaultUser(
     deleted,
     deleted,
     deleted,
     byteArrayOf(),
-    UserIMDataList(user.settings.userId), // This effectively clears IM data.
+    user.imDataListId,
     user.settings
 ) {
     override var description: String? = deleted

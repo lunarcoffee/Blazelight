@@ -3,8 +3,7 @@ package dev.lunarcoffee.blazelight.model.internal
 import dev.lunarcoffee.blazelight.model.internal.forums.*
 import dev.lunarcoffee.blazelight.model.internal.std.util.IdSetWrapper
 import dev.lunarcoffee.blazelight.model.internal.users.DefaultUser
-import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMData
-import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMMessage
+import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMDataList
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 
@@ -17,8 +16,7 @@ object Database {
     val commentCol = db.getCollection<UserComment>("BL_Comment0")
 
     val userCol = db.getCollection<DefaultUser>("BL_User0")
-    val imDataCol = db.getCollection<UserIMData>("BL_IMData0")
-    val imCol = db.getCollection<UserIMMessage>("BL_IMMessage0")
+    val imDataListCol = db.getCollection<UserIMDataList>("BL_IMData0")
 
     val idCol = db.getCollection<IdSetWrapper>("BL_OldID0")
 }

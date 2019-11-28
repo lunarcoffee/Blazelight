@@ -40,8 +40,11 @@ object UserRegisterManager {
         val passwordHash = PasswordHasher(password, salt).hash()
 
         val settings = UserSettings(UniqueIDGenerator.nextId(), timeZone, language)
-        val imDataList = UserIMDataList(settings.userId) // TODO
-        val user = DefaultUser(name, email, passwordHash, salt, imDataList, settings)
+
+        val imDataList = UserIMDataList(settings.userId)
+        Database.imDataListCol.insertOne(imDataList)
+
+        val user = DefaultUser(name, email, passwordHash, salt, imDataList.id, settings)
         Database.userCol.insertOne(user)
         UserCache.users += user
 

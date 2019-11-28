@@ -3,9 +3,9 @@ package dev.lunarcoffee.blazelight
 import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
+import dev.lunarcoffee.blazelight.site.routes.im.imRoute
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.tools.*
-import dev.lunarcoffee.blazelight.site.routes.im.imRoute
 import dev.lunarcoffee.blazelight.site.routes.users.*
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettings
 import dev.lunarcoffee.blazelight.site.routes.users.settings.usersIdSettingsSet
@@ -22,6 +22,11 @@ import io.ktor.sessions.*
 import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
 import java.io.File
+
+// TODO:
+//  - Basic IM functionality.
+//  - Ability to block users from IM.
+//  - IM requests.
 
 @KtorExperimentalAPI
 @Suppress("unused")
