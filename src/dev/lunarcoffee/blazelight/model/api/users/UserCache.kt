@@ -12,4 +12,8 @@ object UserCache : DBCacheable<User> {
     override suspend fun cacheFromDB(id: Long): User? {
         return Database.userCol.findOne(User::id eq id)?.also { users += it }
     }
+
+    suspend fun cacheFromDB(username: String): User? {
+        return Database.userCol.findOne(User::username eq username)?.also { users += it }
+    }
 }

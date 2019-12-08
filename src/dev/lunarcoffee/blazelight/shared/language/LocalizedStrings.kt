@@ -15,6 +15,7 @@ class LocalizedStrings {
     lateinit var deleteAccount: String
     lateinit var register: String
     lateinit var login: String
+    lateinit var go: String
 
     lateinit var home: String
     lateinit var forums: String
@@ -149,8 +150,13 @@ class LocalizedStrings {
     lateinit var usernameTaken: String
     lateinit var passwordConfirmFail: String
     lateinit var successRegister: String
+    lateinit var userNotFound: String
+    lateinit var cannotMessageSelf: String
 
     lateinit var im: String
     lateinit var imCap: String
     lateinit var messages: String
+    lateinit var noConversations: String
+    lateinit var startConversationHeading: String
+    lateinit var noMessagesYetParen: String
 }

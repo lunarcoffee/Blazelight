@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.im
 
+import dev.lunarcoffee.blazelight.model.api.imdatalist.getIMDataList
 import dev.lunarcoffee.blazelight.model.api.users.getUser
-import dev.lunarcoffee.blazelight.model.api.imdata.getIMDataList
 import dev.lunarcoffee.blazelight.shared.language.s
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
@@ -17,6 +17,9 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Route.imRoute() = get("/im") {
+    val messageIndex = call.parameters["a"]?.toIntOrNull()
+    val specialMessages = listOf(s.userNotFound, s.cannotMessageSelf)
+
     val user = call.sessions.get<UserSession>()!!.getUser()!!
     val imDataList = user.imDataListId.getIMDataList()!!
 
@@ -25,26 +28,40 @@ fun Route.imRoute() = get("/im") {
             breadcrumbs { thisCrumb(call, s.imCap) }
             br()
 
-            h3(classes = "title") { b { +s.imCap } }
+            if (imDataList.data.isEmpty())
+                p { +s.noConversations }
+            else
+                h3(classes = "title") { b { +s.imCap } }
             hr()
 
             for (data in imDataList.data) {
                 div(classes = "forum-list-item") {
-                    a(href = "/forums/v", classes = "a1 title") {
-                        +"".textOrEllipsis(70)
+                    a(href = "/im/${data.id}", classes = "a1 title") {
+                        +data.recipientId.getUser()!!.username
                     }
                     p(classes = "forum-topic title") {
                         // TODO: last sent message
-                        +data.recipientId.getUser()!!.username
+                        val last = data.messages.lastOrNull()?.contentRaw ?: s.noMessagesYetParen
+                        +last.textOrEllipsis(70)
                     }
                     i(classes = "thread-l forum-topic title") {
-                        // TODO: last sent message timestamp
                         // Last post author and timestamp.
-                        val last = data.messages.last()
-                        +" ${s.timeOn} ${last.creationTime.toTimeDisplay(user)}"
+                        val time = data.messages.lastOrNull()?.creationTime ?: data.creationTime
+                        +time.toTimeDisplay(user)
                     }
                     hr(classes = "hr-dot")
                 }
+            }
+
+            h3 { +s.startConversationHeading }
+            form(action = "/im/start", method = FormMethod.post, classes = "f-inline") {
+                input(type = InputType.text, name = "username", classes = "fi-text fi-top") {
+                    placeholder = s.username
+                }
+                input(type = InputType.submit, classes = "button-1 b-inline") { value = s.go }
+
+                if (messageIndex in specialMessages.indices)
+                    span(classes = "red") { +specialMessages[messageIndex!!] }
             }
         }
     }

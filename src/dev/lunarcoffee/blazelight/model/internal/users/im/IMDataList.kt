@@ -3,8 +3,10 @@ package dev.lunarcoffee.blazelight.model.internal.users.im
 import dev.lunarcoffee.blazelight.model.internal.std.Dateable
 import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 
+typealias IUserIMDataList = IMDataList<UserIMData, UserIMMessage>
+
 // [IMDataList]s store a list of a [IMData] that store message history.
-interface IMDataList : Dateable, Identifiable {
-    val data: List<IMData>
+interface IMDataList<T : IMData<V>, V : IMMessage> : Dateable, Identifiable {
+    val data: MutableList<T>
     val userId: Long
 }

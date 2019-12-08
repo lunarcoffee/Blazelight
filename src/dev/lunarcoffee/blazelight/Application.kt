@@ -4,6 +4,7 @@ import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
 import dev.lunarcoffee.blazelight.site.routes.im.imRoute
+import dev.lunarcoffee.blazelight.site.routes.im.imStartPost
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.tools.*
 import dev.lunarcoffee.blazelight.site.routes.users.*
@@ -25,7 +26,6 @@ import java.io.File
 
 // TODO:
 //  - Basic IM functionality.
-//  - Ability to block users from IM.
 //  - IM requests.
 
 @KtorExperimentalAPI
@@ -129,6 +129,7 @@ fun Application.configRouting() {
             forumsViewThreadCommentDeleteGo()
 
             imRoute()
+            imStartPost()
         }
 
         homeRoute()
