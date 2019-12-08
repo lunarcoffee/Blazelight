@@ -58,7 +58,7 @@ h2, h3 {
     color: #ddd;
     height: auto;
     padding-bottom: 14px;
-    margin: 0 calc((100vw - 120vh) / 2);
+    margin: 0 calc(50vw - 60vh);
     background: #272727;
     border-radius: 0 0 6px 6px;
 }
@@ -159,7 +159,7 @@ h2, h3 {
     background: #272727;
     color: #ddd;
     width: available;
-    margin: 14px calc((100vw - 120vh) / 2);
+    margin: 14px calc(50vw - 60vh);
     min-height: inherit;
     padding: 20px;
     border-radius: 6px;
@@ -175,6 +175,17 @@ h2, h3 {
     margin: 3px 0;
     outline: none;
     width: 230px;
+}
+
+.fi-im {
+    width: calc(120vh - 90px);
+    margin-top: -5px;
+}
+
+.fi-hidden {
+    border: 0;
+    padding: 0;
+    font-size: 0;
 }
 
 .fi-text:hover {
@@ -261,6 +272,23 @@ h2, h3 {
 
 .p {
     height: 4px;
+}
+
+.im-box {
+    height: 55vh;
+    max-height: 55vh;
+    overflow-y: scroll;
+}
+
+.im-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.im-message {
+    background: cyan;
+    color: red;
 }
 
 .a1 {
@@ -410,7 +438,7 @@ h2, h3 {
 }
 
 .b-plus:hover {
-    filter: brightness(110%) grayscale(100%) ;
+    filter: brightness(110%) grayscale(100%);
 }
 
 .b-x {

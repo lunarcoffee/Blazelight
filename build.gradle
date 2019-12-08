@@ -37,6 +37,7 @@ dependencies {
     compile "io.ktor:ktor-server-sessions:$ktor_version"
     compile "io.ktor:ktor-auth:$ktor_version"
     compile "io.ktor:ktor-html-builder:$ktor_version"
+    compile "io.ktor:ktor-websockets:$ktor_version"
 
     compile "org.litote.kmongo:kmongo:3.11.0"
     compile "org.litote.kmongo:kmongo-coroutine:3.11.0"

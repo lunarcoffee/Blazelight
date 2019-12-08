@@ -159,4 +159,5 @@ class LocalizedStrings {
     lateinit var noConversations: String
     lateinit var startConversationHeading: String
     lateinit var noMessagesYetParen: String
+    lateinit var send: String
 }

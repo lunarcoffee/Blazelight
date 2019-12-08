@@ -4,6 +4,7 @@ import dev.lunarcoffee.blazelight.model.api.imdatalist.IMDataListManager
 import dev.lunarcoffee.blazelight.model.api.imdatalist.getIMDataList
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMData
+import dev.lunarcoffee.blazelight.shared.sanitize
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -19,7 +20,9 @@ fun Route.imStartPost() = post("/im/start") {
     val user = call.sessions.get<UserSession>()!!.getUser()!!
     val params = call.receiveParameters()
 
-    val recipientName = params["username"] ?: return@post call.respond(HttpStatusCode.NotFound)
+    // Prevent messaging oneself.
+    val recipientName = params["username"]?.sanitize()
+        ?: return@post call.respond(HttpStatusCode.NotFound)
     if (user.username == recipientName)
         return@post call.respondRedirect("/im?a=1")
 
@@ -31,5 +34,5 @@ fun Route.imStartPost() = post("/im/start") {
         update(user.imDataListId.getIMDataList()!!.apply { data += imDataAuthor })
         update(recipient.imDataListId.getIMDataList()!!.apply { data += imDataRecipient })
     }
-    call.respondRedirect("/im") // TODO: /im/{imDataAuthor.id}/
+    call.respondRedirect("/im/${imDataAuthor.id}")
 }

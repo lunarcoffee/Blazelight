@@ -3,8 +3,7 @@ package dev.lunarcoffee.blazelight
 import dev.lunarcoffee.blazelight.site.routes.*
 import dev.lunarcoffee.blazelight.site.routes.forums.*
 import dev.lunarcoffee.blazelight.site.routes.forums.threads.*
-import dev.lunarcoffee.blazelight.site.routes.im.imRoute
-import dev.lunarcoffee.blazelight.site.routes.im.imStartPost
+import dev.lunarcoffee.blazelight.site.routes.im.*
 import dev.lunarcoffee.blazelight.site.routes.statuses.*
 import dev.lunarcoffee.blazelight.site.routes.tools.*
 import dev.lunarcoffee.blazelight.site.routes.users.*
@@ -130,6 +129,7 @@ fun Application.configRouting() {
 
             imRoute()
             imStartPost()
+            imId()
         }
 
         homeRoute()
