@@ -34,6 +34,7 @@ fun Routing.forumsView() = get("/forums/view/{id}") {
 
     val threadPage = forum
         .threadIds
+        .asReversed()
         .drop(page * BL_CONFIG.threadPageSize)
         .take(BL_CONFIG.threadPageSize)
         .getThreads()
