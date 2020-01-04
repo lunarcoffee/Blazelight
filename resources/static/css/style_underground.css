@@ -274,10 +274,33 @@ h2, h3 {
     height: 4px;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #474747;
+}
+
 .im-box {
     height: 55vh;
     max-height: 55vh;
     overflow-y: scroll;
+}
+
+.im-box::-webkit-scrollbar {
+    display: block;
+    width: 10px;
 }
 
 .im-list {

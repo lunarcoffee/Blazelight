@@ -1,7 +1,7 @@
 package dev.lunarcoffee.blazelight.site.routes.forums.threads
 
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
-import dev.lunarcoffee.blazelight.model.api.comments.getComment
+import dev.lunarcoffee.blazelight.model.api.comments.getComments
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
 import dev.lunarcoffee.blazelight.model.api.users.getUser
@@ -40,6 +40,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
         .commentIds
         .drop(page * BL_CONFIG.commentPageSize)
         .take(BL_CONFIG.commentPageSize)
+        .getComments()
 
     call.respondHtmlTemplate(HeaderBarTemplate("${s.thread} - ${thread.id}", call, s)) {
         content {
@@ -63,8 +64,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
             hr()
             padding(4)
 
-            for ((index, commentId) in commentPage.withIndex()) {
-                val comment = commentId.getComment()!!
+            for ((index, comment) in commentPage.withIndex()) {
                 val author = comment.authorId.getUser()!!
 
                 div(classes = "forum-list-item comment-list-item") {
@@ -101,7 +101,7 @@ fun Routing.forumsViewThread() = get("/forums/view/{forumId}/{threadId}") {
                                             }
                                         } else {
                                             a(
-                                                href = "${call.path}/${commentId}/edit",
+                                                href = "${call.path}/${comment.id}/edit",
                                                 classes = "a2 pa"
                                             ) {
                                                 +s.edit

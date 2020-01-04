@@ -3,6 +3,7 @@ package dev.lunarcoffee.blazelight.site.routes.forums.threads
 import dev.lunarcoffee.blazelight.model.api.categories.getCategory
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.threads.getThread
+import dev.lunarcoffee.blazelight.model.api.threads.getThreads
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.config.BL_CONFIG
 import dev.lunarcoffee.blazelight.shared.language.s
@@ -35,6 +36,7 @@ fun Routing.forumsView() = get("/forums/view/{id}") {
         .threadIds
         .drop(page * BL_CONFIG.threadPageSize)
         .take(BL_CONFIG.threadPageSize)
+        .getThreads()
 
     call.respondHtmlTemplate(HeaderBarTemplate("${s.forums} - ${forum.name}", call, s)) {
         content {
@@ -60,9 +62,7 @@ fun Routing.forumsView() = get("/forums/view/{id}") {
                 p { +s.noThreadsInForum }
                 padding(8)
             } else {
-                for (threadId in threadPage) {
-                    val thread = threadId.getThread()!!
-
+                for (thread in threadPage) {
                     div(classes = "forum-list-item") {
                         a(href = "/forums/view/${forum.id}/${thread.id}", classes = "a1 title") {
                             +thread.title.textOrEllipsis(70)

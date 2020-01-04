@@ -5,7 +5,7 @@ import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.forums.Thread
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
 import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
-import org.litote.kmongo.eq
+import org.litote.kmongo.*
 
 object ThreadCache : DBCacheable<Thread> {
     val threads = Cache<Thread>()
@@ -20,5 +20,14 @@ object ThreadCache : DBCacheable<Thread> {
 
     override suspend fun cacheFromDB(id: Long): Thread? {
         return Database.threadCol.findOne(Thread::id eq id)?.also { threads += it }
+    }
+
+    override suspend fun cacheManyFromDB(ids: List<Long>): List<Thread> {
+        return Database
+            .threadCol
+            .find(Thread::id `in` ids)
+            .sort(orderBy(Thread::creationTime))
+            .toList()
+            .also { threads += it }
     }
 }

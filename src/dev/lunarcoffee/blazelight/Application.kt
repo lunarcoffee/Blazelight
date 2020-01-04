@@ -25,7 +25,6 @@ import java.io.File
 
 // TODO:
 //  - Basic IM functionality.
-//  - IM requests.
 
 @KtorExperimentalAPI
 @Suppress("unused")

@@ -4,6 +4,7 @@ import dev.lunarcoffee.blazelight.model.internal.Database
 import dev.lunarcoffee.blazelight.model.internal.std.DBCacheable
 import dev.lunarcoffee.blazelight.model.internal.std.util.Cache
 import dev.lunarcoffee.blazelight.model.internal.users.User
+import org.litote.kmongo.`in`
 import org.litote.kmongo.eq
 
 object UserCache : DBCacheable<User> {
@@ -15,5 +16,9 @@ object UserCache : DBCacheable<User> {
 
     suspend fun cacheFromDB(username: String): User? {
         return Database.userCol.findOne(User::username eq username)?.also { users += it }
+    }
+
+    override suspend fun cacheManyFromDB(ids: List<Long>): List<User> {
+        return Database.userCol.find(User::id `in` ids).toList().also { users += it }
     }
 }
