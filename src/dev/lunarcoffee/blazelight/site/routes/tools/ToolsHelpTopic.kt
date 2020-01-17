@@ -7,6 +7,8 @@ import dev.lunarcoffee.blazelight.site.std.renderWithBBCode
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*
@@ -14,7 +16,12 @@ import java.io.File
 
 fun Routing.toolsHelpTopic() = get("/tools/help/{topic}") {
     val topic = call.parameters["topic"]!!
-    val topicTextLines = File("$languageResourceRoot/$topic.txt").readLines()
+
+    val file = File("$languageResourceRoot/$topic.txt")
+    if (!file.exists())
+        return@get call.respond(HttpStatusCode.NotFound)
+
+    val topicTextLines = file.readLines()
     val topicName = topicTextLines[0].substringAfter("#").trim()
     val topicText = topicTextLines.drop(1).joinToString("\n")
 
