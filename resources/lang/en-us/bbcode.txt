@@ -4,18 +4,18 @@ Typing with normal text is fine, but it can fail to express some intentions prop
 [b][size=117]Basic text styling:[/size][/b]
 [hr][/hr]Bold:
 \[b]text\[/b] -> [b]text[/b]
-Italicized:[size=150][/size]
+Italicized:[size=180][/size]
 \[i]text\[/i] -> [i]text[/i]
-Underlined:[size=150][/size]
+Underlined:[size=180][/size]
 \[u]text\[/u] -> [u]text[/u]
-Struckthrough:[size=150][/size]
+Struckthrough:[size=180][/size]
 \[s]text\[/s] -> [s]text[/s]
 
 [b][size=117]Changing size and color:[/size][/b]
 [hr][/hr]Size is represented as a percentage of the regular size. Text can be as small as 20% or as large as 200%. To use the tag looks like:
 \[size=130]text\[/size] -> [size=130]text[/size]
 \[size=70]text\[/size] -> [size=70]text[/size]
-[size=150][/size]Color is another way to format your text. You can use any common color (specifically HTML color) or a hex code:
+[size=180][/size]Color is another way to format your text. You can use any common color (specifically HTML color) or a hex code:
 \[color=red]text\[/color] -> [color=red]text[/color]
 \[color=#6DC79E]text\[/color] -> [color=#6DC79E]text[/color]
 
@@ -23,9 +23,9 @@ Struckthrough:[size=150][/size]
 [hr][/hr]Quite often, it is desirable to link another site. This can be done as:
 \[url]https://google.com\[/url] -> [url]https://google.com[/url]
 \[url=https://google.com]Google\[/url] -> [url=https://google.com]Google[/url]
-[size=150][/size]Other times, it would be nice to embed an image from another site:
+[size=180][/size]Other times, it would be nice to embed an image from another site:
 \[img]https://your.favorite.site/nice_image.png\[/img]
-[size=150][/size]More rarely, you may wish to embed an email link that automatically opens up the viewer's email client:
+[size=180][/size]More rarely, you may wish to embed an email link that automatically opens up the viewer's email client:
 \[email]abc@def.com\[/email] -> [email]abc@def.com[/email]
 
 [b][size=117]Quoting and monospaced text:[/size][/b]
@@ -40,5 +40,5 @@ Struckthrough:[size=150][/size]
 [b][size=117]Other information:[/size][/b]
 [hr][/hr]All of the mentioned tags will span multiple lines (some might be capable of counterintuitive things). It is also possible to combine multiple tags for their style and functionality (\[img] might behave unexpectedly sometimes):
 \[b]\[i]\[color=green]Hello! \[url=https://google.com]Google\[/url]\[/color] is my \[u]favorite\[/u] site.\[/i]\[/b] -> [b][i][color=green]Hello! [url=https://google.com]Google[/url][/color] is my [u]favorite[/u] site.[/i][/b]
-[size=150][/size]Another topic worthy of mention is 'escaping.' If you want to type a tag or other entity which would normally not display as itself (i.e. \[b]this\[/b] would display as [b]this[/b], without the tags), you can prefix the text with a backslash:
+[size=180][/size]Another topic worthy of mention is 'escaping.' If you want to type a tag or other entity which would normally not display as itself (i.e. \[b]this\[/b] would display as [b]this[/b], without the tags), you can prefix the text with a backslash:
 \\\[b]text\\\[/b] -> \[b]text\[/b]

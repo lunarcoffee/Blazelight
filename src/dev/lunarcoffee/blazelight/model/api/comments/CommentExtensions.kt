@@ -13,5 +13,5 @@ fun List<Long>.getComments(): List<Comment> {
     val remainingUncached = this - comments.map { it.id }
     val remaining = runBlocking { CommentCache.cacheManyFromDB(remainingUncached) }
 
-    return comments + remaining
+    return (comments + remaining).sortedBy { it.creationTime }
 }

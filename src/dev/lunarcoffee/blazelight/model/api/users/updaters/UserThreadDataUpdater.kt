@@ -17,6 +17,9 @@ object UserThreadDataUpdater {
     suspend fun deleteThread(threadId: Long, userId: Long) {
         val newThreadIds = userId.getUser()!!.threadIds - threadId
         userId.updateDbUserThreadIds(newThreadIds)
+
+        // Remove to clear old data, then reload data.
+        UserCache.users.removeIf { it.id == userId }
         UserCache.cacheFromDB(userId)
     }
 

@@ -16,5 +16,5 @@ fun List<Long>.getThreads(): List<Thread> {
     val remainingUncached = this - threads.map { it.id }
     val remaining = runBlocking { ThreadCache.cacheManyFromDB(remainingUncached) }
 
-    return threads + remaining
+    return (threads + remaining).sortedByDescending { it.creationTime }
 }

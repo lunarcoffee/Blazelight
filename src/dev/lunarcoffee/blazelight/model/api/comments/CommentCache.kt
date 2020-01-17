@@ -18,7 +18,6 @@ object CommentCache : DBCacheable<Comment> {
             .commentCol
             .find(Comment::id `in` ids)
             .toList()
-            .sortedBy { it.creationTime }
             .also { comments += it }
     }
 }

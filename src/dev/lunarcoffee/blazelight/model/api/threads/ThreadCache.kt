@@ -27,7 +27,6 @@ object ThreadCache : DBCacheable<Thread> {
             .threadCol
             .find(Thread::id `in` ids)
             .toList()
-            .sortedByDescending { it.creationTime }
             .also { threads += it }
     }
 }
