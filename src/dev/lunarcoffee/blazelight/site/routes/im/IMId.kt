@@ -23,8 +23,7 @@ fun Route.imId() = get("/im/{dataId}") {
     val dataList = user.imDataListId.getIMDataList()!!
 
     // Verify the IM data is the accessor's.
-    val data = dataList.data.find { it.id == dataId }
-        ?: return@get call.respond(HttpStatusCode.NotFound)
+    val data = dataList.getByDataId(dataId) ?: return@get call.respond(HttpStatusCode.NotFound)
 
     val recipient = data.recipientId.getUser()!!
     call.respondHtmlTemplate(HeaderBarTemplate("${s.im} - ${recipient.username}", call, s)) {

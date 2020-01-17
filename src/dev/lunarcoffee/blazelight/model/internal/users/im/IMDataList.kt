@@ -9,4 +9,6 @@ typealias IUserIMDataList = IMDataList<UserIMData, UserIMMessage>
 interface IMDataList<T : IMData<V>, V : IMMessage> : Dateable, Identifiable {
     val data: MutableList<T>
     val userId: Long
+
+    fun getByDataId(dataId: Long): T?
 }

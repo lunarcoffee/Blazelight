@@ -38,7 +38,7 @@ class HeadTemplate(
                 sep()
                 a(href = GITHUB_LINK, target = "_blank", classes = "a2") { +"GitHub" }
                 sep()
-                +"Last updated at ${System.currentTimeMillis().toTimeTime(user)}"
+                +"Page loaded at ${System.currentTimeMillis().toTimeTime(user)}"
             }
             padding(10)
         }

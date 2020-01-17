@@ -7,4 +7,6 @@ class UserIMDataList(override val userId: Long) : IUserIMDataList {
 
     override val creationTime = System.currentTimeMillis()
     override val id = UniqueIDGenerator.nextId()
+
+    override fun getByDataId(dataId: Long) = data.find { it.id == dataId }
 }

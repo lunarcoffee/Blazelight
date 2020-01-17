@@ -125,8 +125,10 @@ class LocalizedStrings {
 
     lateinit var help: String
     lateinit var helpDescription: String
-    lateinit var helpBBCodeDescription: String
     lateinit var formattedTextNotice: String
+
+    lateinit var blog: String
+    lateinit var blogDescription: String
 
     lateinit var noThreadsInForum: String
     lateinit var noCategories: String

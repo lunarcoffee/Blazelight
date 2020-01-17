@@ -20,23 +20,22 @@ import io.ktor.response.respondRedirect
 import io.ktor.routing.routing
 import io.ktor.sessions.*
 import io.ktor.util.KtorExperimentalAPI
+import io.ktor.websocket.WebSockets
 import org.slf4j.event.Level
 import java.io.File
-
-// TODO:
-//  - Basic IM functionality.
 
 @KtorExperimentalAPI
 @Suppress("unused")
 fun Application.module() {
+    install(CallLogging) { level = Level.INFO }
+    install(CORS)
+    install(WebSockets)
+
     configAuth()
     configCache()
     configSessions()
     configStatusPages()
     configRouting()
-
-    install(CallLogging) { level = Level.INFO }
-    install(CORS)
 }
 
 fun Application.configAuth() {
@@ -129,6 +128,7 @@ fun Application.configRouting() {
             imRoute()
             imStartPost()
             imId()
+            imIdWs()
         }
 
         homeRoute()

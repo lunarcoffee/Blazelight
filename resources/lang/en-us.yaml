@@ -143,7 +143,6 @@ noneParen:                              "(none)"
 # Help section.
 help:                                   "Help"
 helpDescription:                        "Help topics"
-helpBBCodeDescription:                  "Formatting text with BBCode"
 formattedTextNotice:                    "You can create formatted text with BBCode."
 
 # Special cases for various displays.
