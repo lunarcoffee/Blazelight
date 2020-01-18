@@ -4,9 +4,8 @@ import dev.lunarcoffee.blazelight.model.api.categories.CategoryCache
 import dev.lunarcoffee.blazelight.model.api.forums.getForum
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.s
+import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
-import dev.lunarcoffee.blazelight.site.std.deleteButton
-import dev.lunarcoffee.blazelight.site.std.plusButton
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
@@ -62,8 +61,13 @@ fun Routing.forumsRoute() = get("/forums/{category?}") {
                     }
                     hr()
 
-                    if (category.forumIds.isEmpty())
+                    if (category.forumIds.isEmpty()) {
                         p { +s.noForumsInCategory }
+                        if (isAdmin) {
+                            hr(classes = "hr-dot")
+                            padding(2)
+                        }
+                    }
 
                     for (id in category.forumIds) {
                         val forum = runBlocking { id.getForum()!! }

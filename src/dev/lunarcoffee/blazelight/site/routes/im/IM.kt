@@ -3,10 +3,9 @@ package dev.lunarcoffee.blazelight.site.routes.im
 import dev.lunarcoffee.blazelight.model.api.imdatalist.getIMDataList
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.shared.language.s
+import dev.lunarcoffee.blazelight.site.std.*
 import dev.lunarcoffee.blazelight.site.std.breadcrumbs.breadcrumbs
 import dev.lunarcoffee.blazelight.site.std.sessions.UserSession
-import dev.lunarcoffee.blazelight.site.std.textOrEllipsis
-import dev.lunarcoffee.blazelight.site.std.toTimeDisplay
 import dev.lunarcoffee.blazelight.site.templates.HeaderBarTemplate
 import io.ktor.application.call
 import io.ktor.html.respondHtmlTemplate
@@ -18,7 +17,7 @@ import kotlinx.html.*
 
 fun Route.imRoute() = get("/im") {
     val messageIndex = call.parameters["a"]?.toIntOrNull()
-    val specialMessages = listOf(s.userNotFound, s.cannotMessageSelf)
+    val specialMessages = listOf(s.userNotFound, s.cannotMessageSelf, s.userAlreadyMessaged)
 
     val user = call.sessions.get<UserSession>()!!.getUser()!!
     val imDataList = user.imDataListId.getIMDataList()!!
@@ -52,6 +51,7 @@ fun Route.imRoute() = get("/im") {
                     hr(classes = "hr-dot")
                 }
             }
+            padding(6)
 
             h3 { +s.startConversationHeading }
             form(action = "/im/start", method = FormMethod.post, classes = "f-inline") {

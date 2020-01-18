@@ -172,6 +172,7 @@ passwordConfirmFail:                    "The two passwords don't match!"
 successRegister:                        "Success! You may now log in."
 userNotFound:                           "There is no user with that username!"
 cannotMessageSelf:                      "You cannot start a conversation with yourself!"
+userAlreadyMessaged:                    "You have already started a conversation with that user!"
 
 im:                                     "IM"
 imCap:                                  "Messaging"

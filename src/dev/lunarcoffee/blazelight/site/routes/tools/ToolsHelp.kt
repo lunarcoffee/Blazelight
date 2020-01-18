@@ -32,6 +32,7 @@ fun Routing.toolsHelp() = get("/tools/help") {
                     val reader = BBCodePageReader(file.path).apply { read() }
                     +reader.topicName
                 }
+                br()
             }
         }
     }

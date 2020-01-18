@@ -154,6 +154,7 @@ class LocalizedStrings {
     lateinit var successRegister: String
     lateinit var userNotFound: String
     lateinit var cannotMessageSelf: String
+    lateinit var userAlreadyMessaged: String
 
     lateinit var im: String
     lateinit var imCap: String

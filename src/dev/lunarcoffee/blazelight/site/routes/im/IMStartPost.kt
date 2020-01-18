@@ -27,11 +27,15 @@ fun Route.imStartPost() = post("/im/start") {
         return@post call.respondRedirect("/im?a=1")
 
     val recipient = recipientName.getUser() ?: return@post call.respondRedirect("/im?a=0")
+    val userDataList = user.imDataListId.getIMDataList()!!
+    if (userDataList.data.find { it.recipientId == recipient.id } != null)
+        return@post call.respondRedirect("/im?a=2")
+
     val imDataAuthor = UserIMData(user.id, recipient.id)
     val imDataRecipient = UserIMData(recipient.id, user.id)
 
     IMDataListManager.run {
-        update(user.imDataListId.getIMDataList()!!.apply { data += imDataAuthor })
+        update(userDataList.apply { data += imDataAuthor })
         update(recipient.imDataListId.getIMDataList()!!.apply { data += imDataRecipient })
     }
     call.respondRedirect("/im/${imDataAuthor.id}")
