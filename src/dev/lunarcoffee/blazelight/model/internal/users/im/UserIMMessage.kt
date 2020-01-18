@@ -4,9 +4,9 @@ import dev.lunarcoffee.blazelight.model.internal.std.util.UniqueIDGenerator
 
 class UserIMMessage(
     override val contentRaw: String,
-    override val authorId: String,
-    override val recipientId: String,
-    override val dataId: String
+    override val authorId: Long,
+    override val recipientId: Long,
+    override val dataId: Long
 ) : IMMessage {
 
     override val creationTime = System.currentTimeMillis()

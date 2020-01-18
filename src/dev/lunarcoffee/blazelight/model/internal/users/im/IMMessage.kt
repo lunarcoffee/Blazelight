@@ -6,8 +6,8 @@ import dev.lunarcoffee.blazelight.model.internal.std.Identifiable
 interface IMMessage : Dateable, Identifiable {
     val contentRaw: String
 
-    val authorId: String
-    val recipientId: String
+    val authorId: Long
+    val recipientId: Long
 
-    val dataId: String
+    val dataId: Long
 }

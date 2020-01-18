@@ -309,9 +309,24 @@ h2, h3 {
     margin: 0;
 }
 
-.im-message {
-    background: cyan;
-    color: red;
+.im-sent-message {
+    background: #666;
+    font-size: 14px;
+    color: white;
+    border-radius: 2px;
+    padding: 6px 8px;
+    width: fit-content;
+    margin: 2px 0;
+}
+
+.im-received-message {
+    background: #555;
+    font-size: 14px;
+    color: white;
+    border-radius: 2px;
+    padding: 6px 8px;
+    width: fit-content;
+    margin: 2px 0;
 }
 
 .a1 {
@@ -538,6 +553,11 @@ h2, h3 {
 
 .thread-l {
     color: #777;
+}
+
+.button-row {
+    background: red;
+    border-radius: 2px;
 }
 
 /* */

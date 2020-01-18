@@ -1,25 +1,23 @@
 var socket = new WebSocket("ws" + window.location.href.slice(4) + "/ws");
 
-var messageList = document.getElementById("im-list");
-var inputForm = document.getElementById("im-input");
+var messageList = document.getElementsByClassName("im-list")[0];
+var inputForm = document.getElementsByClassName("im-input")[0];
 
 socket.addEventListener("open", function () {
-    console.log("open"); // TODO:
-
     inputForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
         socket.send(inputForm.children[0].value);
         inputForm.children[0].value = "";
 
-        return false;
+        return true;
     });
 });
 
 socket.addEventListener("message", function (e) {
     var listItem = document.createElement("li");
-    listItem.className = "im-message";
-    listItem.appendChild(document.createTextNode(e.data));
+    listItem.className = e.data[0] === "a" ? "im-sent-message" : "im-received-message";
+    listItem.appendChild(document.createTextNode(e.data.substr(1)));
     messageList.appendChild(listItem);
 
     scrollMessages();

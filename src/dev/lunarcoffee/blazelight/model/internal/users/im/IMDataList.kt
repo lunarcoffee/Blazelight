@@ -11,4 +11,5 @@ interface IMDataList<T : IMData<V>, V : IMMessage> : Dateable, Identifiable {
     val userId: Long
 
     fun getByDataId(dataId: Long): T?
+    fun addByDataId(dataId: Long, message: V)
 }

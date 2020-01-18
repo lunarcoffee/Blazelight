@@ -25,5 +25,21 @@ fun Route.imIdWs() = webSocket("/im/{dataId}/ws") {
     val imData = imDataList.getByDataId(dataId)!!
     val recipientId = imData.recipientId
 
-    IMServer.send(recipientId, "thing", imDataList)
+    // Send previous messages to user.
+    for (message in imData.messages)
+        connection.send((if (message.authorId == user.id) "a" else "r") + message.contentRaw)
+
+    try {
+        // Relay all messages the user sends.
+        var message = connection.receive()
+        while (message != null) {
+            if (message.length > 1000)
+                continue
+
+            IMServer.send(recipientId, message, imDataList, dataId)
+            message = connection.receive()
+        }
+    } finally {
+        IMServer.disconnect(connection)
+    }
 }
