@@ -1,8 +1,6 @@
 package dev.lunarcoffee.blazelight.site.std.im
 
 import dev.lunarcoffee.blazelight.model.api.imdatalist.IMDataListManager
-import dev.lunarcoffee.blazelight.model.api.imdatalist.getIMDataList
-import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.model.internal.users.im.IUserIMDataList
 import dev.lunarcoffee.blazelight.model.internal.users.im.UserIMMessage
 
@@ -12,27 +10,30 @@ object IMServer {
     fun connect(conn: UserIMConnection) = conns.add(conn)
     fun disconnect(conn: UserIMConnection) = conns.remove(conn)
 
-    suspend fun send(userId: Long, message: String, imDataList: IUserIMDataList, dataId: Long) {
-        val authorConn = conns.find { it.userId == imDataList.userId }
-        val recipientConn = conns.find { it.userId == userId }
+    suspend fun send(
+        recipientId: Long,
+        message: String,
+        authorDataList: IUserIMDataList,
+        recipientDataList: IUserIMDataList,
+        authorDataId: Long
+    ) {
+        val authorConn = conns.find { it.userId == authorDataList.userId }
+        val recipientConn = conns.find { it.userId == recipientId }
 
-        // Send messages.
         authorConn?.send("a$message")
         recipientConn?.send("r$message")
 
-        // Update persistent message store for author.
-        imDataList.addByDataId(dataId, UserIMMessage(message, imDataList.userId, userId, dataId))
-        IMDataListManager.update(imDataList)
+        // Cache messages; actual DB transaction happens upon disconnection.
+        val imMessage = UserIMMessage(message, authorDataList.userId, recipientId, authorDataId)
 
-        val recipient = userId.getUser()!!
-        val recipientDataList = recipient.imDataListId.getIMDataList()!!
-        val recipientDataId = recipientDataList.data.find { it.authorId == userId }!!.id
+        authorDataList.addByDataId(authorDataId, imMessage)
+        IMDataListManager.updateCache(authorDataList)
 
-        // Update persistent message store for recipient.
-        recipientDataList.addByDataId(
-            recipientDataId,
-            UserIMMessage(message, imDataList.userId, userId, recipientDataId)
-        )
-        IMDataListManager.update(recipientDataList)
+        val recipientDataId = recipientDataList
+            .data
+            .find { it.recipientId == authorDataList.userId }!!
+            .id
+        recipientDataList.addByDataId(recipientDataId, imMessage)
+        IMDataListManager.updateCache(recipientDataList)
     }
 }

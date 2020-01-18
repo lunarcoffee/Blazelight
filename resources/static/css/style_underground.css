@@ -284,18 +284,19 @@ h2, h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #404040;
+    background: #444444;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #474747;
+    background: #4b4b4b;
 }
 
 .im-box {
     height: 55vh;
     max-height: 55vh;
     overflow-y: scroll;
+    position: relative;
 }
 
 .im-box::-webkit-scrollbar {
@@ -310,19 +311,19 @@ h2, h3 {
 }
 
 .im-sent-message {
-    background: #666;
+    background: #4b4b4b;
     font-size: 14px;
     color: white;
     border-radius: 2px;
     padding: 6px 8px;
     width: fit-content;
-    margin: 2px 0;
+    margin: 2px 4px 2px auto;
 }
 
 .im-received-message {
-    background: #555;
+    background: #373737;
     font-size: 14px;
-    color: white;
+    color: #e6e6e6;
     border-radius: 2px;
     padding: 6px 8px;
     width: fit-content;

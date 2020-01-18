@@ -1,5 +1,6 @@
 package dev.lunarcoffee.blazelight.site.routes.im
 
+import dev.lunarcoffee.blazelight.model.api.imdatalist.IMDataListManager
 import dev.lunarcoffee.blazelight.model.api.imdatalist.getIMDataList
 import dev.lunarcoffee.blazelight.model.api.users.getUser
 import dev.lunarcoffee.blazelight.site.std.im.IMServer
@@ -23,10 +24,11 @@ fun Route.imIdWs() = webSocket("/im/{dataId}/ws") {
         ?: return@webSocket call.respond(HttpStatusCode.NotFound)
 
     val imData = imDataList.getByDataId(dataId)!!
-    val recipientId = imData.recipientId
+    val recipient = imData.recipientId.getUser()!!
+    val recipientDataList = recipient.imDataListId.getIMDataList()!!
 
     // Send previous messages to user.
-    for (message in imData.messages)
+    for (message in imData.messages.sortedBy { it.creationTime })
         connection.send((if (message.authorId == user.id) "a" else "r") + message.contentRaw)
 
     try {
@@ -36,10 +38,14 @@ fun Route.imIdWs() = webSocket("/im/{dataId}/ws") {
             if (message.length > 1000)
                 continue
 
-            IMServer.send(recipientId, message, imDataList, dataId)
+            IMServer.send(recipient.id, message, imDataList, recipientDataList, dataId)
             message = connection.receive()
         }
     } finally {
         IMServer.disconnect(connection)
+
+        // Update messages stored in DB.
+        IMDataListManager.update(imDataList)
+        IMDataListManager.update(recipientDataList)
     }
 }

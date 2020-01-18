@@ -16,8 +16,10 @@ object ThreadEditManager {
         val thread = threadId.getThread()!!.apply { this@apply.title = title }
         CommentEditManager.edit(thread.firstPost!!.id, content)
 
-        ThreadCache.threads.removeIf { it.id == thread.id }
-        ThreadCache.threads += thread
+        ThreadCache.threads.run {
+            removeIf { it.id == thread.id }
+            this += thread
+        }
         Database.threadCol.replaceOne(Thread::id eq thread.id, thread as UserThread)
 
         return ThreadEditResult.SUCCESS

@@ -39,9 +39,10 @@ fun Route.imRoute() = get("/im") {
                         +data.recipientId.getUser()!!.username
                     }
                     p(classes = "forum-topic title") {
-                        // TODO: last sent message
-                        val last = data.messages.lastOrNull()?.contentRaw ?: s.noMessagesYetParen
-                        +last.textOrEllipsis(70)
+                        val last = data.messages.lastOrNull() ?: return@p +s.noMessagesYetParen
+                        val name = if (last.authorId == user.id) "You said: " else "They said: "
+
+                        +(name + last.contentRaw).textOrEllipsis(70)
                     }
                     i(classes = "thread-l forum-topic title") {
                         // Last post author and timestamp.

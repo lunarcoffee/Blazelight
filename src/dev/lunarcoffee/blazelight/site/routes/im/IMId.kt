@@ -37,7 +37,10 @@ fun Route.imId() = get("/im/{dataId}") {
             h3(classes = "title") { b { +recipient.username } }
             hr()
 
-            div(classes = "im-box") { ul(classes = "im-list") }
+            div(classes = "im-box") {
+                p(classes = "im-loading") { +"Fetching message history..." }
+                ul(classes = "im-list")
+            }
             hr()
             form(classes = "f-inline im-input") {
                 input(type = InputType.text, name = "username", classes = "fi-text fi-top fi-im") {

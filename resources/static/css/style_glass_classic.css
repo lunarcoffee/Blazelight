@@ -186,8 +186,19 @@ h2, h3 {
     box-shadow: #50506c 0 0 3px;
 }
 
+.fi-im {
+    width: calc(120vh - 86px);
+    margin-top: -5px;
+}
+
 .fi-text:hover {
     box-shadow: #50506c 0 0 4px;
+}
+
+.fi-hidden {
+    border: 0;
+    padding: 0;
+    font-size: 0;
 }
 
 .fi-select {
@@ -299,6 +310,61 @@ h2, h3 {
 
 .a-page {
     padding-right: 6px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #eeecfa;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cccce6;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bcbcd4;
+}
+
+.im-box {
+    height: 55vh;
+    max-height: 55vh;
+    overflow-y: scroll;
+}
+
+.im-box::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+}
+
+.im-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.im-sent-message {
+    background: #eeecfa;
+    font-size: 14px;
+    color: black;
+    border-radius: 2px;
+    padding: 6px 8px;
+    width: fit-content;
+    margin: 2px 0;
+}
+
+.im-received-message {
+    background: #e0dbee;
+    font-size: 14px;
+    color: black;
+    border-radius: 2px;
+    padding: 6px 8px;
+    width: fit-content;
+    margin: 2px 0;
 }
 
 .red {

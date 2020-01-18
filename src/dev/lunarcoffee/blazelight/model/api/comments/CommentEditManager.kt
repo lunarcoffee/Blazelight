@@ -11,8 +11,10 @@ object CommentEditManager {
             return CommentEditResult.INVALID_CONTENT
 
         val comment = commentId.getComment()!!.apply { contentRaw = content }
-        CommentCache.comments.removeIf { it.id == commentId }
-        CommentCache.comments += comment
+        CommentCache.comments.run {
+            removeIf { it.id == commentId }
+            this += comment
+        }
         Database.commentCol.replaceOne(Comment::id eq commentId, comment as UserComment)
 
         return CommentEditResult.SUCCESS
