@@ -28,6 +28,7 @@ fun Route.imIdWs() = webSocket("/im/{dataId}/ws") {
     val recipientDataList = recipient.imDataListId.getIMDataList()!!
 
     // Send previous messages to user.
+    connection.send("init")
     for (message in imData.messages.sortedBy { it.creationTime })
         connection.send((if (message.authorId == user.id) "a" else "r") + message.contentRaw)
 

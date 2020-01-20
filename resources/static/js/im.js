@@ -17,7 +17,10 @@ socket.addEventListener("open", function () {
 });
 
 socket.addEventListener("message", function (e) {
-    loadingMessage.style.display = "none";
+    if (e.data === "init") {
+        loadingMessage.style.display = "none";
+        return;
+    }
 
     var listItem = document.createElement("li");
     listItem.className = e.data[0] === "a" ? "im-sent-message" : "im-received-message";
@@ -28,5 +31,5 @@ socket.addEventListener("message", function (e) {
 });
 
 function scrollMessages() {
-    messageBox.scrollBy(0, 30);
+    messageBox.scrollBy(0, messageBox.scrollHeight);
 }

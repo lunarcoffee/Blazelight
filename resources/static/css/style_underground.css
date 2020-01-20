@@ -296,6 +296,7 @@ h2, h3 {
     height: 55vh;
     max-height: 55vh;
     overflow-y: scroll;
+    word-wrap: break-word;
     position: relative;
 }
 
@@ -313,6 +314,7 @@ h2, h3 {
 .im-sent-message {
     background: #4b4b4b;
     font-size: 14px;
+    max-width: calc(120vh - 300px);
     color: white;
     border-radius: 2px;
     padding: 6px 8px;
@@ -323,6 +325,7 @@ h2, h3 {
 .im-received-message {
     background: #373737;
     font-size: 14px;
+    max-width: calc(120vh - 300px);
     color: #e6e6e6;
     border-radius: 2px;
     padding: 6px 8px;
