@@ -34,13 +34,12 @@ fun Route.imIdWs() = webSocket("/im/{dataId}/ws") {
 
     try {
         // Relay all messages the user sends.
-        var message = connection.receive()
-        while (message != null) {
-            if (message.length > 1000)
+        while (true) {
+            val message = connection.receive() ?: break
+            if (message.length !in 1..1000)
                 continue
 
             IMServer.send(recipient.id, message, imDataList, recipientDataList, dataId)
-            message = connection.receive()
         }
     } finally {
         IMServer.disconnect(connection)
